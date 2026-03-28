@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Security meta tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>ZornTek — Studio de développement mobile</title>
+    <meta name="description" content="ZornTek conçoit des applications mobiles intelligentes. Découvrez PizzAI, notre première application propulsée par l'IA.">
+    <meta name="author" content="ZornTek">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ZornTek — Studio de développement mobile">
+    <meta property="og:description" content="Applications mobiles intelligentes, conçues avec soin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zorntek.fr">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-card: #161618;
+            --bg-card-hover: #1c1c1f;
+            --border: #222225;
+            --border-subtle: #1a1a1d;
+            --text-primary: #e8e6e3;
+            --text-secondary: #8a8a8f;
+            --text-tertiary: #5a5a5f;
+            --text-accent: #c9a96e;
+            --text-accent-light: #dfc28a;
+            --accent: #c9a96e;
+            --accent-dim: rgba(201, 169, 110, 0.08);
+            --accent-glow: rgba(201, 169, 110, 0.15);
+            --font-display: 'Cormorant Garamond', 'Georgia', serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: var(--bg-primary); }
+        a { color: inherit; text-decoration: none; }
+
+        /* Film grain */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ══════ NAV ══════ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.8rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s var(--ease-out);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 11, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width 0.4s var(--ease-out);
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        /* ══════ HERO ══════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseGlow 10s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+        }
+
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.4s forwards;
+        }
+        .hero h1 em { font-style: italic; color: var(--accent); }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.8;
+            margin-bottom: 3.5rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--bg-primary);
+            background: var(--accent);
+            padding: 1rem 2.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.8s forwards;
+        }
+
+        .hero-cta:hover {
+            background: var(--text-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(201, 169, 110, 0.2);
+        }
+
+        .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .hero-cta:hover svg { transform: translateX(4px); }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 1.2s forwards;
+        }
+
+        .scroll-hint span {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 0;
+        }
+
+        /* ══════ ABOUT ══════ */
+        .about { padding: 8rem 0; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .about h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+        .about h2 em { font-style: italic; color: var(--accent); }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.85;
+        }
+
+        .values { display: flex; flex-direction: column; gap: 2rem; margin-top: 1rem; }
+
+        .value-item {
+            padding: 1.8rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 2px; height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .value-item:hover {
+            border-color: var(--accent-dim);
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+        .value-item:hover::before { opacity: 1; }
+
+        .value-number {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .value-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
+
+        .value-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* ══════ PRODUCT ══════ */
+        .product {
+            padding: 8rem 0;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .product-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+        .product-header h2 em { font-style: italic; color: var(--accent); }
+
+        .product-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 300;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .phone-mockup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-frame {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(145deg, #1a1a1d, #0e0e10);
+            border-radius: 36px;
+            border: 2px solid #2a2a2e;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.03),
+                inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 120px; height: 28px;
+            background: #0e0e10;
+            border-radius: 0 0 18px 18px;
+            z-index: 2;
+        }
+
+        .phone-screen {
+            position: absolute;
+            inset: 8px;
+            border-radius: 28px;
+            background: linear-gradient(180deg, #1a1410 0%, #0f0d0a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .phone-screen .app-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+
+        .phone-screen .app-name {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .phone-screen .app-name span { color: var(--accent); }
+
+        .phone-screen .app-tagline {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 2.5rem;
+        }
+
+        .phone-features { width: 100%; display: flex; flex-direction: column; gap: 0.6rem; }
+
+        .phone-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.6rem 0.8rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .phone-feature-item .pf-icon { font-size: 1.1rem; }
+        .phone-feature-item .pf-text { font-size: 0.7rem; color: var(--text-secondary); font-weight: 400; }
+
+        .phone-glow {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .product-details h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+        .product-details h3 span { color: var(--accent); }
+
+        .product-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-list { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2.5rem; }
+        .feature-row { display: flex; align-items: flex-start; gap: 1rem; }
+
+        .feature-icon {
+            width: 36px; height: 36px; min-width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border: 1px solid rgba(201, 169, 110, 0.12);
+            font-size: 1rem;
+        }
+
+        .feature-content h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+        .feature-content p { font-size: 0.82rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        .badge-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+        .badge {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+        .badge.accent {
+            border-color: rgba(201, 169, 110, 0.3);
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        /* ══════ EXPERTISE ══════ */
+        .expertise { padding: 8rem 0; }
+        .expertise-header { text-align: center; margin-bottom: 4rem; }
+
+        .expertise-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+        }
+        .expertise-header h2 em { font-style: italic; color: var(--accent); }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .expertise-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .expertise-card:hover {
+            border-color: rgba(201, 169, 110, 0.15);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+        .expertise-card:hover::after { transform: scaleX(1); }
+
+        .expertise-icon { font-size: 1.8rem; margin-bottom: 1.5rem; }
+
+        .expertise-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .expertise-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        /* ══════ CONTACT ══════ */
+        .contact {
+            padding: 8rem 0 4rem;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+        }
+
+        .contact-inner { text-align: center; }
+
+        .contact h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+        }
+        .contact h2 em { font-style: italic; color: var(--accent); }
+
+        .contact-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+            max-width: 480px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact-email:hover {
+            color: var(--text-accent-light);
+            border-bottom-color: var(--text-accent-light);
+        }
+
+        /* ══════ FOOTER ══════ */
+        footer {
+            padding: 4rem 0 2.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .footer-logo span { color: var(--accent); }
+
+        .footer-links { display: flex; gap: 2rem; list-style: none; }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover { color: var(--text-secondary); }
+
+        .footer-copy { font-size: 0.72rem; color: var(--text-tertiary); }
+
+        /* ══════ RESPONSIVE ══════ */
+        @media (max-width: 900px) {
+            nav { padding: 1.2rem 1.5rem; }
+            nav.scrolled { padding: 0.9rem 1.5rem; }
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(10,10,11,0.96);
+                backdrop-filter: blur(24px);
+                padding: 2rem 3rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+            .nav-toggle { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .product-showcase { grid-template-columns: 1fr; gap: 3rem; }
+            .phone-mockup { order: -1; }
+            .expertise-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+
+        @media (max-width: 500px) {
+            .hero { padding: 7rem 1.2rem 5rem; }
+            .phone-frame { width: 240px; height: 480px; }
+            .phone-screen { padding: 2.5rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a href="#" class="nav-logo">Zorn<span>Tek</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Studio</a></li>
+            <li><a href="#product">Produits</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <p class="hero-eyebrow">Studio de développement mobile</p>
+        <h1>Des applications<br><em>intelligentes</em>,<br>conçues avec soin</h1>
+        <p class="hero-sub">ZornTek conçoit des applications mobiles qui associent intelligence artificielle et expérience utilisateur raffinée.</p>
+        <a href="#product" class="hero-cta">
+            Découvrir nos produits
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <div class="scroll-hint">
+            <span>Défiler</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <hr class="divider">
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="section-label">Le studio</div>
+                    <h2>Nous construisons<br>des outils <em>utiles</em></h2>
+                    <div class="about-text">
+                        <p>ZornTek est un studio de développement mobile indépendant basé en France. Nous concevons des applications Android et iOS qui résolvent de vrais problèmes, avec une attention particulière portée à la qualité, la performance et l'expérience utilisateur.</p>
+                        <p>Chaque produit est pensé comme un outil durable : code soigné, architecture robuste, design intentionnel. Pas de raccourcis.</p>
+                    </div>
+                </div>
+                <div class="values reveal" style="transition-delay: 0.15s;">
+                    <div class="value-item">
+                        <div class="value-number">01</div>
+                        <div class="value-title">Qualité logicielle</div>
+                        <div class="value-desc">Architecture pensée pour la maintenabilité. Code testé, performances optimisées, sécurité intégrée dès la conception.</div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">02</div>
+                        <div class="value-title">Intelligence artificielle</div>
+                        <div class="value-desc">L'IA au service de l'utilisateur — pas comme gadget, mais comme fonctionnalité de fond qui rend l'application véritablement utile.</div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">03</div>
+                        <div class="value-title">Expérience utilisateur</div>
+                        <div class="value-desc">Interfaces fluides, multilingues, accessibles. Chaque interaction est pensée pour être intuitive et agréable.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT -->
+    <section class="product" id="product">
+        <div class="container">
+            <div class="product-header reveal">
+                <div class="section-label" style="justify-content: center;">Notre produit</div>
+                <h2>Rencontrez <em>PizzAI</em></h2>
+                <p>L'assistant intelligent pour des pizzas parfaites. Calculez votre pâte, consultez le Chef IA, analysez vos créations.</p>
+            </div>
+            <div class="product-showcase">
+                <div class="phone-mockup reveal">
+                    <div class="phone-glow"></div>
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="app-icon">🍕</div>
+                            <div class="app-name">Pizz<span>AI</span></div>
+                            <div class="app-tagline">Ton pizzaiolo intelligent</div>
+                            <div class="phone-features">
+                                <div class="phone-feature-item">
+                                    <span class="pf-icon">🧮</span>
+                                    <span class="pf-text">Calculateur de pâte avancé</span>
+                                </div>
+                                <div class="phone-feature-item">
+                                    <span class="pf-icon">👨‍🍳</span>
+                                    <span class="pf-text">Chef IA conversationnel</span>
+                                </div>
+                                <div class="phone-feature-item">
+                                    <span class="pf-icon">📸</span>
+                                    <span class="pf-text">Analyse photo par IA</span>
+                                </div>
+                                <div class="phone-feature-item">
+                                    <span class="pf-icon">🌍</span>
+                                    <span class="pf-text">FR · EN · IT · DE · ES</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details reveal" style="transition-delay: 0.15s;">
+                    <h3>Pizz<span>AI</span></h3>
+                    <p class="product-desc">PizzAI accompagne les passionnés de pizza à chaque étape : du calcul précis des ingrédients à l'analyse de la cuisson par intelligence artificielle, en passant par un chef virtuel disponible à tout moment.</p>
+                    <div class="feature-list">
+                        <div class="feature-row">
+                            <div class="feature-icon">🧮</div>
+                            <div class="feature-content">
+                                <h4>Calculateur précis</h4>
+                                <p>Profils Napoletana, Romana, Teglia, New York. Protocole guidé étape par étape avec timers.</p>
+                            </div>
+                        </div>
+                        <div class="feature-row">
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-content">
+                                <h4>Chef IA</h4>
+                                <p>Un assistant culinaire propulsé par l'IA. Pizza, flammekueche, vins, desserts.</p>
+                            </div>
+                        </div>
+                        <div class="feature-row">
+                            <div class="feature-icon">📷</div>
+                            <div class="feature-content">
+                                <h4>Analyse photo</h4>
+                                <p>Photographiez votre pizza et recevez un score détaillé avec des conseils personnalisés.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="badge-row">
+                        <span class="badge accent">Android</span>
+                        <span class="badge accent">iOS</span>
+                        <span class="badge">React Native</span>
+                        <span class="badge">Claude AI</span>
+                        <span class="badge">Firebase</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section class="expertise" id="expertise">
+        <div class="container">
+            <div class="expertise-header reveal">
+                <div class="section-label" style="justify-content: center;">Savoir-faire</div>
+                <h2>Notre <em>expertise</em></h2>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-card reveal">
+                    <div class="expertise-icon">📱</div>
+                    <h3>Mobile natif</h3>
+                    <p>Applications Android et iOS avec React Native et Expo. Architecture modulaire, performances natives, déploiement continu.</p>
+                </div>
+                <div class="expertise-card reveal" style="transition-delay: 0.1s;">
+                    <div class="expertise-icon">🧠</div>
+                    <h3>Intelligence artificielle</h3>
+                    <p>Intégration de modèles de langage dans des produits grand public. Chat, analyse d'image, génération de contenu.</p>
+                </div>
+                <div class="expertise-card reveal" style="transition-delay: 0.2s;">
+                    <div class="expertise-icon">☁️</div>
+                    <h3>Cloud & Backend</h3>
+                    <p>Firebase, Cloud Functions, Firestore. Infrastructure serverless scalable avec authentification et temps réel.</p>
+                </div>
+                <div class="expertise-card reveal">
+                    <div class="expertise-icon">🔒</div>
+                    <h3>Sécurité</h3>
+                    <p>Chiffrement, obfuscation, SSL Pinning, validation serveur. La sécurité est une exigence, pas une option.</p>
+                </div>
+                <div class="expertise-card reveal" style="transition-delay: 0.1s;">
+                    <div class="expertise-icon">🌍</div>
+                    <h3>Internationalisation</h3>
+                    <p>Applications multilingues dès la conception. Traductions contextuelles et adaptation culturelle.</p>
+                </div>
+                <div class="expertise-card reveal" style="transition-delay: 0.2s;">
+                    <div class="expertise-icon">💰</div>
+                    <h3>Monétisation</h3>
+                    <p>Modèles freemium, abonnements in-app, publicité ciblée. Stratégie de revenus intégrée dès le jour 1.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-inner reveal">
+                <div class="section-label" style="justify-content: center;">Contact</div>
+                <h2>Travaillons <em>ensemble</em></h2>
+                <p class="contact-desc">Un projet d'application mobile ? Une question sur nos produits ? N'hésitez pas à nous écrire.</p>
+                <a href="mailto:contact@zorntek.fr" class="contact-email" rel="noopener noreferrer">
+                    contact@zorntek.fr
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">Zorn<span>Tek</span></div>
+                <ul class="footer-links">
+                    <li><a href="https://manub81-hash.github.io/pizzai-privacy/" target="_blank" rel="noopener noreferrer">Confidentialité</a></li>
+                    <li><a href="https://manub81-hash.github.io/pizzai-privacy/terms.html" target="_blank" rel="noopener noreferrer">CGU</a></li>
+                    <li><a href="https://www.instagram.com/pizzai_officiel/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+                <span class="footer-copy">&copy; 2026 ZornTek. Tous droits réservés.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        var nav = document.getElementById('nav');
+        window.addEventListener('scroll', function() {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Mobile toggle
+        var toggle = document.getElementById('navToggle');
+        var links = document.getElementById('navLinks');
+        toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+        links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() { links.classList.remove('open'); });
+        });
+
+        // Scroll reveal
+        var reveals = document.querySelectorAll('.reveal');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(function(el) { observer.observe(el); });
+    </script>
+</body>
+</html>
