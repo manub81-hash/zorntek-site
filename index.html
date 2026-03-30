@@ -3,182 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Security meta tags -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline';">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <title>ZornTek — Studio de développement mobile</title>
-    <meta name="description" content="ZornTek conçoit des applications mobiles intelligentes. Découvrez PizzAI, notre première application propulsée par l'IA.">
-    <meta name="author" content="ZornTek">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="ZornTek — Studio de développement mobile">
-    <meta property="og:description" content="Applications mobiles intelligentes, conçues avec soin.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zorntek.fr">
-    <meta property="og:locale" content="fr_FR">
-
-    <!-- Fonts -->
+    <title>PizzAI — Ton pizzaiolo intelligent | ZornTek</title>
+    <meta name="description" content="PizzAI : calculateur de pâte scientifique, Chef IA conversationnel et analyse photo par intelligence artificielle. Disponible sur Android.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0b;
-            --bg-secondary: #111113;
-            --bg-card: #161618;
-            --bg-card-hover: #1c1c1f;
-            --border: #222225;
-            --border-subtle: #1a1a1d;
-            --text-primary: #e8e6e3;
-            --text-secondary: #8a8a8f;
-            --text-tertiary: #5a5a5f;
-            --text-accent: #c9a96e;
-            --text-accent-light: #dfc28a;
-            --accent: #c9a96e;
-            --accent-dim: rgba(201, 169, 110, 0.08);
-            --accent-glow: rgba(201, 169, 110, 0.15);
-            --font-display: 'Cormorant Garamond', 'Georgia', serif;
-            --font-body: 'DM Sans', -apple-system, sans-serif;
-            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --gold: #d4a44a;
+            --gold-light: #e8c878;
+            --gold-dim: rgba(212,164,74,0.15);
+            --bg: #06050a;
+            --bg-card: #0c0b12;
+            --text: #b8b0a0;
+            --text-light: #ddd5c8;
+            --white: #f5f0e8;
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        ::selection { background: var(--accent); color: var(--bg-primary); }
-        a { color: inherit; text-decoration: none; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* Film grain */
+        /* ═══════════════════════════════════════
+           GRAIN + VIGNETTE OVERLAY
+        ═══════════════════════════════════════ */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
         body::after {
             content: '';
             position: fixed;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
             pointer-events: none;
-            z-index: 9999;
-            opacity: 0.5;
+            z-index: 9998;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-
-        .section-label {
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-label::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* ══════ NAV ══════ */
+        /* ═══════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════ */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 1.8rem 3rem;
+            z-index: 1000;
+            padding: 20px 40px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: all 0.5s var(--ease-out);
+            justify-content: space-between;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         nav.scrolled {
-            background: rgba(10, 10, 11, 0.88);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 1.1rem 3rem;
+            background: rgba(6,5,10,0.9);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 14px 40px;
+            border-bottom: 1px solid rgba(212,164,74,0.08);
         }
 
         .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 1px;
         }
-        .nav-logo span { color: var(--accent); }
+        .nav-logo span { color: var(--gold); font-style: italic; }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
+        .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-links a {
-            font-size: 0.78rem;
+            font-size: 13px;
             font-weight: 400;
-            color: var(--text-secondary);
-            letter-spacing: 0.1em;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
             position: relative;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px; left: 0;
-            width: 0; height: 1px;
-            background: var(--accent);
-            transition: width 0.4s var(--ease-out);
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover { color: var(--gold); }
         .nav-links a:hover::after { width: 100%; }
 
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 4px;
+        .nav-cta {
+            font-size: 12px !important;
+            padding: 10px 24px;
+            border: 1px solid var(--gold);
+            border-radius: 100px;
+            color: var(--gold) !important;
+            transition: all 0.3s !important;
         }
-        .nav-toggle span {
-            width: 24px;
-            height: 1.5px;
-            background: var(--text-secondary);
-            transition: all 0.3s ease;
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--bg) !important;
         }
+        .nav-cta::after { display: none !important; }
 
-        /* ══════ HERO ══════ */
+        /* ═══════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -186,793 +137,925 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 8rem 2rem 6rem;
             position: relative;
+            padding: 120px 24px 80px;
         }
 
+        /* Ambient glow */
         .hero::before {
             content: '';
             position: absolute;
-            top: -10%; left: 50%;
+            top: -20%;
+            left: 50%;
             transform: translateX(-50%);
-            width: 700px; height: 700px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
-            border-radius: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212,164,74,0.08) 0%, transparent 70%);
             pointer-events: none;
-            animation: pulseGlow 10s ease-in-out infinite;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-            50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
-        }
-
-        .hero-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 400;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeUp 1s var(--ease-out) 0.2s forwards;
-        }
-
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            font-weight: 400;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 1s var(--ease-out) 0.4s forwards;
-        }
-        .hero h1 em { font-style: italic; color: var(--accent); }
-
-        .hero-sub {
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--text-secondary);
-            max-width: 520px;
-            line-height: 1.8;
-            margin-bottom: 3.5rem;
-            opacity: 0;
-            animation: fadeUp 1s var(--ease-out) 0.6s forwards;
-        }
-
-        .hero-cta {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--bg-primary);
-            background: var(--accent);
-            padding: 1rem 2.5rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.4s var(--ease-out);
+            color: var(--gold);
+            border: 1px solid rgba(212,164,74,0.25);
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 40px;
             opacity: 0;
-            animation: fadeUp 1s var(--ease-out) 0.8s forwards;
+            animation: fadeUp 1s 0.2s forwards;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
         }
 
-        .hero-cta:hover {
-            background: var(--text-accent-light);
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(56px, 10vw, 120px);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 0.95;
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: fadeUp 1s 0.4s forwards;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(18px, 3vw, 26px);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 1s 0.6s forwards;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text);
+            max-width: 520px;
+            margin-bottom: 48px;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 1s 0.8s forwards;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 1s 1s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--gold);
+            color: var(--bg);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(201, 169, 110, 0.2);
+            box-shadow: 0 20px 40px rgba(212,164,74,0.25);
         }
 
-        .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
-        .hero-cta:hover svg { transform: translateX(4px); }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            border-radius: 100px;
+            transition: all 0.4s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
-        .scroll-hint {
+        .hero-scroll {
             position: absolute;
-            bottom: 3rem; left: 50%;
+            bottom: 40px;
+            left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
+            gap: 8px;
             opacity: 0;
-            animation: fadeUp 1s var(--ease-out) 1.2s forwards;
+            animation: fadeUp 1s 1.4s forwards;
         }
-
-        .scroll-hint span {
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
+        .hero-scroll span {
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--text-tertiary);
+            color: rgba(255,255,255,0.3);
         }
-
         .scroll-line {
-            width: 1px; height: 40px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scroll-pulse 2s infinite;
+        }
+        @keyframes scroll-pulse {
+            0% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.3; transform: scaleY(0.6); }
+            100% { opacity: 1; transform: scaleY(1); }
         }
 
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-            50% { opacity: 1; transform: scaleY(1); }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .divider {
-            border: none;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--border), transparent);
-            margin: 0;
-        }
-
-        /* ══════ ABOUT ══════ */
-        .about { padding: 8rem 0; }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .about h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-        }
-        .about h2 em { font-style: italic; color: var(--accent); }
-
-        .about-text p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-            line-height: 1.85;
-        }
-
-        .values { display: flex; flex-direction: column; gap: 2rem; margin-top: 1rem; }
-
-        .value-item {
-            padding: 1.8rem 2rem;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            transition: all 0.4s var(--ease-out);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .value-item::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 2px; height: 100%;
-            background: var(--accent);
+        /* ═══════════════════════════════════════
+           LANGUAGES BAR
+        ═══════════════════════════════════════ */
+        .lang-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 24px;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            animation: fadeUp 1s 1.2s forwards;
+        }
+        .lang-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .lang-flag {
+            width: 28px;
+            height: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .lang-item:hover .lang-flag { opacity: 1; }
+        .lang-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
         }
 
-        .value-item:hover {
-            border-color: var(--accent-dim);
-            background: var(--bg-card-hover);
-            transform: translateX(4px);
-        }
-        .value-item:hover::before { opacity: 1; }
-
-        .value-number {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-bottom: 0.6rem;
-        }
-
-        .value-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem; }
-
-        .value-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        /* ══════ PRODUCT ══════ */
-        .product {
-            padding: 8rem 0;
-            background: var(--bg-secondary);
+        /* ═══════════════════════════════════════
+           SECTION FOUNDATIONS
+        ═══════════════════════════════════════ */
+        section {
             position: relative;
+            z-index: 1;
         }
 
-        .product::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--border), transparent);
+        .section-pad {
+            padding: 120px 24px;
         }
 
-        .product-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .product-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 1.2rem;
-        }
-        .product-header h2 em { font-style: italic; color: var(--accent); }
-
-        .product-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 300;
-            max-width: 550px;
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .product-showcase {
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        /* ═══════════════════════════════════════
+           FEATURES SECTION
+        ═══════════════════════════════════════ */
+        .features {
+            background: linear-gradient(180deg, var(--bg) 0%, #08070e 100%);
+        }
+
+        .features-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 80px;
+        }
+
+        .features-intro p {
+            font-size: 16px;
+            color: var(--text);
+            font-weight: 300;
+        }
+
+        .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            gap: 24px;
         }
 
-        .phone-mockup {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .phone-frame {
-            width: 280px;
-            height: 560px;
-            background: linear-gradient(145deg, #1a1a1d, #0e0e10);
-            border-radius: 36px;
-            border: 2px solid #2a2a2e;
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                0 30px 80px rgba(0,0,0,0.5),
-                0 0 0 1px rgba(255,255,255,0.03),
-                inset 0 1px 0 rgba(255,255,255,0.04);
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 120px; height: 28px;
-            background: #0e0e10;
-            border-radius: 0 0 18px 18px;
-            z-index: 2;
-        }
-
-        .phone-screen {
-            position: absolute;
-            inset: 8px;
-            border-radius: 28px;
-            background: linear-gradient(180deg, #1a1410 0%, #0f0d0a 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 1.5rem;
-        }
-
-        .phone-screen .app-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-
-        .phone-screen .app-name {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-        .phone-screen .app-name span { color: var(--accent); }
-
-        .phone-screen .app-tagline {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            margin-bottom: 2.5rem;
-        }
-
-        .phone-features { width: 100%; display: flex; flex-direction: column; gap: 0.6rem; }
-
-        .phone-feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            padding: 0.6rem 0.8rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
+        .feature-card {
+            background: var(--bg-card);
             border: 1px solid rgba(255,255,255,0.04);
-        }
-        .phone-feature-item .pf-icon { font-size: 1.1rem; }
-        .phone-feature-item .pf-text { font-size: 0.7rem; color: var(--text-secondary); font-weight: 400; }
-
-        .phone-glow {
-            position: absolute;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .product-details h3 {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-        }
-        .product-details h3 span { color: var(--accent); }
-
-        .product-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
-            line-height: 1.85;
-            margin-bottom: 2.5rem;
-        }
-
-        .feature-list { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2.5rem; }
-        .feature-row { display: flex; align-items: flex-start; gap: 1rem; }
-
-        .feature-icon {
-            width: 36px; height: 36px; min-width: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-dim);
-            border: 1px solid rgba(201, 169, 110, 0.12);
-            font-size: 1rem;
-        }
-
-        .feature-content h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
-        .feature-content p { font-size: 0.82rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
-
-        .badge-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-
-        .badge {
-            font-size: 0.68rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            background: var(--bg-card);
-        }
-        .badge.accent {
-            border-color: rgba(201, 169, 110, 0.3);
-            color: var(--accent);
-            background: var(--accent-dim);
-        }
-
-        /* ══════ EXPERTISE ══════ */
-        .expertise { padding: 8rem 0; }
-        .expertise-header { text-align: center; margin-bottom: 4rem; }
-
-        .expertise-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 400;
-        }
-        .expertise-header h2 em { font-style: italic; color: var(--accent); }
-
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
-
-        .expertise-card {
-            padding: 2.5rem 2rem;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            transition: all 0.4s var(--ease-out);
+            border-radius: 24px;
+            padding: 48px 40px;
             position: relative;
             overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .expertise-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-out);
-        }
-
-        .expertise-card:hover {
-            border-color: rgba(201, 169, 110, 0.15);
-            background: var(--bg-card-hover);
+        .feature-card:hover {
+            border-color: rgba(212,164,74,0.15);
             transform: translateY(-4px);
         }
-        .expertise-card:hover::after { transform: scaleX(1); }
 
-        .expertise-icon { font-size: 1.8rem; margin-bottom: 1.5rem; }
-
-        .expertise-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-        }
-
-        .expertise-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 300;
-            line-height: 1.75;
-        }
-
-        /* ══════ CONTACT ══════ */
-        .contact {
-            padding: 8rem 0 4rem;
-            background: var(--bg-secondary);
-            position: relative;
-        }
-
-        .contact::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 1px;
-            background: linear-gradient(to right, transparent, var(--border), transparent);
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-card.hero-card {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212,164,74,0.03) 100%);
         }
 
-        .contact-inner { text-align: center; }
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 24px;
+            display: block;
+        }
 
-        .contact h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
+        .feature-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
             font-weight: 400;
-            margin-bottom: 1.2rem;
+            color: var(--white);
+            margin-bottom: 12px;
         }
-        .contact h2 em { font-style: italic; color: var(--accent); }
 
-        .contact-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text);
             font-weight: 300;
-            max-width: 480px;
-            margin: 0 auto 3rem;
             line-height: 1.8;
         }
 
-        .contact-email {
-            display: inline-flex;
+        .feature-visual {
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 0.8rem;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--accent);
-            transition: all 0.3s ease;
-            padding-bottom: 4px;
-            border-bottom: 1px solid transparent;
         }
 
-        .contact-email:hover {
-            color: var(--text-accent-light);
-            border-bottom-color: var(--text-accent-light);
+        .score-display {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(212,164,74,0.12);
+            border-radius: 20px;
+            padding: 32px;
+            width: 100%;
+            max-width: 320px;
         }
 
-        /* ══════ FOOTER ══════ */
-        footer {
-            padding: 4rem 0 2.5rem;
-            background: var(--bg-secondary);
-        }
-
-        .footer-inner {
+        .score-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border-subtle);
+            padding: 8px 0;
+        }
+        .score-label {
+            font-size: 13px;
+            color: var(--text);
+        }
+        .score-bar-wrap {
+            width: 120px;
+            height: 4px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .score-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 4px;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .score-total {
+            text-align: center;
+            padding-top: 16px;
+            margin-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .score-total .big {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: var(--gold);
+        }
+        .score-total .unit {
+            font-size: 20px;
+            color: var(--text);
+        }
+        .score-total .level {
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
         }
 
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 600;
+        /* ═══════════════════════════════════════
+           PRICING SECTION
+        ═══════════════════════════════════════ */
+        .pricing {
+            background: #08070e;
         }
-        .footer-logo span { color: var(--accent); }
 
-        .footer-links { display: flex; gap: 2rem; list-style: none; }
-
-        .footer-links a {
-            font-size: 0.78rem;
-            color: var(--text-tertiary);
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
+        .pricing-intro {
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto 64px;
         }
-        .footer-links a:hover { color: var(--text-secondary); }
 
-        .footer-copy { font-size: 0.72rem; color: var(--text-tertiary); }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-        /* ══════ RESPONSIVE ══════ */
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .price-card.featured {
+            border-color: rgba(212,164,74,0.3);
+            background: linear-gradient(180deg, rgba(212,164,74,0.06) 0%, var(--bg-card) 100%);
+            transform: scale(1.04);
+        }
+
+        .price-card:hover {
+            border-color: rgba(212,164,74,0.2);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--bg);
+            background: var(--gold);
+            padding: 4px 16px;
+            border-radius: 100px;
+        }
+
+        .price-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        .price-amount .period {
+            font-size: 16px;
+            color: var(--text);
+        }
+        .price-free {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 24px 0;
+            text-align: left;
+        }
+        .price-features li {
+            font-size: 13px;
+            color: var(--text);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .price-features li::before {
+            content: '✦';
+            color: var(--gold);
+            font-size: 8px;
+        }
+
+        /* ═══════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════ */
+        footer {
+            padding: 60px 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 8px;
+        }
+        .footer-brand span { color: rgba(212,164,74,0.4); }
+
+        .footer-info {
+            font-size: 12px;
+            color: rgba(255,255,255,0.15);
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-col h4 {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover { color: var(--gold); }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: rgba(255,255,255,0.12);
+        }
+
+        /* ═══════════════════════════════════════
+           SCROLL ANIMATIONS
+        ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════════════════════
+           FLOATING PARTICLES
+        ═══════════════════════════════════════ */
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-20vh) scale(1); }
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
         @media (max-width: 900px) {
-            nav { padding: 1.2rem 1.5rem; }
-            nav.scrolled { padding: 0.9rem 1.5rem; }
-            .nav-links { display: none; }
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%; left: 0; right: 0;
-                background: rgba(10,10,11,0.96);
-                backdrop-filter: blur(24px);
-                padding: 2rem 3rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border-subtle);
-            }
-            .nav-toggle { display: flex; }
-            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .product-showcase { grid-template-columns: 1fr; gap: 3rem; }
-            .phone-mockup { order: -1; }
-            .expertise-grid { grid-template-columns: 1fr; }
-            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .feature-card.hero-card { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .price-card.featured { transform: none; }
+            .footer-inner { flex-direction: column; }
+            .footer-links { flex-direction: column; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 8px; }
         }
 
-        @media (max-width: 500px) {
-            .hero { padding: 7rem 1.2rem 5rem; }
-            .phone-frame { width: 240px; height: 480px; }
-            .phone-screen { padding: 2.5rem 1.2rem; }
+        @media (max-width: 600px) {
+            nav { padding: 14px 20px; }
+            nav.scrolled { padding: 12px 20px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .section-pad { padding: 80px 20px; }
+            .feature-card { padding: 36px 28px; }
+            .hero { padding: 100px 20px 60px; }
+            .lang-bar { gap: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- PARTICLES -->
+    <div class="particles" id="particles"></div>
+
     <!-- NAV -->
     <nav id="nav">
-        <a href="#" class="nav-logo">Zorn<span>Tek</span></a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">Studio</a></li>
-            <li><a href="#product">Produits</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
+        <a href="#" class="nav-logo">Pizz<span>AI</span></a>
+        <div class="nav-links">
+            <a href="#features">Fonctionnalités</a>
+            <a href="#pricing">Plans</a>
+            <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" class="nav-cta" target="_blank" rel="noopener">Télécharger</a>
+        </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
-        <p class="hero-eyebrow">Studio de développement mobile</p>
-        <h1>Des applications<br><em>intelligentes</em>,<br>conçues avec soin</h1>
-        <p class="hero-sub">ZornTek conçoit des applications mobiles qui associent intelligence artificielle et expérience utilisateur raffinée.</p>
-        <a href="#product" class="hero-cta">
-            Découvrir nos produits
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <div class="scroll-hint">
-            <span>Défiler</span>
+        <div class="hero-badge">Disponible sur Android</div>
+        <h1 class="hero-title">Pizz<em>AI</em></h1>
+        <p class="hero-sub">Ton pizzaiolo intelligent</p>
+        <p class="hero-desc">
+            Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef IA
+            et analyse tes créations en photo. La pizza parfaite, à chaque fournée.
+        </p>
+        <div class="hero-cta-group">
+            <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" class="btn-primary" target="_blank" rel="noopener">
+                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M1 1L17 10L1 19V1Z" fill="currentColor"/></svg>
+                Google Play
+            </a>
+            <a href="#features" class="btn-secondary">
+                Découvrir
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M8 13L3 8M8 13L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="lang-bar">
+            <div class="lang-item">
+                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#002395"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg></div>
+                <span class="lang-label">FR</span>
+            </div>
+            <div class="lang-item">
+                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#012169"/><path d="M0,0 L30,20 M30,0 L0,20" stroke="#fff" stroke-width="3"/><path d="M0,0 L30,20 M30,0 L0,20" stroke="#C8102E" stroke-width="1.5"/><path d="M15,0 V20 M0,10 H30" stroke="#fff" stroke-width="5"/><path d="M15,0 V20 M0,10 H30" stroke="#C8102E" stroke-width="3"/></svg></div>
+                <span class="lang-label">EN</span>
+            </div>
+            <div class="lang-item">
+                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#009246"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg></div>
+                <span class="lang-label">IT</span>
+            </div>
+            <div class="lang-item">
+                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="12" fill="#000"/><rect y="12" width="30" height="4" fill="#DD0000"/><rect y="16" width="30" height="4" fill="#FFCE00"/></svg></div>
+                <span class="lang-label">DE</span>
+            </div>
+            <div class="lang-item">
+                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg></div>
+                <span class="lang-label">ES</span>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>Scroll</span>
             <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <hr class="divider">
-    <section class="about" id="about">
+    <!-- FEATURES -->
+    <section class="features section-pad" id="features">
         <div class="container">
-            <div class="about-grid">
-                <div class="reveal">
-                    <div class="section-label">Le studio</div>
-                    <h2>Nous construisons<br>des outils <em>utiles</em></h2>
-                    <div class="about-text">
-                        <p>ZornTek est un studio de développement mobile indépendant basé en France. Nous concevons des applications Android et iOS qui résolvent de vrais problèmes, avec une attention particulière portée à la qualité, la performance et l'expérience utilisateur.</p>
-                        <p>Chaque produit est pensé comme un outil durable : code soigné, architecture robuste, design intentionnel. Pas de raccourcis.</p>
+            <div class="features-intro reveal">
+                <div class="section-label">Fonctionnalités</div>
+                <h2 class="section-title">Tout pour la <em>pizza parfaite</em></h2>
+                <p>Quatre outils puissants réunis dans une seule application, propulsés par l'intelligence artificielle Claude.</p>
+            </div>
+
+            <div class="feature-grid">
+                <!-- HERO CARD: Photo IA -->
+                <div class="feature-card hero-card reveal">
+                    <div>
+                        <span class="feature-num">01</span>
+                        <h3 class="feature-name">Analyse Photo IA</h3>
+                        <p class="feature-desc">
+                            Photographiez votre pizza et recevez un score détaillé sur 5 critères : cuisson, corniche, forme, garniture et aspect général. L'IA vous donne des conseils personnalisés pour progresser à chaque fournée.
+                        </p>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="score-display" id="scoreDisplay">
+                            <div class="score-row">
+                                <span class="score-label">🔥 Cuisson</span>
+                                <div class="score-bar-wrap"><div class="score-bar" data-width="82%"></div></div>
+                            </div>
+                            <div class="score-row">
+                                <span class="score-label">🫧 Corniche</span>
+                                <div class="score-bar-wrap"><div class="score-bar" data-width="90%"></div></div>
+                            </div>
+                            <div class="score-row">
+                                <span class="score-label">⭕ Forme</span>
+                                <div class="score-bar-wrap"><div class="score-bar" data-width="74%"></div></div>
+                            </div>
+                            <div class="score-row">
+                                <span class="score-label">🧀 Garniture</span>
+                                <div class="score-bar-wrap"><div class="score-bar" data-width="88%"></div></div>
+                            </div>
+                            <div class="score-row">
+                                <span class="score-label">🎨 Aspect</span>
+                                <div class="score-bar-wrap"><div class="score-bar" data-width="85%"></div></div>
+                            </div>
+                            <div class="score-total">
+                                <div><span class="big">4.2</span><span class="unit">/5</span></div>
+                                <div class="level">Expert</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="values reveal" style="transition-delay: 0.15s;">
-                    <div class="value-item">
-                        <div class="value-number">01</div>
-                        <div class="value-title">Qualité logicielle</div>
-                        <div class="value-desc">Architecture pensée pour la maintenabilité. Code testé, performances optimisées, sécurité intégrée dès la conception.</div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-number">02</div>
-                        <div class="value-title">Intelligence artificielle</div>
-                        <div class="value-desc">L'IA au service de l'utilisateur — pas comme gadget, mais comme fonctionnalité de fond qui rend l'application véritablement utile.</div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-number">03</div>
-                        <div class="value-title">Expérience utilisateur</div>
-                        <div class="value-desc">Interfaces fluides, multilingues, accessibles. Chaque interaction est pensée pour être intuitive et agréable.</div>
-                    </div>
+
+                <!-- Calculateur -->
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="feature-icon">⚗️</span>
+                    <span class="feature-num">02</span>
+                    <h3 class="feature-name">Calculateur scientifique</h3>
+                    <p class="feature-desc">
+                        Courbe de levure à 22 points, profils prédéfinis (Napoletana, Romana, Teglia…), protocole guidé étape par étape avec timers intégrés.
+                    </p>
+                </div>
+
+                <!-- Chef IA -->
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="feature-icon">👨‍🍳</span>
+                    <span class="feature-num">03</span>
+                    <h3 class="feature-name">Chef IA</h3>
+                    <p class="feature-desc">
+                        Un pizzaiolo expert disponible 24/7. Posez vos questions sur la pâte, les farines, la cuisson ou la garniture. Sauvegardez les recettes dans votre carnet.
+                    </p>
+                </div>
+
+                <!-- Carnet -->
+                <div class="feature-card reveal reveal-delay-1">
+                    <span class="feature-icon">📒</span>
+                    <span class="feature-num">04</span>
+                    <h3 class="feature-name">Carnet de recettes</h3>
+                    <p class="feature-desc">
+                        Sauvegardez vos créations, vos recettes du Chef IA et vos meilleurs paramètres. Relancez un calcul ou demandez des variantes en un tap.
+                    </p>
+                </div>
+
+                <!-- Guide -->
+                <div class="feature-card reveal reveal-delay-2">
+                    <span class="feature-icon">🌾</span>
+                    <span class="feature-num">05</span>
+                    <h3 class="feature-name">Guide des farines</h3>
+                    <p class="feature-desc">
+                        8 farines détaillées avec force W, taux de protéines, usage recommandé. Caputo Pizzeria, Nuvola, Manitoba et plus encore.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCT -->
-    <section class="product" id="product">
+    <!-- PRICING -->
+    <section class="pricing section-pad" id="pricing">
         <div class="container">
-            <div class="product-header reveal">
-                <div class="section-label" style="justify-content: center;">Notre produit</div>
-                <h2>Rencontrez <em>PizzAI</em></h2>
-                <p>L'assistant intelligent pour des pizzas parfaites. Calculez votre pâte, consultez le Chef IA, analysez vos créations.</p>
+            <div class="pricing-intro reveal">
+                <div class="section-label">Plans</div>
+                <h2 class="section-title">Choisissez <em>votre plan</em></h2>
             </div>
-            <div class="product-showcase">
-                <div class="phone-mockup reveal">
-                    <div class="phone-glow"></div>
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <div class="app-icon">🍕</div>
-                            <div class="app-name">Pizz<span>AI</span></div>
-                            <div class="app-tagline">Ton pizzaiolo intelligent</div>
-                            <div class="phone-features">
-                                <div class="phone-feature-item">
-                                    <span class="pf-icon">🧮</span>
-                                    <span class="pf-text">Calculateur de pâte avancé</span>
-                                </div>
-                                <div class="phone-feature-item">
-                                    <span class="pf-icon">👨‍🍳</span>
-                                    <span class="pf-text">Chef IA conversationnel</span>
-                                </div>
-                                <div class="phone-feature-item">
-                                    <span class="pf-icon">📸</span>
-                                    <span class="pf-text">Analyse photo par IA</span>
-                                </div>
-                                <div class="phone-feature-item">
-                                    <span class="pf-icon">🌍</span>
-                                    <span class="pf-text">FR · EN · IT · DE · ES</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-details reveal" style="transition-delay: 0.15s;">
-                    <h3>Pizz<span>AI</span></h3>
-                    <p class="product-desc">PizzAI accompagne les passionnés de pizza à chaque étape : du calcul précis des ingrédients à l'analyse de la cuisson par intelligence artificielle, en passant par un chef virtuel disponible à tout moment.</p>
-                    <div class="feature-list">
-                        <div class="feature-row">
-                            <div class="feature-icon">🧮</div>
-                            <div class="feature-content">
-                                <h4>Calculateur précis</h4>
-                                <p>Profils Napoletana, Romana, Teglia, New York. Protocole guidé étape par étape avec timers.</p>
-                            </div>
-                        </div>
-                        <div class="feature-row">
-                            <div class="feature-icon">🤖</div>
-                            <div class="feature-content">
-                                <h4>Chef IA</h4>
-                                <p>Un assistant culinaire propulsé par l'IA. Pizza, flammekueche, vins, desserts.</p>
-                            </div>
-                        </div>
-                        <div class="feature-row">
-                            <div class="feature-icon">📷</div>
-                            <div class="feature-content">
-                                <h4>Analyse photo</h4>
-                                <p>Photographiez votre pizza et recevez un score détaillé avec des conseils personnalisés.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="badge-row">
-                        <span class="badge accent">Android</span>
-                        <span class="badge accent">iOS</span>
-                        <span class="badge">React Native</span>
-                        <span class="badge">Claude AI</span>
-                        <span class="badge">Firebase</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- EXPERTISE -->
-    <section class="expertise" id="expertise">
-        <div class="container">
-            <div class="expertise-header reveal">
-                <div class="section-label" style="justify-content: center;">Savoir-faire</div>
-                <h2>Notre <em>expertise</em></h2>
-            </div>
-            <div class="expertise-grid">
-                <div class="expertise-card reveal">
-                    <div class="expertise-icon">📱</div>
-                    <h3>Mobile natif</h3>
-                    <p>Applications Android et iOS avec React Native et Expo. Architecture modulaire, performances natives, déploiement continu.</p>
+            <div class="pricing-grid">
+                <div class="price-card reveal reveal-delay-1">
+                    <div class="price-name">Free</div>
+                    <div class="price-free">0€</div>
+                    <ul class="price-features">
+                        <li>2 messages Chef IA / jour</li>
+                        <li>1 analyse photo / jour</li>
+                        <li>3 recettes sauvegardées</li>
+                        <li>Publicités</li>
+                    </ul>
                 </div>
-                <div class="expertise-card reveal" style="transition-delay: 0.1s;">
-                    <div class="expertise-icon">🧠</div>
-                    <h3>Intelligence artificielle</h3>
-                    <p>Intégration de modèles de langage dans des produits grand public. Chat, analyse d'image, génération de contenu.</p>
-                </div>
-                <div class="expertise-card reveal" style="transition-delay: 0.2s;">
-                    <div class="expertise-icon">☁️</div>
-                    <h3>Cloud & Backend</h3>
-                    <p>Firebase, Cloud Functions, Firestore. Infrastructure serverless scalable avec authentification et temps réel.</p>
-                </div>
-                <div class="expertise-card reveal">
-                    <div class="expertise-icon">🔒</div>
-                    <h3>Sécurité</h3>
-                    <p>Chiffrement, obfuscation, SSL Pinning, validation serveur. La sécurité est une exigence, pas une option.</p>
-                </div>
-                <div class="expertise-card reveal" style="transition-delay: 0.1s;">
-                    <div class="expertise-icon">🌍</div>
-                    <h3>Internationalisation</h3>
-                    <p>Applications multilingues dès la conception. Traductions contextuelles et adaptation culturelle.</p>
-                </div>
-                <div class="expertise-card reveal" style="transition-delay: 0.2s;">
-                    <div class="expertise-icon">💰</div>
-                    <h3>Monétisation</h3>
-                    <p>Modèles freemium, abonnements in-app, publicité ciblée. Stratégie de revenus intégrée dès le jour 1.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-inner reveal">
-                <div class="section-label" style="justify-content: center;">Contact</div>
-                <h2>Travaillons <em>ensemble</em></h2>
-                <p class="contact-desc">Un projet d'application mobile ? Une question sur nos produits ? N'hésitez pas à nous écrire.</p>
-                <a href="mailto:contact@zorntek.fr" class="contact-email" rel="noopener noreferrer">
-                    contact@zorntek.fr
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                </a>
+                <div class="price-card featured reveal reveal-delay-2">
+                    <div class="price-badge">Populaire</div>
+                    <div class="price-name">Pro</div>
+                    <div class="price-amount">2,99€ <span class="period">/mois</span></div>
+                    <ul class="price-features">
+                        <li>20 messages Chef IA / jour</li>
+                        <li>3 analyses photo / jour</li>
+                        <li>Recettes illimitées</li>
+                        <li>Historique photos</li>
+                        <li>Zéro publicité</li>
+                        <li>Essai gratuit 3 jours</li>
+                    </ul>
+                </div>
+
+                <div class="price-card reveal reveal-delay-3">
+                    <div class="price-name">Master</div>
+                    <div class="price-amount">5,99€ <span class="period">/mois</span></div>
+                    <ul class="price-features">
+                        <li>60 messages Chef IA / jour</li>
+                        <li>10 analyses photo / jour</li>
+                        <li>IA avancée (Sonnet)</li>
+                        <li>Recettes illimitées</li>
+                        <li>Historique photos</li>
+                        <li>Zéro publicité</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-logo">Zorn<span>Tek</span></div>
-                <ul class="footer-links">
-                    <li><a href="https://manub81-hash.github.io/pizzai-privacy/" target="_blank" rel="noopener noreferrer">Confidentialité</a></li>
-                    <li><a href="https://manub81-hash.github.io/pizzai-privacy/terms.html" target="_blank" rel="noopener noreferrer">CGU</a></li>
-                    <li><a href="https://www.instagram.com/pizzai_officiel/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                </ul>
-                <span class="footer-copy">&copy; 2026 ZornTek. Tous droits réservés.</span>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">Pizz<span>AI</span></div>
+                <div class="footer-info">
+                    ZornTek — Emmanuel Baldo<br>
+                    Bossendorf, Alsace, France<br>
+                    <a href="mailto:contact@zorntek.fr" style="color:rgba(212,164,74,0.4);text-decoration:none;">contact@zorntek.fr</a>
+                </div>
             </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Application</h4>
+                    <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a>
+                    <a href="#">App Store (bientôt)</a>
+                    <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Légal</h4>
+                    <a href="https://zorntek.fr/privacy.html">Confidentialité</a>
+                    <a href="https://zorntek.fr/terms.html">CGU</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ZornTek. Tous droits réservés.</span>
+            <span>Propulsé par Claude (Anthropic)</span>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
-        // Nav scroll
-        var nav = document.getElementById('nav');
-        window.addEventListener('scroll', function() {
+        // ═══ NAV SCROLL ═══
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 60);
         });
 
-        // Mobile toggle
-        var toggle = document.getElementById('navToggle');
-        var links = document.getElementById('navLinks');
-        toggle.addEventListener('click', function() { links.classList.toggle('open'); });
-        links.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function() { links.classList.remove('open'); });
-        });
-
-        // Scroll reveal
-        var reveals = document.querySelectorAll('.reveal');
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+        // ═══ SCROLL REVEAL ═══
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        reveals.forEach(function(el) { observer.observe(el); });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // ═══ SCORE BARS ANIMATION ═══
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const scoreObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.score-bar').forEach(bar => {
+                        bar.style.width = bar.dataset.width;
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+        scoreObserver.observe(scoreDisplay);
+
+        // ═══ PARTICLES ═══
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (12 + Math.random() * 20) + 's';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+            particlesContainer.appendChild(p);
+        }
+
+        // ═══ SMOOTH SCROLL ═══
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
