@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de confidentialité — PizzAI | ZornTek</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #d4a44a;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 32px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 1; }
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #d4a44a;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 20px;
+            color: #fff;
+            margin: 40px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212, 164, 74, 0.2);
+        }
+        h3 {
+            font-size: 16px;
+            color: #d4a44a;
+            margin: 24px 0 12px;
+        }
+        p { margin-bottom: 12px; color: #ccc; }
+        ul { margin: 8px 0 16px 24px; color: #ccc; }
+        li { margin-bottom: 6px; }
+        a { color: #d4a44a; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        th {
+            color: #d4a44a;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td { color: #ccc; }
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+        .highlight-box {
+            background: rgba(212, 164, 74, 0.08);
+            border-left: 3px solid #d4a44a;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 24px 16px 60px; }
+            h1 { font-size: 26px; }
+            table { font-size: 13px; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="https://zorntek.fr" class="back-link">← ZornTek</a>
+
+    <h1>Politique de confidentialité</h1>
+    <p class="subtitle">Application PizzAI — Dernière mise à jour : 30 mars 2026</p>
+
+    <p>ZornTek, micro-entreprise enregistrée en France, développe et édite l'application mobile PizzAI. La présente politique décrit comment vos données personnelles sont collectées, utilisées et protégées conformément au Règlement Général sur la Protection des Données (RGPD).</p>
+
+    <h2>1. Responsable du traitement</h2>
+    <p>Emmanuel Baldo — ZornTek<br>
+    Siège : Bossendorf, Alsace, France<br>
+    Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+
+    <h2>2. Données collectées</h2>
+
+    <h3>2.1 Données de compte</h3>
+    <ul>
+        <li><strong>Adresse e-mail</strong> — pour l'authentification et la gestion de votre compte</li>
+        <li><strong>Identifiant utilisateur</strong> — identifiant technique unique attribué par Firebase Auth</li>
+        <li><strong>Méthode de connexion</strong> — Google Sign-In ou Apple Sign-In</li>
+    </ul>
+
+    <h3>2.2 Données d'utilisation</h3>
+    <ul>
+        <li><strong>Compteurs d'utilisation</strong> — nombre de requêtes Chef IA et analyses Photo IA par jour (pour appliquer les limites selon votre plan)</li>
+        <li><strong>Recettes sauvegardées</strong> — paramètres de pâte et notes que vous enregistrez dans votre carnet</li>
+        <li><strong>Historique des analyses photo</strong> — scores et conseils associés à vos photos de pizza (plans Pro et Master)</li>
+    </ul>
+
+    <h3>2.3 Photos</h3>
+    <p>Lorsque vous utilisez la fonction Analyse Photo, l'image est envoyée à l'API Claude (Anthropic) pour analyse. Les photos ne sont <strong>pas stockées de manière permanente</strong> par Anthropic et sont traitées uniquement pour générer votre score et vos conseils. Les photos des utilisateurs Pro et Master peuvent être sauvegardées dans Firebase Storage pour l'historique.</p>
+
+    <h3>2.4 Données de paiement</h3>
+    <p>Les transactions d'abonnement (Pro, Master) sont gérées par Google Play Billing ou Apple In-App Purchase, puis synchronisées via RevenueCat. ZornTek n'a <strong>jamais accès</strong> à vos coordonnées bancaires ou données de carte.</p>
+
+    <h3>2.5 Données publicitaires</h3>
+    <p>Pour les utilisateurs du plan gratuit, Google AdMob collecte un identifiant publicitaire pour afficher des annonces personnalisées. Vous pouvez désactiver la personnalisation des annonces dans les paramètres de votre appareil.</p>
+
+    <h2>3. Finalités du traitement</h2>
+    <table>
+        <tr><th>Finalité</th><th>Base légale (RGPD)</th></tr>
+        <tr><td>Authentification et gestion de compte</td><td>Exécution du contrat</td></tr>
+        <tr><td>Fonctionnement de l'application (IA, recettes, limites)</td><td>Exécution du contrat</td></tr>
+        <tr><td>Gestion des abonnements</td><td>Exécution du contrat</td></tr>
+        <tr><td>Affichage de publicités (plan gratuit)</td><td>Intérêt légitime / Consentement</td></tr>
+        <tr><td>Détection de bugs et amélioration</td><td>Intérêt légitime</td></tr>
+        <tr><td>Concours et parrainages</td><td>Consentement</td></tr>
+    </table>
+
+    <h2>4. Sous-traitants et transferts de données</h2>
+    <table>
+        <tr><th>Service</th><th>Données</th><th>Localisation</th></tr>
+        <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>UE (europe-west1)</td></tr>
+        <tr><td>Anthropic (Claude)</td><td>Messages Chef IA, photos pour analyse</td><td>États-Unis*</td></tr>
+        <tr><td>RevenueCat</td><td>Identifiant utilisateur, statut abonnement</td><td>États-Unis*</td></tr>
+        <tr><td>Google AdMob</td><td>Identifiant publicitaire</td><td>International</td></tr>
+    </table>
+    <p style="font-size: 13px; color: #888;">* Transferts vers les États-Unis encadrés par le EU-US Data Privacy Framework.</p>
+
+    <h2>5. Durées de conservation</h2>
+    <table>
+        <tr><th>Donnée</th><th>Durée</th></tr>
+        <tr><td>Compte et données associées</td><td>Jusqu'à suppression du compte</td></tr>
+        <tr><td>Compteurs d'utilisation</td><td>Réinitialisés chaque jour</td></tr>
+        <tr><td>Recettes</td><td>Jusqu'à suppression par l'utilisateur ou du compte</td></tr>
+        <tr><td>Photos analysées</td><td>Traitement immédiat, non conservées par Anthropic</td></tr>
+        <tr><td>Historique photo (Pro/Master)</td><td>Jusqu'à suppression du compte</td></tr>
+        <tr><td>Données de paiement</td><td>Gérées par Google/Apple/RevenueCat</td></tr>
+    </table>
+
+    <h2>6. Vos droits</h2>
+    <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+    <ul>
+        <li><strong>Accès</strong> — obtenir une copie de vos données personnelles</li>
+        <li><strong>Rectification</strong> — corriger des données inexactes</li>
+        <li><strong>Suppression</strong> — faire supprimer vos données et votre compte</li>
+        <li><strong>Portabilité</strong> — recevoir vos données dans un format structuré</li>
+        <li><strong>Opposition</strong> — vous opposer au traitement de vos données</li>
+        <li><strong>Limitation</strong> — demander la limitation du traitement</li>
+    </ul>
+    <p>Pour exercer vos droits, contactez : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+    <p>Vous pouvez également introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a></p>
+
+    <h2 id="suppression">7. Suppression de compte</h2>
+    <div class="highlight-box">
+        <p style="margin-bottom: 8px;"><strong>Pour supprimer votre compte et toutes vos données :</strong></p>
+        <p style="margin-bottom: 0;">Envoyez un e-mail à <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a> avec l'objet <strong>« Suppression de compte »</strong> depuis l'adresse e-mail associée à votre compte PizzAI. Votre compte et l'ensemble de vos données (recettes, historique, compteurs) seront supprimés sous 30 jours.</p>
+    </div>
+
+    <h2>8. Sécurité</h2>
+    <p>Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données :</p>
+    <ul>
+        <li>Communications chiffrées (HTTPS / TLS)</li>
+        <li>Authentification sécurisée via Firebase Auth (Google / Apple Sign-In)</li>
+        <li>Règles d'accès Firestore strictes (chaque utilisateur n'accède qu'à ses propres données)</li>
+        <li>Clés API sensibles stockées côté serveur uniquement (Cloud Functions)</li>
+        <li>Aucun stockage de mots de passe en clair</li>
+    </ul>
+
+    <h2>9. Cookies et technologies similaires</h2>
+    <p>L'application PizzAI n'utilise pas de cookies. Firebase et AdMob peuvent utiliser des identifiants techniques pour le fonctionnement du service et la personnalisation des publicités.</p>
+
+    <h2>10. Mineurs</h2>
+    <p>PizzAI est accessible à tous les âges (classification 4+). Nous ne collectons pas sciemment de données personnelles d'enfants de moins de 16 ans sans le consentement parental. Si vous êtes parent et pensez que votre enfant nous a fourni des données, contactez-nous.</p>
+
+    <h2>11. Modifications</h2>
+    <p>Cette politique peut être mise à jour. En cas de modification substantielle, une notification sera affichée dans l'application. La date de dernière mise à jour figure en haut de cette page.</p>
+
+    <div class="footer">
+        <p>ZornTek — Emmanuel Baldo<br>
+        Bossendorf, Alsace, France<br>
+        <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+        <p style="margin-top: 8px;">© 2026 ZornTek. Tous droits réservés.</p>
+    </div>
+</div>
+</body>
+</html>
