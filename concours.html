@@ -7,300 +7,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: #0a0806;
-            color: #c5b8a5;
-            line-height: 1.8;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(212,164,74,0.06) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            background: rgba(10,8,6,0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212,164,74,0.1);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
-        }
-
-        .nav-brand {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 20px;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0806; color: #c5b8a5; line-height: 1.8; min-height: 100vh; position: relative; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 50% 0%, rgba(212,164,74,0.06) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(10,8,6,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212,164,74,0.1); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #fff; text-decoration: none; letter-spacing: 0.5px; }
         .nav-brand span { color: #d4a44a; }
-
-        .nav-link {
-            font-size: 13px;
-            color: #999;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        .nav-link { font-size: 13px; color: #999; text-decoration: none; transition: color 0.3s; }
         .nav-link:hover { color: #d4a44a; }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 100px 24px 60px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 56px;
-            padding: 48px 0;
-        }
-
-        .hero-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
-        .hero h1 em {
-            color: #d4a44a;
-            font-style: italic;
-        }
-
-        .hero-sub {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 18px;
-            color: #d4a44a;
-            margin-bottom: 16px;
-            font-style: italic;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: #999;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 6px 16px;
-            border-radius: 20px;
-        }
-
-        h2 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #fff;
-            margin-top: 48px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(212,164,74,0.15);
-            position: relative;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 60px;
-            height: 1px;
-            background: #d4a44a;
-        }
-
-        h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            color: #e0d5c5;
-            margin-top: 24px;
-            margin-bottom: 10px;
-            letter-spacing: 0.3px;
-        }
-
-        p {
-            font-size: 14.5px;
-            margin-bottom: 14px;
-            color: #a89b8a;
-            font-weight: 300;
-        }
-
+        .container { max-width: 720px; margin: 0 auto; padding: 100px 24px 60px; position: relative; z-index: 1; }
+        .hero { text-align: center; margin-bottom: 56px; padding: 48px 0; }
+        .hero-icon { font-size: 48px; margin-bottom: 20px; display: block; }
+        .hero h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .hero h1 em { color: #d4a44a; font-style: italic; }
+        .hero-sub { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; color: #d4a44a; margin-bottom: 16px; font-style: italic; }
+        .hero-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #999; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 20px; }
+        h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: #fff; margin-top: 48px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(212,164,74,0.15); position: relative; }
+        h2::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 60px; height: 1px; background: #d4a44a; }
+        h3 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; color: #e0d5c5; margin-top: 24px; margin-bottom: 10px; letter-spacing: 0.3px; }
+        p { font-size: 14.5px; margin-bottom: 14px; color: #a89b8a; font-weight: 300; }
         strong { color: #e0d5c5; font-weight: 500; }
-
-        a {
-            color: #d4a44a;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(212,164,74,0.3);
-            transition: border-color 0.3s;
-        }
+        em { color: #b0a593; }
+        a { color: #d4a44a; text-decoration: none; border-bottom: 1px solid rgba(212,164,74,0.3); transition: border-color 0.3s; }
         a:hover { border-color: #d4a44a; }
-
-        ul, ol {
-            padding-left: 20px;
-            margin-bottom: 16px;
-        }
-        li {
-            font-size: 14.5px;
-            margin-bottom: 8px;
-            color: #a89b8a;
-            font-weight: 300;
-        }
-
-        .glass-card {
-            background: rgba(212,164,74,0.04);
-            border: 1px solid rgba(212,164,74,0.12);
-            border-radius: 16px;
-            padding: 24px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
+        ul, ol { padding-left: 20px; margin-bottom: 16px; }
+        li { font-size: 14.5px; margin-bottom: 8px; color: #a89b8a; font-weight: 300; }
+        .glass-card { background: rgba(212,164,74,0.04); border: 1px solid rgba(212,164,74,0.12); border-radius: 16px; padding: 24px; margin: 20px 0; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .glass-card p { margin-bottom: 4px; }
-
-        .formula-card {
-            background: rgba(212,164,74,0.08);
-            border: 1px solid rgba(212,164,74,0.2);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .formula-card p {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: #d4a44a;
-            margin: 0;
-            font-weight: 400;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        th {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            color: #d4a44a;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: left;
-            padding: 14px 16px;
-            background: rgba(212,164,74,0.08);
-            border-bottom: 1px solid rgba(212,164,74,0.15);
-        }
-        td {
-            font-size: 14px;
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            color: #a89b8a;
-        }
+        .cat-label { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; margin-bottom: 12px; }
+        .cat-pizza { background: rgba(212,164,74,0.15); color: #d4a44a; border: 1px solid rgba(212,164,74,0.3); }
+        .cat-amb { background: rgba(100,180,255,0.1); color: #7ab8f5; border: 1px solid rgba(100,180,255,0.2); }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 12px; overflow: hidden; }
+        th { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #d4a44a; text-transform: uppercase; letter-spacing: 1px; text-align: left; padding: 14px 16px; background: rgba(212,164,74,0.08); border-bottom: 1px solid rgba(212,164,74,0.15); }
+        td { font-size: 14px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #a89b8a; }
         tr:last-child td { border-bottom: none; }
         td:first-child { color: #e0d5c5; font-weight: 500; }
-
-        .total-row {
-            background: rgba(212,164,74,0.06);
-            border-top: 1px solid rgba(212,164,74,0.15);
-            padding: 14px 20px;
-            border-radius: 0 0 12px 12px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin-top: -4px;
-        }
-        .total-row span:last-child {
-            color: #d4a44a;
-            font-weight: 600;
-        }
-
-        .footer {
-            margin-top: 64px;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            text-align: center;
-        }
-        .footer p {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 8px;
-        }
-        .footer a {
-            color: #777;
-            border: none;
-            margin: 0 8px;
-        }
+        .total-row { background: rgba(212,164,74,0.06); border-top: 1px solid rgba(212,164,74,0.15); padding: 14px 20px; border-radius: 0 0 12px 12px; display: flex; justify-content: space-between; font-size: 14px; margin-top: -4px; }
+        .total-row span:last-child { color: #d4a44a; font-weight: 600; }
+        .footer { margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+        .footer p { font-size: 13px; color: #555; margin-bottom: 8px; }
+        .footer a { color: #777; border: none; margin: 0 8px; }
         .footer a:hover { color: #d4a44a; }
-
-        .footer-brand {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 16px;
-            color: #444;
-            margin-bottom: 12px;
-        }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 16px; color: #444; margin-bottom: 12px; }
         .footer-brand span { color: rgba(212,164,74,0.4); }
-
-        .divider {
-            width: 40px;
-            height: 1px;
-            background: rgba(212,164,74,0.3);
-            margin: 40px auto;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 80px 16px 40px; }
-            .hero h1 { font-size: 28px; }
-            .hero-sub { font-size: 16px; }
-            h2 { font-size: 19px; }
-            nav { padding: 14px 16px; }
-        }
+        .divider { width: 40px; height: 1px; background: rgba(212,164,74,0.3); margin: 40px auto; }
+        @media (max-width: 600px) { .container { padding: 80px 16px 40px; } .hero h1 { font-size: 28px; } .hero-sub { font-size: 16px; } h2 { font-size: 19px; } nav { padding: 14px 16px; } }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="https://zorntek.fr/" class="nav-brand">Pizz<span>AI</span></a>
         <a href="https://zorntek.fr/" class="nav-link">Retour</a>
     </nav>
-
     <div class="container">
-
         <div class="hero">
             <span class="hero-icon">🏆</span>
             <h1>Règlement du <em>#PizzAIChallenge</em></h1>
@@ -308,41 +67,41 @@
             <span class="hero-badge">Dernière mise à jour : [DATE]</span>
         </div>
 
-        <!-- ARTICLE 1 -->
         <h2>Article 1 — Organisateur</h2>
         <p>Le concours « #PizzAIChallenge » (ci-après « le Concours ») est organisé par :</p>
         <div class="glass-card">
             <p><strong>ZornTek</strong></p>
             <p>Micro-entreprise — Emmanuel Baldo</p>
-            <p>SIRET : [EN COURS D'ATTRIBUTION]</p>
-            <p>Siège : Strasbourg, Alsace, France</p>
-            <p>Contact : <a href="/cdn-cgi/l/email-protection#24474b4a50454750645e4b564a50414f0a4256"><span class="__cf_email__" data-cfemail="dfbcb0b1abbebcab9fa5b0adb1abbab4f1b9ad">[email&#160;protected]</span></a></p>
+            <p>SIRET : [NUMÉRO SIRET]</p>
+            <p>Siège social : Strasbourg, Alsace, France</p>
+            <p>Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
         </div>
 
-        <!-- ARTICLE 2 -->
         <h2>Article 2 — Objet</h2>
         <p>Le présent règlement définit les conditions et modalités de participation au Concours « #PizzAIChallenge », organisé dans le cadre de la promotion de l'application mobile PizzAI.</p>
-        <p>Le Concours est un <strong>jeu d'adresse</strong> reposant sur les compétences culinaires des participants (qualité de la pizza réalisée, évaluée par intelligence artificielle) et sur leur capacité à mobiliser d'autres participants via un système de parrainage. <strong>Aucun élément de hasard n'intervient dans la désignation des gagnants.</strong></p>
+        <p>Le Concours comprend <strong>deux catégories indépendantes</strong> :</p>
+        <ul>
+            <li><strong>Catégorie « Meilleure Pizza » :</strong> jeu d'adresse reposant sur les compétences culinaires des participants. La qualité de la pizza réalisée est évaluée par intelligence artificielle selon des critères objectifs prédéfinis. Aucun élément de hasard n'intervient dans la désignation des gagnants de cette catégorie.</li>
+            <li><strong>Catégorie « Meilleur Ambassadeur » :</strong> opération promotionnelle de parrainage récompensant les participants ayant recruté le plus grand nombre de nouveaux utilisateurs vérifiés. Le système de parrainage est à un seul niveau : seuls les filleuls directs sont comptabilisés. Le parrain ne perçoit aucun avantage lié aux parrainages effectués par ses propres filleuls. Les filleuls ne sont soumis à aucune obligation financière.</li>
+        </ul>
+        <p>Un même participant peut figurer au classement des deux catégories et remporter un lot dans chacune d'elles.</p>
 
-        <!-- ARTICLE 3 -->
         <h2>Article 3 — Durée</h2>
         <p>Le Concours se déroule du <strong>[DATE DE DÉBUT]</strong> à 00h00 (heure de Paris) au <strong>[DATE DE FIN]</strong> à 23h59 (heure de Paris), soit une durée de trois (3) semaines.</p>
         <p>L'Organisateur se réserve le droit d'écourter, de prolonger ou d'annuler le Concours en cas de force majeure ou si le nombre de participants est jugé insuffisant (moins de 20 participants). Toute modification sera communiquée via l'application PizzAI et le compte Instagram <a href="https://instagram.com/pizzai_officiel">@pizzai_officiel</a>.</p>
 
-        <!-- ARTICLE 4 -->
         <h2>Article 4 — Conditions de participation</h2>
-
         <h3>4.1 — Éligibilité</h3>
         <p>Le Concours est ouvert à toute personne physique :</p>
         <ul>
             <li>Âgée de <strong>dix-huit (18) ans révolus</strong> à la date de début du Concours</li>
-            <li>Résidant dans un pays membre de l'<strong>Espace économique européen (EEE)</strong>, en Suisse ou au Royaume-Uni</li>
+            <li>Résidant en France métropolitaine, dans les DROM, en Suisse ou dans un État membre de l'<strong>Espace économique européen (EEE)</strong></li>
             <li>Disposant d'un accès à Internet et d'un appareil compatible avec l'application PizzAI (Android ou iOS)</li>
-            <li>Ayant créé un compte utilisateur sur l'application PizzAI</li>
+            <li>Ayant créé un compte utilisateur vérifié sur l'application PizzAI</li>
         </ul>
+        <p><em>Le participant est seul responsable du respect de la législation en vigueur dans son pays de résidence en matière de jeux-concours.</em></p>
 
         <h3>4.2 — Exclusions</h3>
-        <p>Sont exclues de la participation :</p>
         <ul>
             <li>Les membres du personnel de l'Organisateur et leurs familles directes (conjoint, ascendants, descendants)</li>
             <li>Toute personne ayant participé à la conception ou à la mise en œuvre du Concours</li>
@@ -354,155 +113,178 @@
         <p>Les éventuels frais de connexion à Internet restent à la charge du participant.</p>
 
         <h3>4.4 — Limitation</h3>
-        <p>La participation est limitée à <strong>un (1) compte par personne physique</strong>. Toute participation multiple (comptes multiples, fausses identités) entraînera la disqualification immédiate.</p>
+        <p>La participation est limitée à <strong>un (1) compte par personne physique et par appareil</strong>. Toute participation multiple (comptes multiples, fausses identités) entraînera la disqualification immédiate de tous les comptes concernés.</p>
 
-        <!-- ARTICLE 5 -->
         <h2>Article 5 — Modalités de participation</h2>
-
         <h3>5.1 — Inscription</h3>
         <p>Pour participer, le candidat doit :</p>
         <ol>
             <li>Télécharger l'application PizzAI depuis le Google Play Store ou l'App Store</li>
-            <li>Créer un compte utilisateur (gratuit)</li>
+            <li>Créer un compte utilisateur (gratuit) et vérifier son adresse email</li>
             <li>Réaliser une pizza de sa propre confection</li>
             <li>Soumettre une photographie de sa pizza à l'analyse par intelligence artificielle via la fonctionnalité « Photo IA » de l'application</li>
             <li>Accepter le présent Règlement</li>
         </ol>
         <p>La soumission de la première analyse photo pendant la période du Concours vaut inscription.</p>
 
-        <h3>5.2 — Système de notation</h3>
-        <p>Le score de chaque participant est calculé selon la formule suivante :</p>
+        <h3>5.2 — Catégorie « Meilleure Pizza »</h3>
+        <div class="cat-label cat-pizza">🍕 Meilleure Pizza</div>
+        <p>Chaque participant peut soumettre jusqu'à <strong>trois (3) analyses photo</strong> pendant la durée du Concours. Seul le meilleur score obtenu est retenu pour le classement.</p>
+        <p>L'intelligence artificielle évalue chaque pizza selon cinq critères objectifs : cuisson, corniche, forme, garniture et aspect général. Elle attribue un <strong>score global de 0 à 100 points</strong>.</p>
+        <p>L'évaluation par intelligence artificielle est réalisée de manière automatisée selon des critères objectifs prédéfinis. Le participant accepte que cette évaluation, à caractère ludique, est définitive et ne peut faire l'objet d'aucune réclamation.</p>
+        <p>En cas d'égalité de score, le départage s'effectue en faveur du participant ayant soumis sa première analyse photo le plus tôt (horodatage serveur).</p>
 
-        <div class="formula-card">
-            <p>Score = Score Photo IA (/100) + 15 pts × filleuls vérifiés</p>
-        </div>
-
-        <p><strong>Score Photo IA :</strong> L'intelligence artificielle évalue la pizza selon cinq critères objectifs (cuisson, corniche, forme, garniture, aspect général), chacun noté sur 20, pour un score total sur 100. Ce score constitue la base du classement du participant.</p>
-
-        <p><strong>Points de parrainage :</strong> Chaque participant dispose d'un code parrain unique, généré automatiquement. Lorsqu'un nouvel utilisateur installe l'application, crée un compte avec ce code, et effectue au moins une action vérifiable, le parrain reçoit 15 points supplémentaires. Le nombre de filleuls n'est pas plafonné.</p>
-
-        <h3>5.3 — Validation d'un filleul</h3>
-        <p>Un filleul est considéré comme « vérifié » lorsque les trois conditions cumulatives suivantes sont remplies :</p>
+        <h3>5.3 — Catégorie « Meilleur Ambassadeur »</h3>
+        <div class="cat-label cat-amb">🤝 Meilleur Ambassadeur</div>
+        <p>Chaque participant dispose d'un code parrain unique, généré automatiquement dans l'application. Le classement est établi selon le nombre de filleuls vérifiés. <strong>Le nombre de filleuls n'est pas plafonné.</strong></p>
+        <p>Un filleul est considéré comme « vérifié » lorsque les conditions cumulatives suivantes sont remplies :</p>
         <ol>
-            <li>Installation de l'application PizzAI</li>
+            <li>Installation de l'application PizzAI sur un appareil physique réel (les émulateurs sont exclus)</li>
             <li>Création d'un compte utilisateur avec un code parrain valide</li>
-            <li>Réalisation d'au moins une action : un calcul de recette, un message au Chef IA, ou une analyse photo</li>
+            <li>Vérification de l'adresse email associée au compte via le lien de confirmation. Les adresses email temporaires ou jetables ne sont pas acceptées.</li>
+            <li>Réalisation d'au moins une (1) action dans l'application : calcul de recette, message au Chef IA ou analyse photo</li>
+            <li>Un délai de validation pouvant aller jusqu'à vingt-quatre (24) heures s'applique avant la comptabilisation du filleul</li>
         </ol>
-        <p>Les filleuls ne sont pas tenus de participer eux-mêmes au Concours pour être comptabilisés.</p>
+        <p>Les filleuls ne sont pas tenus de participer eux-mêmes au Concours pour être comptabilisés. En cas d'égalité du nombre de filleuls, le départage s'effectue en faveur du participant ayant atteint ce nombre le plus tôt.</p>
 
         <h3>5.4 — Classement</h3>
-        <p>Un classement en temps réel est affiché dans l'application, accessible à tous les participants. Ce classement indique le pseudonyme (prénom et initiale du nom) et le score total de chaque participant.</p>
+        <p>Deux classements distincts sont affichés en temps réel dans l'application, accessibles à tous les participants. Chaque classement indique le pseudonyme (prénom et initiale du nom) et le score ou nombre de filleuls de chaque participant.</p>
 
-        <!-- ARTICLE 6 -->
         <h2>Article 6 — Dotations</h2>
 
+        <h3>6.1 — Catégorie « Meilleure Pizza »</h3>
+        <div class="cat-label cat-pizza">🍕 Meilleure Pizza</div>
         <table>
-            <thead>
-                <tr>
-                    <th>Classement</th>
-                    <th>Dotation</th>
-                    <th>Valeur</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Classement</th><th>Dotation</th><th>Valeur</th></tr></thead>
             <tbody>
-                <tr>
-                    <td>🥇 1er</td>
-                    <td>Un bon d'achat Amazon d'une valeur de 300 € + 12 mois PizzAI Master</td>
-                    <td>~372 €</td>
-                </tr>
-                <tr>
-                    <td>🥈 2ème</td>
-                    <td>Un bon d'achat Amazon d'une valeur de 50 € + 6 mois PizzAI Master</td>
-                    <td>~86 €</td>
-                </tr>
-                <tr>
-                    <td>🥉 3ème</td>
-                    <td>Un bon d'achat Amazon d'une valeur de 20 € + 3 mois PizzAI Master</td>
-                    <td>~38 €</td>
-                </tr>
-                <tr>
-                    <td>4ème — 10ème</td>
-                    <td>1 mois PizzAI Master</td>
-                    <td>5,99 €</td>
-                </tr>
+                <tr><td>🥇 1er</td><td>Bon d'achat Amazon de 200 € + 12 mois PizzAI Master</td><td>~272 €</td></tr>
+                <tr><td>🥈 2ème</td><td>Bon d'achat Amazon de 50 € + 6 mois PizzAI Master</td><td>~86 €</td></tr>
+                <tr><td>🥉 3ème</td><td>3 mois PizzAI Master</td><td>~18 €</td></tr>
+                <tr><td>4ème — 10ème</td><td>1 mois PizzAI Master</td><td>5,99 €</td></tr>
             </tbody>
         </table>
+
+        <h3>6.2 — Catégorie « Meilleur Ambassadeur »</h3>
+        <div class="cat-label cat-amb">🤝 Meilleur Ambassadeur</div>
+        <table>
+            <thead><tr><th>Classement</th><th>Dotation</th><th>Valeur</th></tr></thead>
+            <tbody>
+                <tr><td>🥇 1er</td><td>Bon d'achat Amazon de 100 € + 6 mois PizzAI Master</td><td>~136 €</td></tr>
+                <tr><td>🥈 2ème</td><td>3 mois PizzAI Master</td><td>~18 €</td></tr>
+                <tr><td>🥉 3ème</td><td>1 mois PizzAI Master</td><td>5,99 €</td></tr>
+            </tbody>
+        </table>
+
         <div class="total-row">
-            <span>Valeur totale des dotations</span>
-            <span>~538 €</span>
+            <span>Valeur totale estimée des dotations</span>
+            <span>~584 €</span>
         </div>
 
         <p>Les dotations sont nominatives, incessibles et ne peuvent faire l'objet d'aucune contrepartie en espèces. Les bons d'achat Amazon sont non remboursables et non convertibles en espèces. L'Organisateur se réserve le droit de remplacer une dotation par un lot de valeur équivalente en cas d'indisponibilité.</p>
         <p>Les abonnements Master sont activés directement dans l'application. Ils débutent à la date d'attribution et ne sont ni renouvelables ni transférables.</p>
 
-        <!-- ARTICLE 7 -->
         <h2>Article 7 — Désignation et remise des lots</h2>
-
         <h3>7.1 — Désignation</h3>
-        <p>Les gagnants sont les participants occupant les dix (10) premières places du classement à la clôture du Concours, le <strong>[DATE DE FIN]</strong> à 23h59 (heure de Paris).</p>
-        <p>En cas d'égalité de score, le départage s'effectue en faveur du participant ayant soumis sa première analyse photo le plus tôt.</p>
+        <p>Les gagnants sont les participants occupant les premières places de chaque classement à la clôture du Concours, le <strong>[DATE DE FIN]</strong> à 23h59 (heure de Paris). Un même participant peut figurer dans les deux classements et cumuler les dotations correspondantes.</p>
 
         <h3>7.2 — Notification</h3>
         <p>Les gagnants seront contactés par email dans un délai de <strong>cinq (5) jours ouvrés</strong> suivant la clôture. Les résultats seront également publiés dans l'application et sur <a href="https://instagram.com/pizzai_officiel">@pizzai_officiel</a>.</p>
 
-        <h3>7.3 — Réclamation</h3>
-        <p>Chaque gagnant dispose de <strong>sept (7) jours calendaires</strong> pour confirmer son acceptation du lot. Passé ce délai, le lot sera attribué au participant classé immédiatement après.</p>
+        <h3>7.3 — Acceptation du lot</h3>
+        <p>Chaque gagnant dispose de <strong>sept (7) jours calendaires</strong> à compter de la notification pour confirmer son acceptation du lot et, le cas échéant, fournir les pièces justificatives demandées (pièce d'identité). Passé ce délai ou en cas de non-réponse, le lot sera attribué au participant classé immédiatement après.</p>
 
         <h3>7.4 — Remise des lots</h3>
         <p>Les bons d'achat Amazon seront envoyés par email à l'adresse associée au compte PizzAI des gagnants, dans un délai de <strong>quinze (15) jours</strong> suivant confirmation. Les abonnements PizzAI Master seront activés directement dans l'application.</p>
 
-        <!-- ARTICLE 8 -->
         <h2>Article 8 — Lutte contre la fraude</h2>
+        <p>L'Organisateur met en œuvre des mesures techniques et humaines de détection de la fraude :</p>
+
+        <h3>8.1 — Comptes et identité</h3>
         <ul>
-            <li>Un code parrain ne peut être utilisé qu'une seule fois par compte</li>
-            <li>La création de comptes multiples par une même personne (identifiée par email, appareil ou adresse IP) entraîne la disqualification</li>
-            <li>Les filleuls ne sont comptabilisés que s'ils ont effectué au moins une action réelle dans l'application</li>
-            <li>L'Organisateur se réserve le droit de demander une preuve d'identité à tout gagnant</li>
-            <li>L'Organisateur se réserve le droit de disqualifier tout participant au comportement manifestement frauduleux</li>
+            <li>Un seul compte par personne physique et par appareil. La création de comptes multiples, identifiée par adresse email, identifiant d'appareil, adresse IP ou tout autre moyen technique, entraîne la disqualification immédiate de tous les comptes concernés.</li>
+            <li>L'Organisateur se réserve le droit de demander à tout gagnant une pièce d'identité en cours de validité. Le refus ou l'absence de réponse sous quarante-huit (48) heures entraîne la disqualification.</li>
         </ul>
 
-        <!-- ARTICLE 9 -->
-        <h2>Article 9 — Données personnelles</h2>
+        <h3>8.2 — Catégorie « Meilleure Pizza »</h3>
+        <ul>
+            <li>Le participant garantit être l'auteur de la photographie soumise et avoir réalisé la pizza lui-même. La soumission de photographies trouvées sur Internet, retouchées de manière à altérer l'apparence réelle de la pizza, ou représentant une pizza achetée dans le commerce est strictement interdite.</li>
+            <li>L'Organisateur se réserve le droit de demander aux finalistes (top 10) une photographie complémentaire de leur pizza sous un angle différent, dans un délai de vingt-quatre (24) heures. L'absence de réponse entraîne la disqualification.</li>
+            <li>L'Organisateur procède à une vérification par recherche d'image inversée sur les photographies des finalistes avant l'attribution des lots.</li>
+        </ul>
 
+        <h3>8.3 — Catégorie « Meilleur Ambassadeur »</h3>
+        <ul>
+            <li>Un filleul n'est comptabilisé qu'après validation : installation sur un appareil physique réel (émulateurs exclus), adresse email vérifiée et non jetable, et activité vérifiable dans l'application.</li>
+            <li>Le participant garantit que ses filleuls sont des personnes physiques réelles et distinctes. Le recours à des services payants de recrutement, à des fermes de comptes ou à tout procédé artificiel est strictement interdit.</li>
+            <li>L'Organisateur se réserve le droit de ne pas comptabiliser les filleuls dont l'authenticité n'a pu être vérifiée et de demander à tout filleul une preuve d'identité distincte.</li>
+        </ul>
+
+        <h3>8.4 — Dispositions générales</h3>
+        <p>Les décisions de l'Organisateur en matière de fraude sont définitives et sans recours. Toute tentative de fraude avérée pourra donner lieu à des poursuites judiciaires.</p>
+
+        <h2>Article 9 — Données personnelles</h2>
         <h3>9.1 — Responsable du traitement</h3>
-        <p>ZornTek — Emmanuel Baldo — <a href="/cdn-cgi/l/email-protection#ff9c90918b9e9c8bbf85908d918b9a94d1998d"><span class="__cf_email__" data-cfemail="bcdfd3d2c8dddfc8fcc6d3ced2c8d9d792dace">[email&#160;protected]</span></a></p>
+        <p>ZornTek — Emmanuel Baldo — <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
 
         <h3>9.2 — Données collectées</h3>
-        <p>Adresse email, pseudonyme, code parrain, score et classement, photographies de pizzas soumises à l'analyse.</p>
+        <p>Adresse email, pseudonyme, code parrain, score et classement, nombre de filleuls, photographies de pizzas soumises à l'analyse, identifiant d'appareil.</p>
 
-        <h3>9.3 — Finalités</h3>
-        <p>Gestion du Concours, attribution et livraison des dotations, publication du classement. Base légale : exécution du contrat (acceptation du Règlement) et intérêt légitime.</p>
+        <h3>9.3 — Finalités et base légale</h3>
+        <p>Les données sont traitées pour la gestion du Concours, l'attribution et la livraison des dotations, la publication du classement et la lutte contre la fraude. Base légale : exécution du contrat (acceptation du Règlement) et intérêt légitime (sécurité et prévention de la fraude).</p>
 
         <h3>9.4 — Conservation</h3>
         <p>Les données sont conservées <strong>six (6) mois</strong> après la clôture du Concours, sauf obligations légales de conservation plus longues.</p>
 
-        <h3>9.5 — Droits</h3>
-        <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits d'accès, rectification, effacement, limitation, portabilité et opposition. Contact : <a href="/cdn-cgi/l/email-protection#7d1e1213091c1e093d07120f13091816531b0f"><span class="__cf_email__" data-cfemail="b8dbd7d6ccd9dbccf8c2d7cad6ccddd396deca">[email&#160;protected]</span></a>. Réclamation possible auprès de la <a href="https://www.cnil.fr">CNIL</a>.</p>
+        <h3>9.5 — Droits des personnes</h3>
+        <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits d'accès, de rectification, d'effacement, de limitation, de portabilité et d'opposition. Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Réclamation possible auprès de la <a href="https://www.cnil.fr">CNIL</a>.</p>
 
         <h3>9.6 — Sous-traitants</h3>
-        <p>Google Firebase (hébergement, authentification — serveurs UE), Anthropic (analyse photo IA — photos non conservées), RevenueCat (abonnements).</p>
+        <p>Les données peuvent être transmises aux sous-traitants suivants, opérant conformément à des accords de traitement garantissant un niveau de protection adéquat :</p>
+        <ul>
+            <li>Google Firebase — hébergement, authentification (serveurs UE)</li>
+            <li>Anthropic — analyse photo IA (photos non conservées après traitement)</li>
+            <li>RevenueCat — gestion des abonnements</li>
+        </ul>
 
-        <!-- ARTICLE 10 -->
         <h2>Article 10 — Propriété intellectuelle</h2>
-        <p>Le participant garantit être l'auteur de la photographie soumise. Il accorde à l'Organisateur le droit de reproduire et diffuser la photographie à des fins de communication liées au Concours, pour la durée du Concours et les six (6) mois suivants.</p>
+        <p>Le participant garantit être l'auteur de la photographie soumise et détenir l'ensemble des droits nécessaires à son exploitation dans le cadre du Concours.</p>
+        <p>En participant, le participant accorde à l'Organisateur, à titre gratuit, le droit de reproduire et de diffuser la photographie soumise sur tous supports numériques (application, réseaux sociaux, site web), dans le monde entier, à des fins de communication liées au Concours, pour la durée du Concours et les six (6) mois suivant sa clôture.</p>
 
-        <!-- ARTICLE 11 -->
         <h2>Article 11 — Responsabilité</h2>
-        <p>L'Organisateur ne saurait être tenu responsable en cas de dysfonctionnement réseau ou technique indépendant de sa volonté, d'interruption de l'application, d'erreurs de l'évaluation IA (appréciation automatisée à visée ludique), de force majeure (article 1218 du Code civil), d'utilisation frauduleuse des codes parrain par des tiers, ou de non-réception du bon d'achat en raison d'une adresse email erronée fournie par le gagnant.</p>
+        <p>L'Organisateur ne saurait être tenu responsable en cas de :</p>
+        <ul>
+            <li>Dysfonctionnement réseau ou technique indépendant de sa volonté</li>
+            <li>Interruption temporaire ou définitive de l'application</li>
+            <li>Erreurs ou variations de l'évaluation par intelligence artificielle, celle-ci constituant une appréciation automatisée à visée ludique</li>
+            <li>Force majeure au sens de l'article 1218 du Code civil</li>
+            <li>Utilisation frauduleuse des codes parrain par des tiers</li>
+            <li>Non-réception du bon d'achat en raison d'une adresse email erronée fournie par le gagnant</li>
+        </ul>
         <p>L'Organisateur se réserve le droit de modifier, suspendre ou annuler le Concours à tout moment en cas de force majeure ou de fraude avérée.</p>
 
-        <!-- ARTICLE 12 -->
         <h2>Article 12 — Fiscalité</h2>
-        <p>Les lots en nature issus de jeux-concours ne sont pas soumis à l'impôt sur le revenu pour les résidents français. Les gagnants hors de France sont invités à se renseigner sur leur réglementation locale.</p>
+        <p>En l'état actuel de la législation française, les lots attribués dans le cadre d'un jeu d'adresse ne sont pas soumis à l'impôt sur le revenu pour les résidents fiscaux français. Cette information est donnée à titre indicatif et ne constitue pas un conseil fiscal. Les gagnants résidant hors de France sont invités à se renseigner sur la réglementation fiscale applicable dans leur pays de résidence.</p>
 
-        <!-- ARTICLE 13 -->
-        <h2>Article 13 — Acceptation</h2>
-        <p>La participation au Concours implique l'acceptation pleine et entière du présent Règlement. Tout non-respect entraînera la disqualification.</p>
+        <h2>Article 13 — Acceptation du règlement</h2>
+        <p>La participation au Concours implique l'acceptation pleine et entière du présent Règlement. Tout non-respect des conditions de participation ou du présent Règlement entraînera la disqualification du participant.</p>
 
-        <!-- ARTICLE 14 -->
         <h2>Article 14 — Dépôt du règlement</h2>
-        <p>Conformément à la loi n° 2014-344 du 17 mars 2014, le dépôt auprès d'un huissier n'est pas obligatoire. Le présent Règlement est librement consultable à cette adresse et peut être obtenu sur simple demande à <a href="/cdn-cgi/l/email-protection#d4b7bbbaa0b5b7a094aebba6baa0b1bffab2a6"><span class="__cf_email__" data-cfemail="f3909c9d87929087b3899c819d879698dd9581">[email&#160;protected]</span></a>.</p>
+        <p>Conformément à la loi n° 2014-344 du 17 mars 2014, le dépôt du règlement auprès d'un huissier de justice n'est pas obligatoire. Le présent Règlement est librement consultable à l'adresse <a href="https://zorntek.fr/concours.html">zorntek.fr/concours.html</a> ainsi que dans l'application PizzAI. Il peut être obtenu sur simple demande écrite adressée à <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>.</p>
 
-        <!-- ARTICLE 15 -->
         <h2>Article 15 — Litiges</h2>
-        <p>Le présent Règlement est soumis au droit français. Tout litige sera soumis à la compétence exclusive des tribunaux de Stras
+        <p>Le présent Règlement est soumis au droit français. En cas de difficulté relative à l'interprétation ou à l'exécution du présent Règlement, et à défaut de règlement amiable, tout litige sera soumis à la compétence exclusive des tribunaux compétents de Strasbourg.</p>
+        <p>Réclamations : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+
+        <div class="divider"></div>
+        <div class="footer">
+            <p class="footer-brand">Pizz<span>AI</span></p>
+            <p>© 2026 ZornTek — Emmanuel Baldo</p>
+            <p>
+                <a href="/">Confidentialité</a>
+                <a href="/terms.html">CGU</a>
+                <a href="https://instagram.com/pizzai_officiel">Instagram</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
