@@ -5,1057 +5,391 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PizzAI — Ton pizzaiolo intelligent | ZornTek</title>
     <meta name="description" content="PizzAI : calculateur de pâte scientifique, Chef IA conversationnel et analyse photo par intelligence artificielle. Disponible sur Android.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #d4a44a;
-            --gold-light: #e8c878;
-            --gold-dim: rgba(212,164,74,0.15);
-            --bg: #06050a;
-            --bg-card: #0c0b12;
-            --text: #b8b0a0;
-            --text-light: #ddd5c8;
-            --white: #f5f0e8;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ═══════════════════════════════════════
-           GRAIN + VIGNETTE OVERLAY
-        ═══════════════════════════════════════ */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        /* ═══════════════════════════════════════
-           NAVIGATION
-        ═══════════════════════════════════════ */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        nav.scrolled {
-            background: rgba(6,5,10,0.9);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            padding: 14px 40px;
-            border-bottom: 1px solid rgba(212,164,74,0.08);
-        }
-
-        .nav-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            font-weight: 600;
-            color: var(--white);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-        .nav-logo span { color: var(--gold); font-style: italic; }
-
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a {
-            font-size: 13px;
-            font-weight: 400;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::after { width: 100%; }
-
-        .nav-cta {
-            font-size: 12px !important;
-            padding: 10px 24px;
-            border: 1px solid var(--gold);
-            border-radius: 100px;
-            color: var(--gold) !important;
-            transition: all 0.3s !important;
-        }
-        .nav-cta:hover {
-            background: var(--gold) !important;
-            color: var(--bg) !important;
-        }
-        .nav-cta::after { display: none !important; }
-
-        /* ═══════════════════════════════════════
-           HERO SECTION
-        ═══════════════════════════════════════ */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 120px 24px 80px;
-        }
-
-        /* Ambient glow */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(212,164,74,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            border: 1px solid rgba(212,164,74,0.25);
-            padding: 8px 20px;
-            border-radius: 100px;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeUp 1s 0.2s forwards;
-        }
-        .hero-badge::before {
-            content: '';
-            width: 6px; height: 6px;
-            background: var(--gold);
-            border-radius: 50%;
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-        }
-
-        .hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(56px, 10vw, 120px);
-            font-weight: 300;
-            color: var(--white);
-            line-height: 0.95;
-            margin-bottom: 12px;
-            opacity: 0;
-            animation: fadeUp 1s 0.4s forwards;
-        }
-        .hero-title em {
-            font-style: italic;
-            color: var(--gold);
-            font-weight: 400;
-        }
-
-        .hero-sub {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(18px, 3vw, 26px);
-            font-weight: 300;
-            font-style: italic;
-            color: var(--gold);
-            margin-bottom: 32px;
-            opacity: 0;
-            animation: fadeUp 1s 0.6s forwards;
-        }
-
-        .hero-desc {
-            font-size: 16px;
-            color: var(--text);
-            max-width: 520px;
-            margin-bottom: 48px;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeUp 1s 0.8s forwards;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-            opacity: 0;
-            animation: fadeUp 1s 1s forwards;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 36px;
-            background: var(--gold);
-            color: var(--bg);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 100px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(212,164,74,0.25);
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 36px;
-            border: 1px solid rgba(255,255,255,0.12);
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            border-radius: 100px;
-            transition: all 0.4s;
-        }
-        .btn-secondary:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeUp 1s 1.4s forwards;
-        }
-        .hero-scroll span {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
-        }
-        .scroll-line {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-            animation: scroll-pulse 2s infinite;
-        }
-        @keyframes scroll-pulse {
-            0% { opacity: 1; transform: scaleY(1); }
-            50% { opacity: 0.3; transform: scaleY(0.6); }
-            100% { opacity: 1; transform: scaleY(1); }
-        }
-
-        /* ═══════════════════════════════════════
-           LANGUAGES BAR
-        ═══════════════════════════════════════ */
-        .lang-bar {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 40px 24px;
-            opacity: 0;
-            animation: fadeUp 1s 1.2s forwards;
-        }
-        .lang-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-        .lang-flag {
-            width: 28px;
-            height: 20px;
-            border-radius: 3px;
-            overflow: hidden;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-        }
-        .lang-item:hover .lang-flag { opacity: 1; }
-        .lang-label {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
-        }
-
-        /* ═══════════════════════════════════════
-           SECTION FOUNDATIONS
-        ═══════════════════════════════════════ */
-        section {
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-pad {
-            padding: 120px 24px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 300;
-            color: var(--white);
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-        .section-title em {
-            font-style: italic;
-            color: var(--gold);
-        }
-
-        /* ═══════════════════════════════════════
-           FEATURES SECTION
-        ═══════════════════════════════════════ */
-        .features {
-            background: linear-gradient(180deg, var(--bg) 0%, #08070e 100%);
-        }
-
-        .features-intro {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 80px;
-        }
-
-        .features-intro p {
-            font-size: 16px;
-            color: var(--text);
-            font-weight: 300;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 24px;
-            padding: 48px 40px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .feature-card:hover {
-            border-color: rgba(212,164,74,0.15);
-            transform: translateY(-4px);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .feature-card:hover::before { opacity: 1; }
-
-        .feature-card.hero-card {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(212,164,74,0.03) 100%);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 24px;
-            display: block;
-        }
-
-        .feature-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--gold);
-            letter-spacing: 2px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .feature-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--white);
-            margin-bottom: 12px;
-        }
-
-        .feature-desc {
-            font-size: 14px;
-            color: var(--text);
-            font-weight: 300;
-            line-height: 1.8;
-        }
-
-        .feature-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .score-display {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(212,164,74,0.12);
-            border-radius: 20px;
-            padding: 32px;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .score-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-        }
-        .score-label {
-            font-size: 13px;
-            color: var(--text);
-        }
-        .score-bar-wrap {
-            width: 120px;
-            height: 4px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .score-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-light));
-            border-radius: 4px;
-            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .score-total {
-            text-align: center;
-            padding-top: 16px;
-            margin-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-        .score-total .big {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            font-weight: 300;
-            color: var(--gold);
-        }
-        .score-total .unit {
-            font-size: 20px;
-            color: var(--text);
-        }
-        .score-total .level {
-            font-size: 12px;
-            color: var(--gold);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        /* ═══════════════════════════════════════
-           PRICING SECTION
-        ═══════════════════════════════════════ */
-        .pricing {
-            background: #08070e;
-        }
-
-        .pricing-intro {
-            text-align: center;
-            max-width: 550px;
-            margin: 0 auto 64px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 20px;
-            padding: 36px 28px;
-            text-align: center;
-            position: relative;
-            transition: all 0.4s;
-        }
-
-        .price-card.featured {
-            border-color: rgba(212,164,74,0.3);
-            background: linear-gradient(180deg, rgba(212,164,74,0.06) 0%, var(--bg-card) 100%);
-            transform: scale(1.04);
-        }
-
-        .price-card:hover {
-            border-color: rgba(212,164,74,0.2);
-        }
-
-        .price-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--bg);
-            background: var(--gold);
-            padding: 4px 16px;
-            border-radius: 100px;
-        }
-
-        .price-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            color: var(--white);
-            margin-bottom: 8px;
-        }
-
-        .price-amount {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 300;
-            color: var(--gold);
-            margin-bottom: 4px;
-        }
-        .price-amount .period {
-            font-size: 16px;
-            color: var(--text);
-        }
-        .price-free {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 42px;
-            font-weight: 300;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .price-features {
-            list-style: none;
-            margin: 24px 0;
-            text-align: left;
-        }
-        .price-features li {
-            font-size: 13px;
-            color: var(--text);
-            padding: 6px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .price-features li::before {
-            content: '✦';
-            color: var(--gold);
-            font-size: 8px;
-        }
-
-        /* ═══════════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════════ */
-        footer {
-            padding: 60px 24px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .footer-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .footer-brand {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            color: rgba(255,255,255,0.3);
-            margin-bottom: 8px;
-        }
-        .footer-brand span { color: rgba(212,164,74,0.4); }
-
-        .footer-info {
-            font-size: 12px;
-            color: rgba(255,255,255,0.15);
-            line-height: 1.8;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
-        }
-
-        .footer-col h4 {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
-            margin-bottom: 16px;
-        }
-
-        .footer-col a {
-            display: block;
-            font-size: 13px;
-            color: rgba(255,255,255,0.3);
-            text-decoration: none;
-            padding: 4px 0;
-            transition: color 0.3s;
-        }
-        .footer-col a:hover { color: var(--gold); }
-
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 40px auto 0;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: rgba(255,255,255,0.12);
-        }
-
-        /* ═══════════════════════════════════════
-           SCROLL ANIMATIONS
-        ═══════════════════════════════════════ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ═══════════════════════════════════════
-           FLOATING PARTICLES
-        ═══════════════════════════════════════ */
-        .particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 50%;
-            opacity: 0;
-            animation: float-particle linear infinite;
-        }
-
-        @keyframes float-particle {
-            0% { opacity: 0; transform: translateY(100vh) scale(0); }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { opacity: 0; transform: translateY(-20vh) scale(1); }
-        }
-
-        /* ═══════════════════════════════════════
-           RESPONSIVE
-        ═══════════════════════════════════════ */
-        @media (max-width: 900px) {
-            .feature-grid { grid-template-columns: 1fr; }
-            .feature-card.hero-card { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-            .price-card.featured { transform: none; }
-            .footer-inner { flex-direction: column; }
-            .footer-links { flex-direction: column; gap: 24px; }
-            .footer-bottom { flex-direction: column; gap: 8px; }
-        }
-
-        @media (max-width: 600px) {
-            nav { padding: 14px 20px; }
-            nav.scrolled { padding: 12px 20px; }
-            .nav-links a:not(.nav-cta) { display: none; }
-            .section-pad { padding: 80px 20px; }
-            .feature-card { padding: 36px 28px; }
-            .hero { padding: 100px 20px 60px; }
-            .lang-bar { gap: 20px; }
-        }
+        :root{--gold:#d4a44a;--gold-light:#e8c878;--gold-dim:rgba(212,164,74,.12);--bg:#060509;--bg2:#0a0910;--bg-card:rgba(12,11,18,.8);--text:#9e9588;--text-light:#d5cfc4;--white:#f5f0e8}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        .overlay-grain,.overlay-vignette{position:fixed;inset:0;pointer-events:none;z-index:9998}.overlay-grain{z-index:9999;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E")}.overlay-vignette{background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.55) 100%)}
+        .cursor-glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,164,74,.04) 0%,transparent 70%);transform:translate(-50%,-50%);pointer-events:none;z-index:0;will-change:transform}
+        nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:24px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .6s cubic-bezier(.16,1,.3,1)}nav.scrolled{background:rgba(6,5,9,.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);padding:16px 48px;border-bottom:1px solid rgba(212,164,74,.06)}.nav-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--white);text-decoration:none;letter-spacing:.5px}.nav-logo i{color:var(--gold);font-style:italic}.nav-right{display:flex;gap:36px;align-items:center}.nav-right a{font-size:12px;font-weight:500;color:rgba(255,255,255,.4);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s}.nav-right a:hover{color:var(--gold)}.nav-dl{padding:10px 28px!important;border:1px solid rgba(212,164,74,.4)!important;border-radius:100px;color:var(--gold)!important;transition:all .4s!important}.nav-dl:hover{background:var(--gold)!important;color:var(--bg)!important;border-color:var(--gold)!important}
+        .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:120px 24px 60px;overflow:hidden}
+        .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0;animation:orb-in 2s forwards}.orb-1{width:500px;height:500px;background:rgba(212,164,74,.07);top:10%;left:20%;animation-delay:.5s}.orb-2{width:400px;height:400px;background:rgba(196,93,44,.05);bottom:20%;right:15%;animation-delay:1s}.orb-3{width:300px;height:300px;background:rgba(212,164,74,.04);top:50%;left:60%;animation-delay:1.5s}@keyframes orb-in{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+        .hero-content{position:relative;z-index:2}.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:0 auto 32px;opacity:0;animation:line-in 1s .2s forwards}@keyframes line-in{from{opacity:0;height:0}to{opacity:1;height:60px}}
+        .hero-over{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;opacity:0;animation:fadeUp .8s .6s forwards}
+        .hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:.9;margin-bottom:8px;overflow:hidden}.hero-title .line{display:block;opacity:0;animation:titleReveal 1s forwards}.hero-title .l1{font-size:clamp(72px,13vw,160px);color:var(--white);animation-delay:.8s}.hero-title .l1 em{color:var(--gold);font-style:italic;font-weight:400}@keyframes titleReveal{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
+        .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);font-style:italic;font-weight:300;color:rgba(212,164,74,.6);margin:20px 0 40px;opacity:0;animation:fadeUp .8s 1.2s forwards}
+        .hero-p{font-size:15px;color:var(--text);max-width:460px;margin:0 auto 48px;font-weight:300;line-height:1.8;opacity:0;animation:fadeUp .8s 1.4s forwards}
+        .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.6s forwards;align-items:center}
+        .store-badge{display:inline-flex;align-items:center;gap:12px;padding:12px 28px 12px 20px;background:#111;border:1px solid rgba(255,255,255,.2);border-radius:12px;text-decoration:none;transition:all .4s cubic-bezier(.16,1,.3,1);min-width:200px}.store-badge:hover{border-color:rgba(255,255,255,.4);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}.store-badge svg{flex-shrink:0}.store-badge-text{display:flex;flex-direction:column;line-height:1.2}.store-badge-small{font-size:10px;color:rgba(255,255,255,.6);font-weight:400}.store-badge-big{font-size:17px;color:#fff;font-weight:600;letter-spacing:-.2px}
+        .store-badge.disabled{opacity:.35;pointer-events:none;position:relative}.store-badge.disabled .store-soon{position:absolute;top:-8px;right:-8px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--bg);padding:2px 8px;border-radius:100px}
+        .cta-badges{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+        .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:100px;text-decoration:none;font-size:14px;font-weight:500;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative}.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 24px 48px rgba(212,164,74,.3),0 0 0 1px rgba(212,164,74,.2)}.btn-ghost{border:1px solid rgba(255,255,255,.1);color:var(--text-light)}.btn-ghost:hover{border-color:rgba(212,164,74,.4);color:var(--gold);transform:translateY(-2px)}
+        .hero-langs{display:flex;justify-content:center;gap:12px;margin-top:56px;opacity:0;animation:fadeUp .8s 1.8s forwards}.lang-btn{background:none;border:none;cursor:pointer;padding:10px;border-radius:8px;transition:all .3s;opacity:.35;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.lang-btn:hover{opacity:.8;transform:scale(1.15)}.lang-btn.active{opacity:1;background:rgba(212,164,74,.1);box-shadow:0 0 0 1px rgba(212,164,74,.3)}.lang-btn svg{display:block;width:28px;height:18px;border-radius:2px;pointer-events:none}
+        .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp .8s 2.2s forwards}.scroll-mouse{width:20px;height:32px;border:1.5px solid rgba(255,255,255,.15);border-radius:12px;position:relative;margin:0 auto 8px}.scroll-dot{width:3px;height:6px;background:var(--gold);border-radius:3px;position:absolute;top:6px;left:50%;transform:translateX(-50%);animation:scroll-dot 2s infinite}@keyframes scroll-dot{0%{opacity:1;top:6px}100%{opacity:0;top:20px}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+        .stats{border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:48px 24px}.stats-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;gap:40px;flex-wrap:wrap}.stat{text-align:center}.stat-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--white);line-height:1}.stat-num .accent{color:var(--gold)}.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:8px}
+        .features{padding:140px 24px;position:relative}.features::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(212,164,74,.03) 0%,transparent 60%);pointer-events:none}.f-container{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+        .f-header{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:100px}.f-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.f-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:300;color:var(--white);line-height:1.1}.f-title em{font-style:italic;color:var(--gold);font-weight:400}.f-intro{font-size:15px;font-weight:300;line-height:1.9;color:var(--text);align-self:end}
+        .f-item{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 0;border-top:1px solid rgba(255,255,255,.04)}.f-item:nth-child(even){direction:rtl}.f-item:nth-child(even)>*{direction:ltr}
+        .f-item-num{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:rgba(212,164,74,.08);line-height:1;margin-bottom:20px}.f-item-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--white);margin-bottom:16px}.f-item-desc{font-size:14px;font-weight:300;line-height:1.9;color:var(--text)}.f-item-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.f-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gold);border:1px solid rgba(212,164,74,.2);padding:4px 12px;border-radius:100px}
+        .f-visual{display:flex;justify-content:center}.f-phone{width:260px;background:#111018;border-radius:32px;border:1px solid rgba(255,255,255,.06);padding:12px;box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.03);position:relative;overflow:hidden}.f-phone::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:3px;background:rgba(255,255,255,.08);border-radius:0 0 4px 4px}.f-phone-screen{background:var(--bg);border-radius:22px;padding:28px 20px;min-height:380px;display:flex;flex-direction:column}
+        .ph-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--white);margin-bottom:24px;text-align:center}
+        .ph-score-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}.ph-score-label{font-size:12px;color:var(--text)}.ph-score-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)}.ph-bar-wrap{flex:1;height:3px;background:rgba(255,255,255,.05);border-radius:3px;margin:0 12px;overflow:hidden}.ph-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;transition:width 1.5s cubic-bezier(.16,1,.3,1);width:0}.ph-total{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}.ph-big{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold)}.ph-unit{font-size:18px;color:var(--text)}.ph-level{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+        .ph-chat{display:flex;flex-direction:column;gap:12px;flex:1}.ph-bubble{padding:12px 16px;border-radius:16px;font-size:12px;line-height:1.6;max-width:90%}.ph-bubble.user{background:rgba(212,164,74,.12);color:var(--gold-light);align-self:flex-end;border-bottom-right-radius:4px}.ph-bubble.ai{background:rgba(255,255,255,.05);color:var(--text-light);align-self:flex-start;border-bottom-left-radius:4px}.ph-typing{display:flex;gap:4px;align-self:flex-start;padding:8px 16px}.ph-typing span{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:tb 1.4s infinite}.ph-typing span:nth-child(2){animation-delay:.2s}.ph-typing span:nth-child(3){animation-delay:.4s}@keyframes tb{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+        .plans{padding:140px 24px;background:var(--bg2)}.plans-inner{max-width:1000px;margin:0 auto}.plans-header{text-align:center;margin-bottom:64px}.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.plan{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:24px;padding:40px 32px;position:relative;transition:all .4s}.plan:hover{border-color:rgba(212,164,74,.15)}.plan.pop{border-color:rgba(212,164,74,.25);background:linear-gradient(180deg,rgba(212,164,74,.04) 0%,rgba(255,255,255,.02) 100%)}.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:4px 16px;border-radius:100px}.plan-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--white);margin-bottom:4px}.plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold);margin-bottom:4px}.plan-price .per{font-size:16px;color:var(--text)}.plan-price-free{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--text);margin-bottom:4px}.plan-trial{font-size:12px;color:var(--gold);margin-bottom:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px}.plan-features{list-style:none;margin-top:24px}.plan-features li{font-size:13px;color:var(--text);padding:7px 0;display:flex;align-items:center;gap:10px;font-weight:300}.plan-features li::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
+        .cta-section{padding:160px 24px;text-align:center;position:relative}.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,164,74,.06) 0%,transparent 60%);pointer-events:none}.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:300;color:var(--white);margin-bottom:16px;position:relative}.cta-title em{font-style:italic;color:var(--gold)}.cta-p{font-size:15px;color:var(--text);font-weight:300;max-width:420px;margin:0 auto 40px}
+        footer{padding:56px 24px;border-top:1px solid rgba(255,255,255,.04)}.ft-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px}.ft-brand{font-family:'Cormorant Garamond',serif;font-size:22px;color:rgba(255,255,255,.2);margin-bottom:10px}.ft-brand i{color:rgba(212,164,74,.3);font-style:italic}.ft-info{font-size:12px;color:rgba(255,255,255,.12);line-height:1.9}.ft-info a{color:rgba(212,164,74,.35);text-decoration:none}.ft-info a:hover{color:var(--gold)}.ft-cols{display:flex;gap:48px}.ft-col h5{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px;font-weight:500}.ft-col a{display:block;font-size:13px;color:rgba(255,255,255,.25);text-decoration:none;padding:3px 0;transition:color .3s;font-weight:300}.ft-col a:hover{color:var(--gold)}.ft-bottom{max-width:1100px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.03);display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.08)}
+        .rv{opacity:0;transform:translateY(50px);transition:all 1s cubic-bezier(.16,1,.3,1)}.rv.vis{opacity:1;transform:translateY(0)}.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
+        @media(max-width:900px){.f-header{grid-template-columns:1fr;gap:24px}.f-item{grid-template-columns:1fr;gap:40px}.f-item:nth-child(even){direction:ltr}.plans-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}.ft-inner{flex-direction:column}.ft-cols{flex-direction:column;gap:24px}.ft-bottom{flex-direction:column;gap:4px}.stat-num{font-size:36px}}
+        @media(max-width:600px){nav{padding:16px 20px}nav.scrolled{padding:12px 20px}.nav-right a:not(.nav-dl){display:none}.features{padding:80px 16px}.plans{padding:80px 16px}.cta-section{padding:100px 16px}.f-phone{width:220px}.hero-langs{gap:12px}}
     </style>
 </head>
 <body>
+<div class="overlay-grain"></div>
+<div class="overlay-vignette"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-    <!-- PARTICLES -->
-    <div class="particles" id="particles"></div>
+<nav id="nav">
+    <a href="#" class="nav-logo">Pizz<i>AI</i></a>
+    <div class="nav-right">
+        <a href="#features" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="#plans" data-i18n="nav.plans">Plans</a>
+        <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="nav-dl" data-i18n="nav.download">Télécharger</a>
+    </div>
+</nav>
 
-    <!-- NAV -->
-    <nav id="nav">
-        <a href="#" class="nav-logo">Pizz<span>AI</span></a>
-        <div class="nav-links">
-            <a href="#features">Fonctionnalités</a>
-            <a href="#pricing">Plans</a>
-            <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" class="nav-cta" target="_blank" rel="noopener">Télécharger</a>
-        </div>
-    </nav>
-
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-badge">Disponible sur Android</div>
-        <h1 class="hero-title">Pizz<em>AI</em></h1>
-        <p class="hero-sub">Ton pizzaiolo intelligent</p>
-        <p class="hero-desc">
-            Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef IA
-            et analyse tes créations en photo. La pizza parfaite, à chaque fournée.
-        </p>
-        <div class="hero-cta-group">
-            <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" class="btn-primary" target="_blank" rel="noopener">
-                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M1 1L17 10L1 19V1Z" fill="currentColor"/></svg>
-                Google Play
+<section class="hero">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+    <div class="hero-content">
+        <div class="hero-line"></div>
+        <div class="hero-over" data-i18n="hero.over">L'intelligence artificielle au service de la pizza</div>
+        <h1 class="hero-title"><span class="line l1">Pizz<em>AI</em></span></h1>
+        <p class="hero-tagline" data-i18n="hero.tagline">Ton pizzaiolo intelligent</p>
+        <p class="hero-p" data-i18n="hero.desc">Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef\u00a0IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.</p>
+        <div class="hero-btns">
+            <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="store-badge">
+                <svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
+                <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge.gp.small">Disponible sur</span><span class="store-badge-big">Google Play</span></div>
             </a>
-            <a href="#features" class="btn-secondary">
-                Découvrir
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M8 13L3 8M8 13L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </a>
-        </div>
-
-        <!-- LANGUAGES -->
-        <div class="lang-bar">
-            <div class="lang-item">
-                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#002395"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg></div>
-                <span class="lang-label">FR</span>
-            </div>
-            <div class="lang-item">
-                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#012169"/><path d="M0,0 L30,20 M30,0 L0,20" stroke="#fff" stroke-width="3"/><path d="M0,0 L30,20 M30,0 L0,20" stroke="#C8102E" stroke-width="1.5"/><path d="M15,0 V20 M0,10 H30" stroke="#fff" stroke-width="5"/><path d="M15,0 V20 M0,10 H30" stroke="#C8102E" stroke-width="3"/></svg></div>
-                <span class="lang-label">EN</span>
-            </div>
-            <div class="lang-item">
-                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#009246"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE2B37"/></svg></div>
-                <span class="lang-label">IT</span>
-            </div>
-            <div class="lang-item">
-                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="12" fill="#000"/><rect y="12" width="30" height="4" fill="#DD0000"/><rect y="16" width="30" height="4" fill="#FFCE00"/></svg></div>
-                <span class="lang-label">DE</span>
-            </div>
-            <div class="lang-item">
-                <div class="lang-flag"><svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg></div>
-                <span class="lang-label">ES</span>
+            <div class="store-badge disabled">
+                <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
+                <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge.as.small">Télécharger sur l'</span><span class="store-badge-big">App Store</span></div>
+                <span class="store-soon" data-i18n="badge.soon">Bientôt</span>
             </div>
         </div>
-
-        <div class="hero-scroll">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
+        <div class="hero-langs">
+            <button class="lang-btn active" data-lang="fr"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ED2939"/></svg></button>
+            <button class="lang-btn" data-lang="en"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#012169"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" stroke-width="2.5"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#C8102E" stroke-width="1.2"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="4"/><path d="M12,0 V16 M0,8 H24" stroke="#C8102E" stroke-width="2.4"/></svg></button>
+            <button class="lang-btn" data-lang="it"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#009246"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#CE2B37"/></svg></button>
+            <button class="lang-btn" data-lang="de"><svg viewBox="0 0 24 16"><rect width="24" height="10" fill="#000"/><rect y="10" width="24" height="3" fill="#DD0000"/><rect y="13" width="24" height="3" fill="#FFCE00"/></svg></button>
+            <button class="lang-btn" data-lang="es"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></svg></button>
         </div>
-    </section>
+    </div>
+    <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
+</section>
 
-    <!-- FEATURES -->
-    <section class="features section-pad" id="features">
-        <div class="container">
-            <div class="features-intro reveal">
-                <div class="section-label">Fonctionnalités</div>
-                <h2 class="section-title">Tout pour la <em>pizza parfaite</em></h2>
-                <p>Quatre outils puissants réunis dans une seule application, propulsés par l'intelligence artificielle Claude.</p>
+<div class="stats rv">
+    <div class="stats-inner">
+        <div class="stat"><div class="stat-num"><span class="accent" data-count="5">0</span></div><div class="stat-label" data-i18n="stats.langs">Langues</div></div>
+        <div class="stat"><div class="stat-num"><span class="accent" data-count="22">0</span></div><div class="stat-label" data-i18n="stats.yeast">Points courbe levure</div></div>
+        <div class="stat"><div class="stat-num"><span class="accent" data-count="5">0</span></div><div class="stat-label" data-i18n="stats.criteria">Critères d'analyse</div></div>
+        <div class="stat"><div class="stat-num"><span class="accent" data-count="8">0</span></div><div class="stat-label" data-i18n="stats.flours">Farines référencées</div></div>
+    </div>
+</div>
+
+<section class="features" id="features">
+    <div class="f-container">
+        <div class="f-header rv">
+            <div><div class="f-label" data-i18n="feat.label">Fonctionnalités</div><h2 class="f-title" data-i18n-html="feat.title">Tout pour la<br><em>pizza parfaite</em></h2></div>
+            <p class="f-intro" data-i18n="feat.intro">Quatre outils propulsés par l'intelligence artificielle Claude, réunis dans une seule application. De la farine au four, chaque étape est couverte.</p>
+        </div>
+
+        <div class="f-item rv">
+            <div>
+                <div class="f-item-num">01</div>
+                <h3 class="f-item-name" data-i18n="f1.name">Analyse Photo IA</h3>
+                <p class="f-item-desc" data-i18n="f1.desc">Photographiez votre pizza et recevez un score détaillé sur 5 critères. L'IA évalue la cuisson, la corniche, la forme, la garniture et l'aspect général, puis vous donne des conseils personnalisés pour progresser.</p>
+                <div class="f-item-tags"><span class="f-tag" data-i18n="f1.t1">Vision IA</span><span class="f-tag" data-i18n="f1.t2">Score /5</span><span class="f-tag" data-i18n="f1.t3">Conseils</span></div>
             </div>
+            <div class="f-visual">
+                <div class="f-phone"><div class="f-phone-screen" id="phoneScore">
+                    <div class="ph-title" data-i18n="ph.photo">Analyse Photo</div>
+                    <div class="ph-score-row"><span class="ph-score-label" data-i18n="ph.s1">🔥 Cuisson</span><div class="ph-bar-wrap"><div class="ph-bar" data-w="82%"></div></div><span class="ph-score-val">4.1</span></div>
+                    <div class="ph-score-row"><span class="ph-score-label" data-i18n="ph.s2">🫧 Corniche</span><div class="ph-bar-wrap"><div class="ph-bar" data-w="90%"></div></div><span class="ph-score-val">4.5</span></div>
+                    <div class="ph-score-row"><span class="ph-score-label" data-i18n="ph.s3">⭕ Forme</span><div class="ph-bar-wrap"><div class="ph-bar" data-w="74%"></div></div><span class="ph-score-val">3.7</span></div>
+                    <div class="ph-score-row"><span class="ph-score-label" data-i18n="ph.s4">🧀 Garniture</span><div class="ph-bar-wrap"><div class="ph-bar" data-w="88%"></div></div><span class="ph-score-val">4.4</span></div>
+                    <div class="ph-score-row"><span class="ph-score-label" data-i18n="ph.s5">🎨 Aspect</span><div class="ph-bar-wrap"><div class="ph-bar" data-w="85%"></div></div><span class="ph-score-val">4.3</span></div>
+                    <div class="ph-total"><span class="ph-big">4.2</span><span class="ph-unit">/5</span><div class="ph-level">Expert</div></div>
+                </div></div>
+            </div>
+        </div>
 
-            <div class="feature-grid">
-                <!-- HERO CARD: Photo IA -->
-                <div class="feature-card hero-card reveal">
-                    <div>
-                        <span class="feature-num">01</span>
-                        <h3 class="feature-name">Analyse Photo IA</h3>
-                        <p class="feature-desc">
-                            Photographiez votre pizza et recevez un score détaillé sur 5 critères : cuisson, corniche, forme, garniture et aspect général. L'IA vous donne des conseils personnalisés pour progresser à chaque fournée.
-                        </p>
+        <div class="f-item rv">
+            <div>
+                <div class="f-item-num">02</div>
+                <h3 class="f-item-name" data-i18n="f2.name">Chef IA</h3>
+                <p class="f-item-desc" data-i18n="f2.desc">Un pizzaiolo expert disponible 24/7. Posez vos questions sur la pâte, les farines, la cuisson, la garniture ou le dépannage. Sauvegardez ses recettes directement dans votre carnet.</p>
+                <div class="f-item-tags"><span class="f-tag">Claude Haiku</span><span class="f-tag" data-i18n="f2.t2">Conversationnel</span><span class="f-tag" data-i18n="f2.t3">Recettes</span></div>
+            </div>
+            <div class="f-visual">
+                <div class="f-phone"><div class="f-phone-screen">
+                    <div class="ph-title" data-i18n="ph.chef">Chef IA</div>
+                    <div class="ph-chat">
+                        <div class="ph-bubble user" data-i18n="ph.q1">Comment réussir une pâte bien alvéolée ?</div>
+                        <div class="ph-bubble ai" data-i18n="ph.a1">Pour une mie alvéolée, vise 70-75% d'hydratation avec une farine W280+. Le secret : un long pointage de 24h au frigo 🧊 et des rabats toutes les 30 min pendant la 1ère heure.</div>
+                        <div class="ph-bubble user" data-i18n="ph.q2">Quelle farine tu recommandes ?</div>
+                        <div class="ph-typing"><span></span><span></span><span></span></div>
                     </div>
-                    <div class="feature-visual">
-                        <div class="score-display" id="scoreDisplay">
-                            <div class="score-row">
-                                <span class="score-label">🔥 Cuisson</span>
-                                <div class="score-bar-wrap"><div class="score-bar" data-width="82%"></div></div>
-                            </div>
-                            <div class="score-row">
-                                <span class="score-label">🫧 Corniche</span>
-                                <div class="score-bar-wrap"><div class="score-bar" data-width="90%"></div></div>
-                            </div>
-                            <div class="score-row">
-                                <span class="score-label">⭕ Forme</span>
-                                <div class="score-bar-wrap"><div class="score-bar" data-width="74%"></div></div>
-                            </div>
-                            <div class="score-row">
-                                <span class="score-label">🧀 Garniture</span>
-                                <div class="score-bar-wrap"><div class="score-bar" data-width="88%"></div></div>
-                            </div>
-                            <div class="score-row">
-                                <span class="score-label">🎨 Aspect</span>
-                                <div class="score-bar-wrap"><div class="score-bar" data-width="85%"></div></div>
-                            </div>
-                            <div class="score-total">
-                                <div><span class="big">4.2</span><span class="unit">/5</span></div>
-                                <div class="level">Expert</div>
-                            </div>
+                </div></div>
+            </div>
+        </div>
+
+        <div class="f-item rv">
+            <div>
+                <div class="f-item-num">03</div>
+                <h3 class="f-item-name" data-i18n="f3.name">Calculateur scientifique</h3>
+                <p class="f-item-desc" data-i18n="f3.desc">Courbe de levure à 22 points pour un dosage parfait. Profils prédéfinis (Napoletana, Romana, Teglia, New York), protocole guidé étape par étape avec timers intégrés.</p>
+                <div class="f-item-tags"><span class="f-tag" data-i18n="f3.t1">22 points levure</span><span class="f-tag" data-i18n="f3.t2">Protocole guidé</span><span class="f-tag">Timers</span></div>
+            </div>
+            <div class="f-visual">
+                <div class="f-phone"><div class="f-phone-screen" style="justify-content:center;gap:16px;">
+                    <div class="ph-title" data-i18n="ph.calc">Calculateur</div>
+                    <div style="text-align:center;">
+                        <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text);margin-bottom:8px;">Napoletana · 4 pâtons · 250g</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;">
+                            <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);">612<span style="font-size:14px;color:var(--text);">g</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.flour">Farine</div></div>
+                            <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);">398<span style="font-size:14px;color:var(--text);">ml</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.water">Eau</div></div>
+                            <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);">18<span style="font-size:14px;color:var(--text);">g</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.salt">Sel</div></div>
+                            <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);">1.8<span style="font-size:14px;color:var(--text);">g</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.yeast">Levure</div></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Calculateur -->
-                <div class="feature-card reveal reveal-delay-1">
-                    <span class="feature-icon">⚗️</span>
-                    <span class="feature-num">02</span>
-                    <h3 class="feature-name">Calculateur scientifique</h3>
-                    <p class="feature-desc">
-                        Courbe de levure à 22 points, profils prédéfinis (Napoletana, Romana, Teglia…), protocole guidé étape par étape avec timers intégrés.
-                    </p>
-                </div>
-
-                <!-- Chef IA -->
-                <div class="feature-card reveal reveal-delay-2">
-                    <span class="feature-icon">👨‍🍳</span>
-                    <span class="feature-num">03</span>
-                    <h3 class="feature-name">Chef IA</h3>
-                    <p class="feature-desc">
-                        Un pizzaiolo expert disponible 24/7. Posez vos questions sur la pâte, les farines, la cuisson ou la garniture. Sauvegardez les recettes dans votre carnet.
-                    </p>
-                </div>
-
-                <!-- Carnet -->
-                <div class="feature-card reveal reveal-delay-1">
-                    <span class="feature-icon">📒</span>
-                    <span class="feature-num">04</span>
-                    <h3 class="feature-name">Carnet de recettes</h3>
-                    <p class="feature-desc">
-                        Sauvegardez vos créations, vos recettes du Chef IA et vos meilleurs paramètres. Relancez un calcul ou demandez des variantes en un tap.
-                    </p>
-                </div>
-
-                <!-- Guide -->
-                <div class="feature-card reveal reveal-delay-2">
-                    <span class="feature-icon">🌾</span>
-                    <span class="feature-num">05</span>
-                    <h3 class="feature-name">Guide des farines</h3>
-                    <p class="feature-desc">
-                        8 farines détaillées avec force W, taux de protéines, usage recommandé. Caputo Pizzeria, Nuvola, Manitoba et plus encore.
-                    </p>
-                </div>
+                </div></div>
             </div>
         </div>
-    </section>
 
-    <!-- PRICING -->
-    <section class="pricing section-pad" id="pricing">
-        <div class="container">
-            <div class="pricing-intro reveal">
-                <div class="section-label">Plans</div>
-                <h2 class="section-title">Choisissez <em>votre plan</em></h2>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="price-card reveal reveal-delay-1">
-                    <div class="price-name">Free</div>
-                    <div class="price-free">0€</div>
-                    <ul class="price-features">
-                        <li>2 messages Chef IA / jour</li>
-                        <li>1 analyse photo / jour</li>
-                        <li>3 recettes sauvegardées</li>
-                        <li>Publicités</li>
-                    </ul>
-                </div>
-
-                <div class="price-card featured reveal reveal-delay-2">
-                    <div class="price-badge">Populaire</div>
-                    <div class="price-name">Pro</div>
-                    <div class="price-amount">2,99€ <span class="period">/mois</span></div>
-                    <ul class="price-features">
-                        <li>20 messages Chef IA / jour</li>
-                        <li>3 analyses photo / jour</li>
-                        <li>Recettes illimitées</li>
-                        <li>Historique photos</li>
-                        <li>Zéro publicité</li>
-                        <li>Essai gratuit 3 jours</li>
-                    </ul>
-                </div>
-
-                <div class="price-card reveal reveal-delay-3">
-                    <div class="price-name">Master</div>
-                    <div class="price-amount">5,99€ <span class="period">/mois</span></div>
-                    <ul class="price-features">
-                        <li>60 messages Chef IA / jour</li>
-                        <li>10 analyses photo / jour</li>
-                        <li>IA avancée (Sonnet)</li>
-                        <li>Recettes illimitées</li>
-                        <li>Historique photos</li>
-                        <li>Zéro publicité</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-inner">
+        <div class="f-item rv">
             <div>
-                <div class="footer-brand">Pizz<span>AI</span></div>
-                <div class="footer-info">
-                    ZornTek — Emmanuel Baldo<br>
-                    Bossendorf, Alsace, France<br>
-                    <a href="mailto:contact@zorntek.fr" style="color:rgba(212,164,74,0.4);text-decoration:none;">contact@zorntek.fr</a>
-                </div>
+                <div class="f-item-num">04</div>
+                <h3 class="f-item-name" data-i18n="f4.name">Carnet & Guide des farines</h3>
+                <p class="f-item-desc" data-i18n="f4.desc">Sauvegardez vos recettes et vos meilleurs paramètres. Consultez le guide de 8 farines détaillées avec force W, protéines et usages recommandés. 18 termes techniques dans le glossaire.</p>
+                <div class="f-item-tags"><span class="f-tag" data-i18n="f4.t1">8 farines</span><span class="f-tag" data-i18n="f4.t2">Glossaire</span><span class="f-tag" data-i18n="f4.t3">Favoris</span></div>
             </div>
-            <div class="footer-links">
-                <div class="footer-col">
-                    <h4>Application</h4>
-                    <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a>
-                    <a href="#">App Store (bientôt)</a>
-                    <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Légal</h4>
-                    <a href="https://zorntek.fr/privacy.html">Confidentialité</a>
-                    <a href="https://zorntek.fr/terms.html">CGU</a>
-                </div>
+            <div class="f-visual">
+                <div class="f-phone"><div class="f-phone-screen" style="gap:10px;">
+                    <div class="ph-title" data-i18n="ph.guide">Guide farines</div>
+                    <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 16px;"><div style="font-size:13px;color:var(--white);font-weight:500;">Caputo Pizzeria</div><div style="font-size:11px;color:var(--text);margin-top:4px;">W 260 · 12.5% <span data-i18n="ph.protein">protéines</span></div><div style="width:70%;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;margin-top:8px;"></div></div>
+                    <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 16px;"><div style="font-size:13px;color:var(--white);font-weight:500;">Caputo Nuvola</div><div style="font-size:11px;color:var(--text);margin-top:4px;">W 300 · 13% <span data-i18n="ph.protein2">protéines</span></div><div style="width:82%;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;margin-top:8px;"></div></div>
+                    <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 16px;"><div style="font-size:13px;color:var(--white);font-weight:500;">Manitoba</div><div style="font-size:11px;color:var(--text);margin-top:4px;">W 380+ · 14% <span data-i18n="ph.protein3">protéines</span></div><div style="width:95%;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;margin-top:8px;"></div></div>
+                </div></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <span>© 2026 ZornTek. Tous droits réservés.</span>
-            <span>Propulsé par Claude (Anthropic)</span>
+    </div>
+</section>
+
+<section class="plans" id="plans">
+    <div class="plans-inner">
+        <div class="plans-header rv"><div class="f-label" data-i18n="plans.label">Plans</div><h2 class="f-title" data-i18n-html="plans.title">Choisissez <em>votre plan</em></h2></div>
+        <div class="plans-grid">
+            <div class="plan rv rv-d1"><div class="plan-name">Free</div><div class="plan-price-free">0€</div><div class="plan-trial">&nbsp;</div><ul class="plan-features"><li data-i18n="p.f1">2 messages Chef IA / jour</li><li data-i18n="p.f2">1 analyse photo / jour</li><li data-i18n="p.f3">3 recettes</li><li data-i18n="p.f4">Publicités</li></ul></div>
+            <div class="plan pop rv rv-d2"><div class="plan-badge" data-i18n="p.popular">Populaire</div><div class="plan-name">Pro</div><div class="plan-price">2,99€ <span class="per" data-i18n="p.month">/mois</span></div><div class="plan-trial" data-i18n="p.trial">Essai gratuit 3 jours</div><ul class="plan-features"><li data-i18n="p.p1">20 messages Chef IA / jour</li><li data-i18n="p.p2">3 analyses photo / jour</li><li data-i18n="p.p3">Recettes illimitées</li><li data-i18n="p.p4">Historique photos</li><li data-i18n="p.p5">Zéro publicité</li></ul></div>
+            <div class="plan rv rv-d3"><div class="plan-name">Master</div><div class="plan-price">5,99€ <span class="per" data-i18n="p.month2">/mois</span></div><div class="plan-trial">&nbsp;</div><ul class="plan-features"><li data-i18n="p.m1">60 messages Chef IA / jour</li><li data-i18n="p.m2">10 analyses photo / jour</li><li data-i18n="p.m3">IA avancée (Sonnet)</li><li data-i18n="p.m4">Recettes illimitées</li><li data-i18n="p.m5">Historique photos</li><li data-i18n="p.m6">Zéro publicité</li></ul></div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- SCRIPTS -->
-    <script>
-        // ═══ NAV SCROLL ═══
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 60);
-        });
+<section class="cta-section rv">
+    <h2 class="cta-title" data-i18n-html="cta.title">Prêt à faire la <em>pizza parfaite</em> ?</h2>
+    <p class="cta-p" data-i18n="cta.desc">Rejoignez des passionnés qui perfectionnent leur technique à chaque fournée.</p>
+    <div class="cta-badges">
+        <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="store-badge">
+            <svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
+            <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge2.gp.small">Disponible sur</span><span class="store-badge-big">Google Play</span></div>
+        </a>
+        <div class="store-badge disabled">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
+            <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge2.as.small">Télécharger sur l'</span><span class="store-badge-big">App Store</span></div>
+            <span class="store-soon" data-i18n="badge2.soon">Bientôt</span>
+        </div>
+    </div>
+</section>
 
-        // ═══ SCROLL REVEAL ═══
-        const revealEls = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-        revealEls.forEach(el => revealObserver.observe(el));
+<footer>
+    <div class="ft-inner">
+        <div><div class="ft-brand">Pizz<i>AI</i></div><div class="ft-info">ZornTek — Emmanuel Baldo<br>Bossendorf, Alsace, France<br><a href="/cdn-cgi/l/email-protection#31525e5f45505245714b5e435f45545a1f5743"><span class="__cf_email__" data-cfemail="4625292832272532063c29342832232d682034">[email&#160;protected]</span></a></div></div>
+        <div class="ft-cols">
+            <div class="ft-col"><h5 data-i18n="ft.app">Application</h5><a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a><a href="#" data-i18n="ft.ios">App Store (bientôt)</a><a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a></div>
+            <div class="ft-col"><h5 data-i18n="ft.legal">Légal</h5><a href="https://zorntek.fr/privacy.html" data-i18n="ft.privacy">Confidentialité</a><a href="https://zorntek.fr/terms.html" data-i18n="ft.terms">CGU</a></div>
+        </div>
+    </div>
+    <div class="ft-bottom"><span>© 2026 ZornTek</span><span data-i18n="ft.powered">Propulsé par Claude · Anthropic</span></div>
+</footer>
 
-        // ═══ SCORE BARS ANIMATION ═══
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const scoreObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.querySelectorAll('.score-bar').forEach(bar => {
-                        bar.style.width = bar.dataset.width;
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
-        scoreObserver.observe(scoreDisplay);
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ═══ TRANSLATIONS ═══
+const T = {
+fr: {
+    "nav.features":"Fonctionnalités","nav.plans":"Plans","nav.download":"Télécharger",
+    "hero.over":"L'intelligence artificielle au service de la pizza","hero.tagline":"Ton pizzaiolo intelligent",
+    "hero.desc":"Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef\u00a0IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.",
+    "badge.gp.small":"Disponible sur","badge.as.small":"Télécharger sur l'","badge.soon":"Bientôt","badge2.gp.small":"Disponible sur","badge2.as.small":"Télécharger sur l'","badge2.soon":"Bientôt",
+    "stats.langs":"Langues","stats.yeast":"Points courbe levure","stats.criteria":"Critères d'analyse","stats.flours":"Farines référencées",
+    "feat.label":"Fonctionnalités","feat.title":"Tout pour la<br><em>pizza parfaite</em>",
+    "feat.intro":"Quatre outils propulsés par l'intelligence artificielle Claude, réunis dans une seule application. De la farine au four, chaque étape est couverte.",
+    "f1.name":"Analyse Photo IA","f1.desc":"Photographiez votre pizza et recevez un score détaillé sur 5 critères. L'IA évalue la cuisson, la corniche, la forme, la garniture et l'aspect général, puis vous donne des conseils personnalisés pour progresser.","f1.t1":"Vision IA","f1.t2":"Score /5","f1.t3":"Conseils",
+    "f2.name":"Chef IA","f2.desc":"Un pizzaiolo expert disponible 24/7. Posez vos questions sur la pâte, les farines, la cuisson, la garniture ou le dépannage. Sauvegardez ses recettes directement dans votre carnet.","f2.t2":"Conversationnel","f2.t3":"Recettes",
+    "f3.name":"Calculateur scientifique","f3.desc":"Courbe de levure à 22 points pour un dosage parfait. Profils prédéfinis (Napoletana, Romana, Teglia, New York), protocole guidé étape par étape avec timers intégrés.","f3.t1":"22 points levure","f3.t2":"Protocole guidé",
+    "f4.name":"Carnet & Guide des farines","f4.desc":"Sauvegardez vos recettes et vos meilleurs paramètres. Consultez le guide de 8 farines détaillées avec force W, protéines et usages recommandés. 18 termes techniques dans le glossaire.","f4.t1":"8 farines","f4.t2":"Glossaire","f4.t3":"Favoris",
+    "ph.photo":"Analyse Photo","ph.s1":"🔥 Cuisson","ph.s2":"🫧 Corniche","ph.s3":"⭕ Forme","ph.s4":"🧀 Garniture","ph.s5":"🎨 Aspect",
+    "ph.chef":"Chef IA","ph.q1":"Comment réussir une pâte bien alvéolée ?","ph.a1":"Pour une mie alvéolée, vise 70-75% d'hydratation avec une farine W280+. Le secret : un long pointage de 24h au frigo 🧊 et des rabats toutes les 30 min pendant la 1ère heure.","ph.q2":"Quelle farine tu recommandes ?",
+    "ph.calc":"Calculateur","ph.flour":"Farine","ph.water":"Eau","ph.salt":"Sel","ph.yeast":"Levure",
+    "ph.guide":"Guide farines","ph.protein":"protéines","ph.protein2":"protéines","ph.protein3":"protéines",
+    "plans.label":"Plans","plans.title":"Choisissez <em>votre plan</em>",
+    "p.popular":"Populaire","p.month":"/mois","p.month2":"/mois","p.trial":"Essai gratuit 3 jours",
+    "p.f1":"2 messages Chef IA / jour","p.f2":"1 analyse photo / jour","p.f3":"3 recettes","p.f4":"Publicités",
+    "p.p1":"20 messages Chef IA / jour","p.p2":"3 analyses photo / jour","p.p3":"Recettes illimitées","p.p4":"Historique photos","p.p5":"Zéro publicité",
+    "p.m1":"60 messages Chef IA / jour","p.m2":"10 analyses photo / jour","p.m3":"IA avancée (Sonnet)","p.m4":"Recettes illimitées","p.m5":"Historique photos","p.m6":"Zéro publicité",
+    "cta.title":"Prêt à faire la <em>pizza parfaite</em> ?","cta.desc":"Rejoignez des passionnés qui perfectionnent leur technique à chaque fournée.",
+    "ft.app":"Application","ft.ios":"App Store (bientôt)","ft.legal":"Légal","ft.privacy":"Confidentialité","ft.terms":"CGU","ft.powered":"Propulsé par Claude · Anthropic"
+},
+en: {
+    "nav.features":"Features","nav.plans":"Plans","nav.download":"Download",
+    "hero.over":"Artificial intelligence at the service of pizza","hero.tagline":"Your smart pizza assistant",
+    "hero.desc":"Calculate your dough with scientific precision, perfect your technique with the AI\u00a0Chef and analyze your creations by photo. The perfect pizza, every bake.",
+    "badge.gp.small":"GET IT ON","badge.as.small":"Download on the","badge.soon":"Soon","badge2.gp.small":"GET IT ON","badge2.as.small":"Download on the","badge2.soon":"Soon",
+    "stats.langs":"Languages","stats.yeast":"Yeast curve points","stats.criteria":"Analysis criteria","stats.flours":"Referenced flours",
+    "feat.label":"Features","feat.title":"Everything for the<br><em>perfect pizza</em>",
+    "feat.intro":"Four tools powered by Claude artificial intelligence, united in a single app. From flour to oven, every step is covered.",
+    "f1.name":"AI Photo Analysis","f1.desc":"Photograph your pizza and receive a detailed score across 5 criteria. The AI evaluates baking, crust, shape, toppings and overall appearance, then gives you personalized tips to improve.","f1.t1":"AI Vision","f1.t2":"Score /5","f1.t3":"Tips",
+    "f2.name":"AI Chef","f2.desc":"An expert pizzaiolo available 24/7. Ask your questions about dough, flour, baking, toppings or troubleshooting. Save recipes directly to your notebook.","f2.t2":"Conversational","f2.t3":"Recipes",
+    "f3.name":"Scientific calculator","f3.desc":"22-point yeast curve for perfect dosing. Preset profiles (Napoletana, Romana, Teglia, New York), step-by-step guided protocol with built-in timers.","f3.t1":"22 yeast points","f3.t2":"Guided protocol",
+    "f4.name":"Notebook & Flour guide","f4.desc":"Save your recipes and best parameters. Browse the guide of 8 detailed flours with W strength, protein content and recommended uses. 18 technical terms in the glossary.","f4.t1":"8 flours","f4.t2":"Glossary","f4.t3":"Favorites",
+    "ph.photo":"Photo Analysis","ph.s1":"🔥 Baking","ph.s2":"🫧 Crust","ph.s3":"⭕ Shape","ph.s4":"🧀 Toppings","ph.s5":"🎨 Appearance",
+    "ph.chef":"AI Chef","ph.q1":"How to get a well-aerated dough?","ph.a1":"For an airy crumb, aim for 70-75% hydration with a W280+ flour. The secret: a long 24h cold proof 🧊 and stretch & folds every 30 min during the first hour.","ph.q2":"Which flour do you recommend?",
+    "ph.calc":"Calculator","ph.flour":"Flour","ph.water":"Water","ph.salt":"Salt","ph.yeast":"Yeast",
+    "ph.guide":"Flour guide","ph.protein":"protein","ph.protein2":"protein","ph.protein3":"protein",
+    "plans.label":"Plans","plans.title":"Choose <em>your plan</em>",
+    "p.popular":"Popular","p.month":"/month","p.month2":"/month","p.trial":"Free 3-day trial",
+    "p.f1":"2 AI Chef messages / day","p.f2":"1 photo analysis / day","p.f3":"3 recipes","p.f4":"Ads",
+    "p.p1":"20 AI Chef messages / day","p.p2":"3 photo analyses / day","p.p3":"Unlimited recipes","p.p4":"Photo history","p.p5":"Zero ads",
+    "p.m1":"60 AI Chef messages / day","p.m2":"10 photo analyses / day","p.m3":"Advanced AI (Sonnet)","p.m4":"Unlimited recipes","p.m5":"Photo history","p.m6":"Zero ads",
+    "cta.title":"Ready to make the <em>perfect pizza</em>?","cta.desc":"Join enthusiasts who perfect their technique with every bake.",
+    "ft.app":"Application","ft.ios":"App Store (soon)","ft.legal":"Legal","ft.privacy":"Privacy","ft.terms":"Terms","ft.powered":"Powered by Claude · Anthropic"
+},
+it: {
+    "nav.features":"Funzionalità","nav.plans":"Piani","nav.download":"Scarica",
+    "hero.over":"L'intelligenza artificiale al servizio della pizza","hero.tagline":"Il tuo pizzaiolo intelligente",
+    "hero.desc":"Calcola il tuo impasto con precisione scientifica, perfeziona la tecnica con lo Chef\u00a0IA e analizza le tue creazioni in foto. La pizza perfetta, a ogni infornata.",
+    "badge.gp.small":"Disponibile su","badge.as.small":"Scarica su","badge.soon":"Presto","badge2.gp.small":"Disponibile su","badge2.as.small":"Scarica su","badge2.soon":"Presto",
+    "stats.langs":"Lingue","stats.yeast":"Punti curva lievito","stats.criteria":"Criteri di analisi","stats.flours":"Farine referenziate",
+    "feat.label":"Funzionalità","feat.title":"Tutto per la<br><em>pizza perfetta</em>",
+    "feat.intro":"Quattro strumenti alimentati dall'intelligenza artificiale Claude, riuniti in una sola app. Dalla farina al forno, ogni fase è coperta.",
+    "f1.name":"Analisi Foto IA","f1.desc":"Fotografa la tua pizza e ricevi un punteggio dettagliato su 5 criteri. L'IA valuta cottura, cornicione, forma, condimento e aspetto generale, poi ti dà consigli personalizzati per migliorare.","f1.t1":"Visione IA","f1.t2":"Punteggio /5","f1.t3":"Consigli",
+    "f2.name":"Chef IA","f2.desc":"Un pizzaiolo esperto disponibile 24/7. Fai le tue domande su impasto, farine, cottura, condimenti o risoluzione problemi. Salva le ricette direttamente nel tuo quaderno.","f2.t2":"Conversazionale","f2.t3":"Ricette",
+    "f3.name":"Calcolatore scientifico","f3.desc":"Curva lievito a 22 punti per un dosaggio perfetto. Profili predefiniti (Napoletana, Romana, Teglia, New York), protocollo guidato passo dopo passo con timer integrati.","f3.t1":"22 punti lievito","f3.t2":"Protocollo guidato",
+    "f4.name":"Quaderno & Guida farine","f4.desc":"Salva le tue ricette e i tuoi migliori parametri. Consulta la guida di 8 farine dettagliate con forza W, proteine e usi consigliati. 18 termini tecnici nel glossario.","f4.t1":"8 farine","f4.t2":"Glossario","f4.t3":"Preferiti",
+    "ph.photo":"Analisi Foto","ph.s1":"🔥 Cottura","ph.s2":"🫧 Cornicione","ph.s3":"⭕ Forma","ph.s4":"🧀 Condimento","ph.s5":"🎨 Aspetto",
+    "ph.chef":"Chef IA","ph.q1":"Come ottenere un impasto ben alveolato?","ph.a1":"Per una mollica alveolata, punta al 70-75% di idratazione con una farina W280+. Il segreto: una lunga puntata di 24h in frigo 🧊 e pieghe ogni 30 min durante la prima ora.","ph.q2":"Quale farina consigli?",
+    "ph.calc":"Calcolatore","ph.flour":"Farina","ph.water":"Acqua","ph.salt":"Sale","ph.yeast":"Lievito",
+    "ph.guide":"Guida farine","ph.protein":"proteine","ph.protein2":"proteine","ph.protein3":"proteine",
+    "plans.label":"Piani","plans.title":"Scegli il <em>tuo piano</em>",
+    "p.popular":"Popolare","p.month":"/mese","p.month2":"/mese","p.trial":"Prova gratuita 3 giorni",
+    "p.f1":"2 messaggi Chef IA / giorno","p.f2":"1 analisi foto / giorno","p.f3":"3 ricette","p.f4":"Pubblicità",
+    "p.p1":"20 messaggi Chef IA / giorno","p.p2":"3 analisi foto / giorno","p.p3":"Ricette illimitate","p.p4":"Storico foto","p.p5":"Zero pubblicità",
+    "p.m1":"60 messaggi Chef IA / giorno","p.m2":"10 analisi foto / giorno","p.m3":"IA avanzata (Sonnet)","p.m4":"Ricette illimitate","p.m5":"Storico foto","p.m6":"Zero pubblicità",
+    "cta.title":"Pronto a fare la <em>pizza perfetta</em>?","cta.desc":"Unisciti agli appassionati che perfezionano la loro tecnica a ogni infornata.",
+    "ft.app":"Applicazione","ft.ios":"App Store (presto)","ft.legal":"Legale","ft.privacy":"Privacy","ft.terms":"Termini","ft.powered":"Alimentato da Claude · Anthropic"
+},
+de: {
+    "nav.features":"Funktionen","nav.plans":"Pläne","nav.download":"Herunterladen",
+    "hero.over":"Künstliche Intelligenz im Dienste der Pizza","hero.tagline":"Dein smarter Pizza-Assistent",
+    "hero.desc":"Berechne deinen Teig mit wissenschaftlicher Präzision, perfektioniere deine Technik mit dem KI\u00a0Chef und analysiere deine Kreationen per Foto. Die perfekte Pizza, bei jedem Backen.",
+    "badge.gp.small":"JETZT BEI","badge.as.small":"Laden im","badge.soon":"Bald","badge2.gp.small":"JETZT BEI","badge2.as.small":"Laden im","badge2.soon":"Bald",
+    "stats.langs":"Sprachen","stats.yeast":"Hefekurve-Punkte","stats.criteria":"Analysekriterien","stats.flours":"Referenzierte Mehle",
+    "feat.label":"Funktionen","feat.title":"Alles für die<br><em>perfekte Pizza</em>",
+    "feat.intro":"Vier Werkzeuge angetrieben von der künstlichen Intelligenz Claude, vereint in einer einzigen App. Vom Mehl bis zum Ofen, jeder Schritt ist abgedeckt.",
+    "f1.name":"KI-Fotoanalyse","f1.desc":"Fotografiere deine Pizza und erhalte eine detaillierte Bewertung über 5 Kriterien. Die KI bewertet Backen, Rand, Form, Belag und Gesamterscheinung und gibt dir personalisierte Tipps zur Verbesserung.","f1.t1":"KI Vision","f1.t2":"Score /5","f1.t3":"Tipps",
+    "f2.name":"KI Chef","f2.desc":"Ein Pizzaiolo-Experte rund um die Uhr verfügbar. Stelle deine Fragen zu Teig, Mehl, Backen, Belag oder Fehlerbehebung. Speichere Rezepte direkt in deinem Notizbuch.","f2.t2":"Konversation","f2.t3":"Rezepte",
+    "f3.name":"Wissenschaftlicher Rechner","f3.desc":"22-Punkte-Hefekurve für perfekte Dosierung. Voreingestellte Profile (Napoletana, Romana, Teglia, New York), Schritt-für-Schritt geführtes Protokoll mit integrierten Timern.","f3.t1":"22 Hefepunkte","f3.t2":"Geführtes Protokoll",
+    "f4.name":"Notizbuch & Mehlführer","f4.desc":"Speichere deine Rezepte und besten Parameter. Durchstöbere den Leitfaden mit 8 detaillierten Mehlen mit W-Stärke, Proteingehalt und empfohlenen Verwendungen. 18 Fachbegriffe im Glossar.","f4.t1":"8 Mehle","f4.t2":"Glossar","f4.t3":"Favoriten",
+    "ph.photo":"Fotoanalyse","ph.s1":"🔥 Backen","ph.s2":"🫧 Rand","ph.s3":"⭕ Form","ph.s4":"🧀 Belag","ph.s5":"🎨 Aussehen",
+    "ph.chef":"KI Chef","ph.q1":"Wie bekomme ich einen schön luftigen Teig?","ph.a1":"Für eine luftige Krume ziele auf 70-75% Hydration mit einem W280+ Mehl. Das Geheimnis: eine lange 24h Stockgare im Kühlschrank 🧊 und Dehnen & Falten alle 30 Min in der ersten Stunde.","ph.q2":"Welches Mehl empfiehlst du?",
+    "ph.calc":"Rechner","ph.flour":"Mehl","ph.water":"Wasser","ph.salt":"Salz","ph.yeast":"Hefe",
+    "ph.guide":"Mehlführer","ph.protein":"Protein","ph.protein2":"Protein","ph.protein3":"Protein",
+    "plans.label":"Pläne","plans.title":"Wähle <em>deinen Plan</em>",
+    "p.popular":"Beliebt","p.month":"/Monat","p.month2":"/Monat","p.trial":"3 Tage kostenlos testen",
+    "p.f1":"2 KI Chef Nachrichten / Tag","p.f2":"1 Fotoanalyse / Tag","p.f3":"3 Rezepte","p.f4":"Werbung",
+    "p.p1":"20 KI Chef Nachrichten / Tag","p.p2":"3 Fotoanalysen / Tag","p.p3":"Unbegrenzte Rezepte","p.p4":"Foto-Verlauf","p.p5":"Keine Werbung",
+    "p.m1":"60 KI Chef Nachrichten / Tag","p.m2":"10 Fotoanalysen / Tag","p.m3":"Fortgeschrittene KI (Sonnet)","p.m4":"Unbegrenzte Rezepte","p.m5":"Foto-Verlauf","p.m6":"Keine Werbung",
+    "cta.title":"Bereit für die <em>perfekte Pizza</em>?","cta.desc":"Schließe dich Enthusiasten an, die ihre Technik bei jedem Backen perfektionieren.",
+    "ft.app":"Anwendung","ft.ios":"App Store (bald)","ft.legal":"Rechtliches","ft.privacy":"Datenschutz","ft.terms":"AGB","ft.powered":"Betrieben von Claude · Anthropic"
+},
+es: {
+    "nav.features":"Funcionalidades","nav.plans":"Planes","nav.download":"Descargar",
+    "hero.over":"La inteligencia artificial al servicio de la pizza","hero.tagline":"Tu pizzero inteligente",
+    "hero.desc":"Calcula tu masa con precisión científica, perfecciona tu técnica con el Chef\u00a0IA y analiza tus creaciones en foto. La pizza perfecta, en cada horneada.",
+    "badge.gp.small":"Disponible en","badge.as.small":"Descargar en la","badge.soon":"Pronto","badge2.gp.small":"Disponible en","badge2.as.small":"Descargar en la","badge2.soon":"Pronto",
+    "stats.langs":"Idiomas","stats.yeast":"Puntos curva levadura","stats.criteria":"Criterios de análisis","stats.flours":"Harinas referenciadas",
+    "feat.label":"Funcionalidades","feat.title":"Todo para la<br><em>pizza perfecta</em>",
+    "feat.intro":"Cuatro herramientas impulsadas por la inteligencia artificial Claude, reunidas en una sola aplicación. De la harina al horno, cada paso está cubierto.",
+    "f1.name":"Análisis Foto IA","f1.desc":"Fotografía tu pizza y recibe una puntuación detallada en 5 criterios. La IA evalúa cocción, borde, forma, cobertura y aspecto general, luego te da consejos personalizados para mejorar.","f1.t1":"Visión IA","f1.t2":"Puntuación /5","f1.t3":"Consejos",
+    "f2.name":"Chef IA","f2.desc":"Un pizzero experto disponible 24/7. Haz tus preguntas sobre masa, harinas, cocción, coberturas o solución de problemas. Guarda las recetas directamente en tu cuaderno.","f2.t2":"Conversacional","f2.t3":"Recetas",
+    "f3.name":"Calculadora científica","f3.desc":"Curva de levadura de 22 puntos para una dosificación perfecta. Perfiles predefinidos (Napoletana, Romana, Teglia, New York), protocolo guiado paso a paso con temporizadores integrados.","f3.t1":"22 puntos levadura","f3.t2":"Protocolo guiado",
+    "f4.name":"Cuaderno & Guía de harinas","f4.desc":"Guarda tus recetas y tus mejores parámetros. Consulta la guía de 8 harinas detalladas con fuerza W, proteínas y usos recomendados. 18 términos técnicos en el glosario.","f4.t1":"8 harinas","f4.t2":"Glosario","f4.t3":"Favoritos",
+    "ph.photo":"Análisis Foto","ph.s1":"🔥 Cocción","ph.s2":"🫧 Borde","ph.s3":"⭕ Forma","ph.s4":"🧀 Cobertura","ph.s5":"🎨 Aspecto",
+    "ph.chef":"Chef IA","ph.q1":"¿Cómo lograr una masa bien alveolada?","ph.a1":"Para una miga alveolada, apunta al 70-75% de hidratación con una harina W280+. El secreto: una fermentación larga de 24h en el frigo 🧊 y pliegues cada 30 min durante la primera hora.","ph.q2":"¿Qué harina recomiendas?",
+    "ph.calc":"Calculadora","ph.flour":"Harina","ph.water":"Agua","ph.salt":"Sal","ph.yeast":"Levadura",
+    "ph.guide":"Guía harinas","ph.protein":"proteínas","ph.protein2":"proteínas","ph.protein3":"proteínas",
+    "plans.label":"Planes","plans.title":"Elige <em>tu plan</em>",
+    "p.popular":"Popular","p.month":"/mes","p.month2":"/mes","p.trial":"Prueba gratis 3 días",
+    "p.f1":"2 mensajes Chef IA / día","p.f2":"1 análisis foto / día","p.f3":"3 recetas","p.f4":"Publicidad",
+    "p.p1":"20 mensajes Chef IA / día","p.p2":"3 análisis foto / día","p.p3":"Recetas ilimitadas","p.p4":"Historial fotos","p.p5":"Sin publicidad",
+    "p.m1":"60 mensajes Chef IA / día","p.m2":"10 análisis foto / día","p.m3":"IA avanzada (Sonnet)","p.m4":"Recetas ilimitadas","p.m5":"Historial fotos","p.m6":"Sin publicidad",
+    "cta.title":"¿Listo para la <em>pizza perfecta</em>?","cta.desc":"Únete a apasionados que perfeccionan su técnica en cada horneada.",
+    "ft.app":"Aplicación","ft.ios":"App Store (pronto)","ft.legal":"Legal","ft.privacy":"Privacidad","ft.terms":"Términos","ft.powered":"Impulsado por Claude · Anthropic"
+}
+};
 
-        // ═══ PARTICLES ═══
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = (12 + Math.random() * 20) + 's';
-            p.style.animationDelay = Math.random() * 15 + 's';
-            p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
-            particlesContainer.appendChild(p);
-        }
+function setLang(lang) {
+    if (!T[lang]) return;
+    const dict = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (dict[k]) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const k = el.getAttribute('data-i18n-html');
+        if (dict[k]) el.innerHTML = dict[k];
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('pizzai_lang', lang); } catch(e) {}
+}
 
-        // ═══ SMOOTH SCROLL ═══
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+// Init language
+document.querySelectorAll('.lang-btn').forEach(b => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+});
+const saved = (() => { try { return localStorage.getItem('pizzai_lang'); } catch(e) { return null; } })();
+if (saved && T[saved]) setLang(saved);
+
+// ═══ NAV ═══
+const nav=document.getElementById('nav');let ticking=false;window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>80);ticking=false});ticking=true}});
+
+// ═══ CURSOR GLOW ═══
+const glow=document.getElementById('cursorGlow');if(window.matchMedia('(pointer:fine)').matches){document.addEventListener('mousemove',e=>{glow.style.transform=`translate(${e.clientX-300}px,${e.clientY-300}px)`})}else{glow.style.display='none'}
+
+// ═══ SCROLL REVEAL ═══
+const rvEls=document.querySelectorAll('.rv');const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});rvEls.forEach(el=>rvObs.observe(el));
+
+// ═══ SCORE BARS ═══
+const phoneScore=document.getElementById('phoneScore');const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ph-bar').forEach(b=>{b.style.width=b.dataset.w})}})},{threshold:.4});barObs.observe(phoneScore);
+
+// ═══ COUNTERS ═══
+const counters=document.querySelectorAll('[data-count]');const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done='1';const target=+e.target.dataset.count;const dur=1200;const start=performance.now();const step=ts=>{const p=Math.min((ts-start)/dur,1);e.target.textContent=Math.round((1-Math.pow(1-p,3))*target);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}})},{threshold:.5});counters.forEach(c=>cObs.observe(c));
+
+// ═══ SMOOTH SCROLL ═══
+docume
