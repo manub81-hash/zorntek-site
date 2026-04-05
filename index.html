@@ -69,7 +69,7 @@
         <div class="hero-over" data-i18n="hero.over">L'intelligence artificielle au service de la pizza</div>
         <h1 class="hero-title"><span class="line l1">Pizz<em>AI</em></span></h1>
         <p class="hero-tagline" data-i18n="hero.tagline">Ton pizzaiolo intelligent</p>
-        <p class="hero-p" data-i18n="hero.desc">Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef\u00a0IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.</p>
+        <p class="hero-p" data-i18n="hero.desc">Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef&nbsp;IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.</p>
         <div class="hero-btns">
             <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="store-badge">
                 <svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
@@ -374,7 +374,7 @@ document.querySelectorAll('.lang-btn').forEach(b => {
     b.addEventListener('click', () => setLang(b.dataset.lang));
 });
 const saved = (() => { try { return localStorage.getItem('pizzai_lang'); } catch(e) { return null; } })();
-if (saved && T[saved]) setLang(saved);
+if (saved && T[saved]) setLang(saved); else setLang('fr');
 
 // ═══ NAV ═══
 const nav=document.getElementById('nav');let ticking=false;window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>80);ticking=false});ticking=true}});
@@ -392,4 +392,7 @@ const phoneScore=document.getElementById('phoneScore');const barObs=new Intersec
 const counters=document.querySelectorAll('[data-count]');const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done='1';const target=+e.target.dataset.count;const dur=1200;const start=performance.now();const step=ts=>{const p=Math.min((ts-start)/dur,1);e.target.textContent=Math.round((1-Math.pow(1-p,3))*target);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}})},{threshold:.5});counters.forEach(c=>cObs.observe(c));
 
 // ═══ SMOOTH SCROLL ═══
-docume
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
