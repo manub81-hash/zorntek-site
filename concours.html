@@ -3,185 +3,409 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PizzAI — Règlement #PizzAIChallenge</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<title>Règlement #PizzAIChallenge — PizzAI</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,sans-serif;background:#0a0806;color:#c5b8a5;line-height:1.8;min-height:100vh;overflow-x:hidden}body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,164,74,.06) 0%,transparent 60%);pointer-events:none;z-index:0}nav{position:fixed;top:0;left:0;right:0;background:rgba(10,8,6,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,164,74,.1);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;z-index:100}.nb{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;text-decoration:none}.nb span{color:#d4a44a}.nl{font-size:13px;color:#999;text-decoration:none}.lb{display:flex;gap:8px;position:fixed;top:60px;right:24px;z-index:99;background:rgba(10,8,6,.9);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.06)}.lb button{cursor:pointer;font-size:20px;opacity:.4;transition:opacity .3s;background:none;border:none;padding:2px}.lb button.a{opacity:1}.lb button:hover{opacity:.8}.c{max-width:720px;margin:0 auto;padding:100px 24px 60px;position:relative;z-index:1}.hero{text-align:center;margin-bottom:56px;padding:48px 0}.hero-icon{font-size:48px;margin-bottom:20px;display:block}.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:700;color:#fff;margin-bottom:4px}.hero h1 em{color:#d4a44a;font-style:italic}.hs{font-family:'Playfair Display',Georgia,serif;font-size:18px;color:#d4a44a;margin-bottom:16px;font-style:italic}.hb{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;color:#999;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);padding:6px 16px;border-radius:20px}h2{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#fff;margin-top:48px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(212,164,74,.15);position:relative}h2::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:1px;background:#d4a44a}h3{font-size:15px;font-weight:600;color:#e0d5c5;margin-top:24px;margin-bottom:10px}p{font-size:14.5px;margin-bottom:14px;color:#a89b8a;font-weight:300}strong{color:#e0d5c5;font-weight:500}em{color:#b0a593}a{color:#d4a44a;text-decoration:none;border-bottom:1px solid rgba(212,164,74,.3)}ul,ol{padding-left:20px;margin-bottom:16px}li{font-size:14.5px;margin-bottom:8px;color:#a89b8a;font-weight:300}.gc{background:rgba(212,164,74,.04);border:1px solid rgba(212,164,74,.12);border-radius:16px;padding:24px;margin:20px 0}.gc p{margin-bottom:4px}.cl{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:6px;margin-bottom:12px}.cp{background:rgba(212,164,74,.15);color:#d4a44a;border:1px solid rgba(212,164,74,.3)}.ca{background:rgba(100,180,255,.1);color:#7ab8f5;border:1px solid rgba(100,180,255,.2)}table{width:100%;border-collapse:collapse;margin:20px 0;overflow:hidden}th{font-size:12px;font-weight:600;color:#d4a44a;text-transform:uppercase;letter-spacing:1px;text-align:left;padding:14px 16px;background:rgba(212,164,74,.08);border-bottom:1px solid rgba(212,164,74,.15)}td{font-size:14px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);color:#a89b8a}tr:last-child td{border-bottom:none}td:first-child{color:#e0d5c5;font-weight:500}.tr{background:rgba(212,164,74,.06);border-top:1px solid rgba(212,164,74,.15);padding:14px 20px;display:flex;justify-content:space-between;font-size:14px;margin-top:-4px}.tr span:last-child{color:#d4a44a;font-weight:600}.ft{margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,.06);text-align:center}.ft p{font-size:13px;color:#555;margin-bottom:8px}.ft a{color:#777;border:none;margin:0 8px}.ftb{font-family:'Playfair Display',Georgia,serif;font-size:16px;color:#444;margin-bottom:12px}.ftb span{color:rgba(212,164,74,.4)}.dv{width:40px;height:1px;background:rgba(212,164,74,.3);margin:40px auto}[data-l]{display:none}[data-l].a{display:block}@media(max-width:600px){.c{padding:80px 16px 40px}.hero h1{font-size:28px}h2{font-size:19px}.lb{top:56px;right:12px;padding:4px 8px}.lb button{font-size:16px}}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0806;
+    color: #c9b99a;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 1px solid rgba(212,164,74,0.15);
+    margin-bottom: 40px;
+  }
+
+  .header .emoji { font-size: 48px; margin-bottom: 12px; }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #f5e6d3;
+    margin-bottom: 4px;
+  }
+
+  .header h1 span { color: #d4a44a; }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: #8a7e6d;
+    font-style: italic;
+  }
+
+  .header .update {
+    font-size: 12px;
+    color: #6b6259;
+    margin-top: 8px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f5e6d3;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(212,164,74,0.1);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #d4a44a;
+    margin: 24px 0 10px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  ul, ol {
+    margin-bottom: 12px;
+    padding-left: 24px;
+  }
+
+  li { margin-bottom: 6px; }
+
+  .highlight {
+    color: #d4a44a;
+    font-weight: 600;
+  }
+
+  .prize-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 20px;
+    font-size: 14px;
+  }
+
+  .prize-table th {
+    background: rgba(212,164,74,0.1);
+    color: #d4a44a;
+    font-weight: 700;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid rgba(212,164,74,0.15);
+  }
+
+  .prize-table td {
+    padding: 10px 14px;
+    border: 1px solid rgba(212,164,74,0.08);
+  }
+
+  .prize-table tr:nth-child(odd) td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .bonus-card {
+    background: rgba(212,164,74,0.06);
+    border: 1px solid rgba(212,164,74,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+
+  .bonus-card strong { color: #d4a44a; }
+
+  .contact-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,164,74,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .contact-box a {
+    color: #d4a44a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  a { color: #d4a44a; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid rgba(212,164,74,0.1);
+    margin-top: 40px;
+    font-size: 13px;
+    color: #6b6259;
+  }
+
+  .footer .brand {
+    font-size: 18px;
+    font-weight: 800;
+    color: #f5e6d3;
+    margin-bottom: 4px;
+  }
+
+  .footer .brand span { color: #d4a44a; }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 26px; }
+    h2 { font-size: 19px; }
+    .prize-table { font-size: 12px; }
+    .prize-table th, .prize-table td { padding: 8px 10px; }
+  }
 </style>
 </head>
 <body>
-<nav><a href="https://zorntek.fr/" class="nb">Pizz<span>AI</span></a><a href="https://zorntek.fr/" class="nl" id="nb"></a></nav>
-<div class="lb">
-<button class="a" onclick="L('fr')">🇫🇷</button>
-<button onclick="L('en')">🇬🇧</button>
-<button onclick="L('it')">🇮🇹</button>
-<button onclick="L('de')">🇩🇪</button>
-<button onclick="L('es')">🇪🇸</button>
-</div>
-<div class="c">
-<div class="hero"><span class="hero-icon">🏆</span><h1>Règlement du <em>#PizzAIChallenge</em></h1><p class="hs" id="sub"></p><span class="hb" id="upd"></span></div>
 
-<div data-l="fr" class="a">
-<h2>Article 1 — Organisateur</h2>
-<p>Le concours « #PizzAIChallenge » est organisé par :</p>
-<div class="gc"><p><strong>ZornTek</strong></p><p>Micro-entreprise — Emmanuel Baldo</p><p>SIRET : [NUMÉRO SIRET]</p><p>Siège : Strasbourg, Alsace, France</p><p>Contact : <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286bca9b4a8b2a3ade8a0b4"><span class="__cf_email__" data-cfemail="fc9f9392889d9f88bc86938e92889997d29a8e">[email&#160;protected]</span></a></p></div>
-<h2>Article 2 — Objet</h2>
-<p>Le Concours comprend <strong>deux catégories indépendantes</strong> :</p>
-<ul><li><strong>« Meilleure Pizza » :</strong> jeu d'adresse — qualité évaluée par IA selon des critères objectifs. Aucun hasard.</li><li><strong>« Meilleur Ambassadeur » :</strong> parrainage à un seul niveau. Aucune obligation financière pour les filleuls.</li></ul>
-<p>Un participant peut figurer aux deux classements et cumuler les lots.</p>
-<h2>Article 3 — Durée</h2>
-<p>Du <strong>[DATE DÉBUT]</strong> 00h00 au <strong>[DATE FIN]</strong> 23h59 (Paris) — 3 semaines. Modification possible si force majeure ou &lt;20 participants.</p>
-<h2>Article 4 — Participation</h2>
-<p>18 ans+, résident France/DROM/Suisse/EEE, compte PizzAI vérifié. <strong>Entièrement gratuit.</strong> 1 compte par personne et par appareil. Exclusions : personnel de l'Organisateur + familles, concepteurs du Concours, personnes morales.</p>
-<h2>Article 5 — Modalités</h2>
-<h3>5.1 — Inscription</h3>
-<ol><li>Télécharger PizzAI</li><li>Créer un compte + vérifier email</li><li>Faire une pizza maison</li><li>Soumettre une photo via « Photo IA »</li><li>Accepter le Règlement</li></ol>
-<p><strong>Bonus de bienvenue :</strong> tout participant soumettant sa première analyse photo pendant la période du Concours reçoit automatiquement <strong>1 semaine d'abonnement PizzAI Master gratuit</strong>.</p>
-<h3>5.2 — Meilleure Pizza</h3>
-<div class="cl cp">🍕 Meilleure Pizza</div>
-<p><strong>3 analyses max</strong>, meilleur score retenu. 5 critères (cuisson, corniche, forme, garniture, aspect), <strong>score 0–100</strong>. Évaluation définitive. Égalité : premier inscrit.</p>
-<h3>5.3 — Meilleur Ambassadeur</h3>
-<div class="cl ca">🤝 Meilleur Ambassadeur</div>
-<p>Code parrain unique. Classement par filleuls vérifiés. <strong>Pas de plafond.</strong> Filleul vérifié = appareil réel + compte avec code + email vérifié (pas jetable) + 1 action (calcul/chat/photo) + délai 24h. Filleuls non tenus de participer. Égalité : premier à atteindre le nombre.</p>
-<h3>5.4 — Classement</h3>
-<p>Deux classements temps réel dans l'app (pseudonyme + score/filleuls).</p>
-<h2>Article 6 — Dotations</h2>
-<h3>6.1 — Meilleure Pizza</h3>
-<div class="cl cp">🍕</div>
-<table><thead><tr><th>Place</th><th>Dotation</th><th>Valeur</th></tr></thead><tbody><tr><td>🥇 1er</td><td>Bon Amazon 200 € + 12 mois Master</td><td>~272 €</td></tr><tr><td>🥈 2e</td><td>Bon Amazon 50 € + 6 mois Master</td><td>~86 €</td></tr><tr><td>🥉 3e</td><td>3 mois Master</td><td>~18 €</td></tr><tr><td>4e–10e</td><td>1 mois Master</td><td>5,99 €</td></tr></tbody></table>
-<h3>6.2 — Meilleur Ambassadeur</h3>
-<div class="cl ca">🤝</div>
-<table><thead><tr><th>Place</th><th>Dotation</th><th>Valeur</th></tr></thead><tbody><tr><td>🥇 1er</td><td>Bon Amazon 100 € + 6 mois Master</td><td>~136 €</td></tr><tr><td>🥈 2e</td><td>3 mois Master</td><td>~18 €</td></tr><tr><td>🥉 3e</td><td>1 mois Master</td><td>5,99 €</td></tr></tbody></table>
-<div class="tr"><span>Total estimé</span><span>~584 €</span></div>
-<p>Lots nominatifs, incessibles, non convertibles en espèces. Bons Amazon non remboursables. Abonnements activés dans l'app, non renouvelables ni transférables.</p>
-<h2>Article 7 — Désignation et remise</h2>
-<p>Gagnants = premières places à la clôture. Cumul possible. Notification email sous 5 jours ouvrés. Résultats dans l'app + Instagram. Acceptation sous 7 jours (pièce d'identité exigible), sinon lot au suivant. Bons Amazon par email sous 15 jours.</p>
-<h2>Article 8 — Anti-fraude</h2>
-<p>1 compte/personne/appareil (email, ID appareil, IP). Pièce d'identité exigible sous 48h. Photos : auteur garanti, recherche image inversée top 10, photo complémentaire demandable sous 24h. Filleuls : appareil réel, email vérifié non jetable, activité vérifiable. Fermes de comptes interdites. Décisions définitives et sans recours.</p>
-<h2>Article 9 — Données personnelles</h2>
-<p>Responsable : ZornTek — <a href="/cdn-cgi/l/email-protection#4625292832272532063c29342832232d682034"><span class="__cf_email__" data-cfemail="e98a86879d888a9da993869b879d8c82c78f9b">[email&#160;protected]</span></a>. Données : email, pseudo, code parrain, scores, photos, ID appareil. Finalités : gestion, dotations, classement, anti-fraude. Base légale : contrat + intérêt légitime. Conservation : 6 mois. Droits RGPD complets (accès, rectification, effacement, limitation, portabilité, opposition). Réclamation : <a href="https://www.cnil.fr">CNIL</a>. Sous-traitants : Firebase (UE), Anthropic (photos non conservées), RevenueCat.</p>
-<h2>Article 10 — Propriété intellectuelle</h2>
-<p>Le participant autorise la reproduction et diffusion de sa photo sur supports numériques pendant le Concours + 6 mois.</p>
-<h2>Article 11 — Responsabilité</h2>
-<p>Pas de responsabilité pour : dysfonctionnements techniques, interruptions, erreurs IA (évaluation ludique), force majeure (art. 1218 Code civil), fraude tiers, emails erronés. Droit de modifier/suspendre/annuler.</p>
-<h2>Article 12 — Fiscalité</h2>
-<p>Lots en nature non imposables en France (indicatif, pas un conseil fiscal). Gagnants hors France : vérifier la loi locale.</p>
-<h2>Article 13 — Acceptation</h2>
-<p>Participer = accepter pleinement le Règlement.</p>
-<h2>Article 14 — Dépôt</h2>
-<p>Dépôt huissier non obligatoire (loi n° 2014-344). Consultable sur <a href="https://zorntek.fr/concours.html">zorntek.fr/concours.html</a> et dans l'app. Copie gratuite sur demande.</p>
-<h2>Article 15 — Litiges</h2>
-<p>Droit français. Tribunaux de Strasbourg. <a href="/cdn-cgi/l/email-protection#f2919d9c86939186b2889d809c869799dc9480"><span class="__cf_email__" data-cfemail="98fbf7f6ecf9fbecd8e2f7eaf6ecfdf3b6feea">[email&#160;protected]</span></a></p>
+<div class="container">
+
+  <div class="header">
+    <div class="emoji">🍕</div>
+    <h1>Règlement du <span>#PizzAIChallenge</span></h1>
+    <p class="subtitle">Concours gratuit sans obligation d'achat</p>
+    <p class="update">Dernière mise à jour : [DATE]</p>
+  </div>
+
+  <!-- ARTICLE 1 -->
+  <h2>Article 1 — Organisateur</h2>
+  <p>Le concours « #PizzAIChallenge » (ci-après « le Concours ») est organisé par :</p>
+  <p>
+    <strong class="highlight">ZornTek</strong> — Micro-entreprise — Emmanuel Baldo<br>
+    SIRET : [NUMÉRO SIRET]<br>
+    Siège social : Strasbourg, Alsace, France<br>
+    Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>
+  </p>
+
+  <!-- ARTICLE 2 -->
+  <h2>Article 2 — Objet</h2>
+  <p>Le présent règlement définit les conditions et modalités de participation au Concours « #PizzAIChallenge », organisé dans le cadre de la promotion de l'application mobile PizzAI.</p>
+  <p>Le Concours comprend <span class="highlight">deux catégories indépendantes</span> :</p>
+  <ul>
+    <li><strong class="highlight">Catégorie « Meilleure Pizza »</strong> : jeu d'adresse reposant sur les compétences culinaires des participants. La qualité de la pizza réalisée est évaluée par intelligence artificielle selon des critères objectifs prédéfinis. Aucun élément de hasard n'intervient dans la désignation des gagnants de cette catégorie.</li>
+    <li><strong class="highlight">Catégorie « Meilleur Ambassadeur »</strong> : opération promotionnelle de parrainage récompensant les participants ayant recruté le plus grand nombre de nouveaux utilisateurs vérifiés. Le système de parrainage est à un seul niveau : seuls les filleuls directs sont comptabilisés. Le parrain ne perçoit aucun avantage lié aux parrainages effectués par ses propres filleuls. Les filleuls ne sont soumis à aucune obligation financière.</li>
+  </ul>
+  <p>Un même participant peut figurer au classement des deux catégories et remporter un lot dans chacune d'elles.</p>
+
+  <!-- ARTICLE 3 -->
+  <h2>Article 3 — Durée</h2>
+  <p>Le Concours se déroule du <span class="highlight">[DATE DE DÉBUT]</span> à 00h00 (heure de Paris) au <span class="highlight">[DATE DE FIN]</span> à 23h59 (heure de Paris), soit une durée de trois (3) semaines.</p>
+  <p>L'Organisateur se réserve le droit d'écourter, de prolonger ou d'annuler le Concours en cas de force majeure ou si le nombre de participants est jugé insuffisant (moins de 20 participants). Toute modification sera communiquée via l'application PizzAI et le compte Instagram <a href="https://instagram.com/pizzai_officiel" target="_blank">@pizzai_officiel</a>.</p>
+
+  <!-- ARTICLE 4 -->
+  <h2>Article 4 — Conditions de participation</h2>
+
+  <h3>4.1 — Éligibilité</h3>
+  <p>Le Concours est ouvert à toute personne physique :</p>
+  <ul>
+    <li>Âgée de dix-huit (18) ans révolus à la date de début du Concours</li>
+    <li>Résidant en France métropolitaine, dans les départements et régions d'outre-mer (DROM), en Suisse ou dans un État membre de l'Espace économique européen (EEE)</li>
+    <li>Disposant d'un accès à Internet et d'un appareil compatible avec l'application PizzAI (Android ou iOS)</li>
+    <li>Ayant créé un compte utilisateur vérifié sur l'application PizzAI</li>
+  </ul>
+  <p><em>Le participant est seul responsable du respect de la législation en vigueur dans son pays de résidence en matière de jeux-concours.</em></p>
+
+  <h3>4.2 — Exclusions</h3>
+  <p>Sont exclues de la participation :</p>
+  <ul>
+    <li>Les membres du personnel de l'Organisateur et leurs familles directes (conjoint, ascendants, descendants)</li>
+    <li>Toute personne ayant participé à la conception ou à la mise en œuvre du Concours</li>
+    <li>Les personnes morales (entreprises, associations, etc.)</li>
+  </ul>
+
+  <h3>4.3 — Gratuité</h3>
+  <p>La participation au Concours est entièrement gratuite et sans obligation d'achat. L'application PizzAI est disponible gratuitement. Les fonctionnalités nécessaires à la participation (analyse photo par IA) sont accessibles dans la version gratuite de l'application.</p>
+  <p>Les éventuels frais de connexion à Internet restent à la charge du participant.</p>
+
+  <h3>4.4 — Limitation</h3>
+  <p>La participation est limitée à <span class="highlight">un (1) compte par personne physique et par appareil</span>. Toute participation multiple (comptes multiples, fausses identités) entraînera la disqualification immédiate de tous les comptes concernés.</p>
+
+  <!-- ARTICLE 5 -->
+  <h2>Article 5 — Modalités de participation</h2>
+
+  <h3>5.1 — Inscription</h3>
+  <p>Pour participer, le candidat doit :</p>
+  <ol>
+    <li>Télécharger l'application PizzAI depuis le Google Play Store ou l'App Store</li>
+    <li>Créer un compte utilisateur (gratuit) et vérifier son adresse email</li>
+    <li>Réaliser une pizza de sa propre confection</li>
+    <li>Soumettre une photographie de sa pizza à l'analyse par intelligence artificielle via la fonctionnalité « Photo IA » de l'application</li>
+    <li>Accepter le présent Règlement</li>
+  </ol>
+  <p>La soumission de la première analyse photo pendant la période du Concours vaut inscription.</p>
+
+  <div class="bonus-card">
+    <strong>🎁 Bonus participation :</strong> Tout participant soumettant sa première analyse photo pendant la période du Concours reçoit automatiquement <strong>1 semaine d'abonnement PizzAI Master gratuit</strong>.
+  </div>
+
+  <h3>5.2 — Catégorie « Meilleure Pizza »</h3>
+  <p>Chaque participant peut soumettre jusqu'à <span class="highlight">trois (3) analyses photo</span> pendant la durée du Concours. Seul le meilleur score obtenu est retenu pour le classement. Seules les photos prises avec l'appareil photo du téléphone sont prises en compte (les photos importées depuis la galerie ne comptent pas pour le classement).</p>
+  <p>L'intelligence artificielle évalue chaque pizza selon cinq critères objectifs : cuisson, corniche, forme, garniture et aspect général. Elle attribue un <span class="highlight">score global de 0 à 100 points</span>.</p>
+  <p>L'évaluation par intelligence artificielle est réalisée de manière automatisée selon des critères objectifs prédéfinis. Le participant accepte que cette évaluation, à caractère ludique, est définitive et ne peut faire l'objet d'aucune réclamation.</p>
+  <p>En cas d'égalité de score, le départage s'effectue en faveur du participant ayant soumis sa première analyse photo le plus tôt (horodatage serveur).</p>
+
+  <h3>5.3 — Catégorie « Meilleur Ambassadeur »</h3>
+  <p>Chaque participant dispose d'un code parrain unique, généré automatiquement dans l'application. Le classement est établi selon le nombre de filleuls vérifiés. <span class="highlight">Le nombre de filleuls n'est pas plafonné.</span></p>
+  <p>Un filleul est considéré comme « vérifié » lorsque les conditions cumulatives suivantes sont remplies :</p>
+  <ol>
+    <li>Installation de l'application PizzAI sur un appareil physique réel (les émulateurs sont exclus)</li>
+    <li>Création d'un compte utilisateur avec un code parrain valide</li>
+    <li>Vérification de l'adresse email associée au compte via le lien de confirmation envoyé par l'application. Les adresses email temporaires ou jetables ne sont pas acceptées.</li>
+    <li>Réalisation d'au moins une (1) action dans l'application parmi : calcul de recette, message au Chef IA ou analyse photo</li>
+    <li>Un délai de validation pouvant aller jusqu'à vingt-quatre (24) heures s'applique avant la comptabilisation du filleul</li>
+  </ol>
+  <p>Les filleuls ne sont pas tenus de participer eux-mêmes au Concours pour être comptabilisés. En cas d'égalité du nombre de filleuls, le départage s'effectue en faveur du participant ayant atteint ce nombre le plus tôt.</p>
+
+  <h3>5.4 — Classement</h3>
+  <p>Deux classements distincts sont affichés en temps réel dans l'application, accessibles à tous les participants. Chaque classement indique le pseudonyme (prénom et initiale du nom) et le score ou nombre de filleuls de chaque participant.</p>
+
+  <!-- ARTICLE 6 -->
+  <h2>Article 6 — Dotations</h2>
+
+  <h3>6.1 — Catégorie « Meilleure Pizza »</h3>
+  <table class="prize-table">
+    <tr><th>Classement</th><th>Dotation</th><th>Valeur</th></tr>
+    <tr><td><strong>🏆 1er</strong></td><td>Bon d'achat Amazon de 200 € + 12 mois PizzAI Master</td><td>~272 €</td></tr>
+    <tr><td><strong>🥈 2ème</strong></td><td>Bon d'achat Amazon de 50 € + 6 mois PizzAI Master</td><td>~86 €</td></tr>
+    <tr><td><strong>🥉 3ème</strong></td><td>3 mois PizzAI Master</td><td>~18 €</td></tr>
+    <tr><td>4e — 10e</td><td>1 mois PizzAI Master</td><td>5,99 €</td></tr>
+  </table>
+
+  <h3>6.2 — Catégorie « Meilleur Ambassadeur »</h3>
+  <table class="prize-table">
+    <tr><th>Classement</th><th>Dotation</th><th>Valeur</th></tr>
+    <tr><td><strong>🏆 1er</strong></td><td>Bon d'achat Amazon de 100 € + 6 mois PizzAI Master</td><td>~136 €</td></tr>
+    <tr><td><strong>🥈 2ème</strong></td><td>3 mois PizzAI Master</td><td>~18 €</td></tr>
+    <tr><td><strong>🥉 3ème</strong></td><td>1 mois PizzAI Master</td><td>5,99 €</td></tr>
+  </table>
+
+  <p><strong class="highlight">Valeur totale estimée des dotations : ~584 €</strong></p>
+
+  <p>Les dotations sont nominatives, incessibles et ne peuvent faire l'objet d'aucune contrepartie en espèces. Les bons d'achat Amazon sont non remboursables et non convertibles en espèces. L'Organisateur se réserve le droit de remplacer une dotation par un lot de valeur équivalente en cas d'indisponibilité.</p>
+  <p>Les abonnements Master sont activés directement dans l'application. Ils débutent à la date d'attribution et ne sont ni renouvelables ni transférables.</p>
+
+  <!-- ARTICLE 7 -->
+  <h2>Article 7 — Désignation et remise des lots</h2>
+
+  <h3>7.1 — Désignation</h3>
+  <p>Les gagnants sont les participants occupant les premières places de chaque classement à la clôture du Concours, le <span class="highlight">[DATE DE FIN]</span> à 23h59 (heure de Paris). Un même participant peut figurer dans les deux classements et cumuler les dotations correspondantes.</p>
+
+  <h3>7.2 — Notification</h3>
+  <p>Les gagnants seront contactés par email dans un délai de cinq (5) jours ouvrés suivant la clôture. Les résultats seront également publiés dans l'application et sur le compte Instagram <a href="https://instagram.com/pizzai_officiel" target="_blank">@pizzai_officiel</a>.</p>
+
+  <h3>7.3 — Acceptation du lot</h3>
+  <p>Chaque gagnant dispose de sept (7) jours calendaires à compter de la notification pour confirmer son acceptation du lot et, le cas échéant, fournir les pièces justificatives demandées (pièce d'identité). Passé ce délai ou en cas de non-réponse, le lot sera attribué au participant classé immédiatement après.</p>
+
+  <h3>7.4 — Remise des lots</h3>
+  <p>Les bons d'achat Amazon seront envoyés par email à l'adresse associée au compte PizzAI des gagnants, dans un délai de quinze (15) jours suivant confirmation. Les abonnements PizzAI Master seront activés directement dans l'application.</p>
+
+  <!-- ARTICLE 8 -->
+  <h2>Article 8 — Lutte contre la fraude</h2>
+  <p>L'Organisateur met en œuvre des mesures techniques et humaines de détection de la fraude, notamment :</p>
+
+  <h3>8.1 — Comptes et identité</h3>
+  <ul>
+    <li>Un seul compte par personne physique et par appareil. La création de comptes multiples, identifiée par adresse email, identifiant d'appareil, adresse IP ou tout autre moyen technique, entraîne la disqualification immédiate de tous les comptes concernés.</li>
+    <li>L'Organisateur se réserve le droit de demander à tout gagnant une pièce d'identité en cours de validité. Le refus ou l'absence de réponse sous quarante-huit (48) heures entraîne la disqualification.</li>
+  </ul>
+
+  <h3>8.2 — Catégorie « Meilleure Pizza »</h3>
+  <ul>
+    <li>Le participant garantit être l'auteur de la photographie soumise et avoir réalisé la pizza lui-même. La soumission de photographies trouvées sur Internet, retouchées de manière à altérer l'apparence réelle de la pizza, ou représentant une pizza achetée dans le commerce est strictement interdite.</li>
+    <li>L'Organisateur se réserve le droit de demander aux finalistes (top 10) une photographie complémentaire de leur pizza sous un angle différent, dans un délai de vingt-quatre (24) heures. L'absence de réponse entraîne la disqualification.</li>
+    <li>L'Organisateur procède à une vérification par recherche d'image inversée sur les photographies des finalistes avant l'attribution des lots.</li>
+  </ul>
+
+  <h3>8.3 — Catégorie « Meilleur Ambassadeur »</h3>
+  <ul>
+    <li>Un filleul n'est comptabilisé qu'après validation, laquelle requiert : une installation sur un appareil physique réel (les émulateurs sont exclus), une adresse email vérifiée et non jetable, et une activité vérifiable dans l'application.</li>
+    <li>Le participant garantit que ses filleuls sont des personnes physiques réelles et distinctes. Le recours à des services payants de recrutement, à des fermes de comptes ou à tout procédé artificiel est strictement interdit.</li>
+    <li>L'Organisateur se réserve le droit de ne pas comptabiliser les filleuls dont l'authenticité n'a pu être vérifiée et de demander à tout filleul une preuve d'identité distincte.</li>
+  </ul>
+
+  <h3>8.4 — Dispositions générales</h3>
+  <p>Les décisions de l'Organisateur en matière de fraude sont définitives et sans recours. Toute tentative de fraude avérée pourra donner lieu à des poursuites judiciaires.</p>
+
+  <!-- ARTICLE 9 -->
+  <h2>Article 9 — Données personnelles</h2>
+
+  <h3>9.1 — Responsable du traitement</h3>
+  <p>ZornTek — Emmanuel Baldo — <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+
+  <h3>9.2 — Données collectées</h3>
+  <p>Adresse email, pseudonyme, code parrain, score et classement, nombre de filleuls, photographies de pizzas soumises à l'analyse, identifiant d'appareil.</p>
+
+  <h3>9.3 — Finalités et base légale</h3>
+  <p>Les données sont traitées pour la gestion du Concours, l'attribution et la livraison des dotations, la publication du classement et la lutte contre la fraude. Base légale : exécution du contrat (acceptation du Règlement) et intérêt légitime (sécurité et prévention de la fraude).</p>
+
+  <h3>9.4 — Conservation</h3>
+  <p>Les données sont conservées six (6) mois après la clôture du Concours, sauf obligations légales de conservation plus longues.</p>
+
+  <h3>9.5 — Droits des personnes</h3>
+  <p>Conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous disposez des droits d'accès, de rectification, d'effacement, de limitation, de portabilité et d'opposition au traitement de vos données personnelles. Ces droits peuvent être exercés par email à l'adresse : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Vous disposez également du droit d'introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés (CNIL).</p>
+
+  <h3>9.6 — Sous-traitants</h3>
+  <p>Les données peuvent être transmises aux sous-traitants suivants :</p>
+  <ul>
+    <li>Google Firebase — hébergement, authentification (serveurs UE)</li>
+    <li>Anthropic — analyse photo IA (les photographies ne sont pas conservées après traitement)</li>
+    <li>RevenueCat — gestion des abonnements</li>
+  </ul>
+
+  <!-- ARTICLE 10 -->
+  <h2>Article 10 — Propriété intellectuelle</h2>
+  <p>Le participant garantit être l'auteur de la photographie soumise et détenir l'ensemble des droits nécessaires à son exploitation dans le cadre du Concours.</p>
+  <p>En participant au Concours, le participant accorde à l'Organisateur, à titre gratuit, le droit de reproduire et de diffuser la photographie soumise sur tous supports numériques (application, réseaux sociaux, site web), dans le monde entier, à des fins de communication liées au Concours, pour la durée du Concours et les six (6) mois suivant sa clôture.</p>
+
+  <!-- ARTICLE 11 -->
+  <h2>Article 11 — Responsabilité</h2>
+  <p>L'Organisateur ne saurait être tenu responsable en cas de :</p>
+  <ul>
+    <li>Dysfonctionnement réseau ou technique indépendant de sa volonté</li>
+    <li>Interruption temporaire ou définitive de l'application</li>
+    <li>Erreurs ou variations de l'évaluation par intelligence artificielle, celle-ci constituant une appréciation automatisée à visée ludique</li>
+    <li>Force majeure au sens de l'article 1218 du Code civil</li>
+    <li>Utilisation frauduleuse des codes parrain par des tiers</li>
+    <li>Non-réception du bon d'achat en raison d'une adresse email erronée fournie par le gagnant</li>
+  </ul>
+  <p>L'Organisateur se réserve le droit de modifier, suspendre ou annuler le Concours à tout moment en cas de force majeure ou de fraude avérée.</p>
+
+  <!-- ARTICLE 12 -->
+  <h2>Article 12 — Fiscalité</h2>
+  <p>En l'état actuel de la législation française, les lots attribués dans le cadre d'un jeu d'adresse ne sont pas soumis à l'impôt sur le revenu pour les résidents fiscaux français. Cette information est donnée à titre indicatif et ne constitue pas un conseil fiscal. Les gagnants résidant hors de France sont invités à se renseigner sur la réglementation fiscale applicable dans leur pays de résidence.</p>
+
+  <!-- ARTICLE 13 -->
+  <h2>Article 13 — Acceptation du règlement</h2>
+  <p>La participation au Concours implique l'acceptation pleine et entière du présent Règlement. Tout non-respect des conditions de participation ou du présent Règlement entraînera la disqualification du participant.</p>
+
+  <!-- ARTICLE 14 -->
+  <h2>Article 14 — Dépôt du règlement</h2>
+  <p>Conformément à la loi n° 2014-344 du 17 mars 2014, le dépôt du règlement auprès d'un huissier de justice n'est pas obligatoire. Le présent Règlement est librement consultable dans l'application PizzAI et peut être obtenu sur simple demande écrite adressée à <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>.</p>
+
+  <!-- ARTICLE 15 -->
+  <h2>Article 15 — Litiges</h2>
+  <p>Le présent Règlement est soumis au droit français. En cas de difficulté relative à l'interprétation ou à l'exécution du présent Règlement, et à défaut de règlement amiable, tout litige sera soumis à la compétence exclusive des tribunaux compétents de Strasbourg.</p>
+
+  <div class="contact-box">
+    <p>📧 Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></p>
+    <p>📲 Application : <a href="https://zorntek.fr/app">zorntek.fr/app</a></p>
+    <p>📸 Instagram : <a href="https://instagram.com/pizzai_officiel" target="_blank">@pizzai_officiel</a></p>
+  </div>
+
+  <div class="footer">
+    <p class="brand">🍕 Pizz<span>AI</span></p>
+    <p>© 2026 ZornTek — Tous droits réservés</p>
+  </div>
+
 </div>
 
-<div data-l="en">
-<h2>Article 1 — Organizer</h2>
-<div class="gc"><p><strong>ZornTek</strong> — Sole proprietorship — Emmanuel Baldo</p><p>SIRET: [PENDING] — Strasbourg, France</p><p><a href="/cdn-cgi/l/email-protection#15767a7b61747661556f7a677b61707e3b7367"><span class="__cf_email__" data-cfemail="35565a5b41545641754f5a475b41505e1b5347">[email&#160;protected]</span></a></p></div>
-<h2>Article 2 — Purpose</h2>
-<p>The Contest includes <strong>two independent categories</strong>:</p>
-<ul><li><strong>"Best Pizza":</strong> skill-based — AI evaluates quality using objective criteria. No chance involved.</li><li><strong>"Best Ambassador":</strong> single-level referral promotion. No financial obligation for referees.</li></ul>
-<p>Participants may appear in both leaderboards and win prizes in each.</p>
-<h2>Article 3 — Duration</h2>
-<p>From <strong>[START DATE]</strong> 00:00 to <strong>[END DATE]</strong> 23:59 (Paris time) — 3 weeks.</p>
-<h2>Article 4 — Eligibility</h2>
-<p>18+, residing in France/Switzerland/EEA, verified PizzAI account. <strong>Free to enter.</strong> One account per person per device. Exclusions: organizer's staff + family, contest designers, legal entities.</p>
-<h2>Article 5 — How to participate</h2>
-<h3>5.1 — Registration</h3>
-<ol><li>Download PizzAI</li><li>Create account + verify email</li><li>Make your own pizza</li><li>Submit a photo via "Photo AI"</li><li>Accept these Rules</li></ol>
-<p><strong>Welcome bonus:</strong> every participant submitting their first photo analysis during the Contest period automatically receives <strong>1 free week of PizzAI Master</strong>.</p>
-<h3>5.2 — Best Pizza</h3>
-<div class="cl cp">🍕 Best Pizza</div>
-<p><strong>3 analyses max</strong>, best score kept. 5 criteria (baking, crust, shape, toppings, appearance), <strong>score 0–100</strong>. Evaluation is final. Tie-break: earliest submission.</p>
-<h3>5.3 — Best Ambassador</h3>
-<div class="cl ca">🤝 Best Ambassador</div>
-<p>Unique referral code. Ranked by verified referrals. <strong>No cap.</strong> Verified = real device + account with code + verified email (no disposable) + 1 action (calc/chat/photo) + 24h delay. Referrals need not enter the Contest. Tie-break: first to reach the count.</p>
-<h2>Article 6 — Prizes</h2>
-<h3>6.1 — Best Pizza</h3>
-<div class="cl cp">🍕</div>
-<table><thead><tr><th>Rank</th><th>Prize</th><th>Value</th></tr></thead><tbody><tr><td>🥇 1st</td><td>€200 Amazon gift card + 12 months Master</td><td>~€272</td></tr><tr><td>🥈 2nd</td><td>€50 Amazon gift card + 6 months Master</td><td>~€86</td></tr><tr><td>🥉 3rd</td><td>3 months Master</td><td>~€18</td></tr><tr><td>4th–10th</td><td>1 month Master</td><td>€5.99</td></tr></tbody></table>
-<h3>6.2 — Best Ambassador</h3>
-<div class="cl ca">🤝</div>
-<table><thead><tr><th>Rank</th><th>Prize</th><th>Value</th></tr></thead><tbody><tr><td>🥇 1st</td><td>€100 Amazon gift card + 6 months Master</td><td>~€136</td></tr><tr><td>🥈 2nd</td><td>3 months Master</td><td>~€18</td></tr><tr><td>🥉 3rd</td><td>1 month Master</td><td>€5.99</td></tr></tbody></table>
-<div class="tr"><span>Total estimated value</span><span>~€584</span></div>
-<p>Prizes are personal, non-transferable, no cash alternative. Gift cards are non-refundable. Master subscriptions activated in-app.</p>
-<h2>Articles 7–15</h2>
-<p>Winners = top-ranked at close. Stackable prizes. Email notification within 5 business days. Results in-app + Instagram. Acceptance within 7 days (ID may be required). Gift cards by email within 15 days. Fraud: 1 account/person/device, reverse image search top 10, real devices only. GDPR: controller ZornTek, 6-month retention, full rights. French law, Strasbourg courts. <a href="/cdn-cgi/l/email-protection#a5c6cacbd1c4c6d1e5dfcad7cbd1c0ce8bc3d7"><span class="__cf_email__" data-cfemail="593a36372d383a2d1923362b372d3c32773f2b">[email&#160;protected]</span></a></p>
-</div>
-
-<div data-l="it">
-<h2>Articolo 1 — Organizzatore</h2>
-<div class="gc"><p><strong>ZornTek</strong> — Emmanuel Baldo — Strasburgo, Francia</p><p><a href="/cdn-cgi/l/email-protection#eb8884859f8a889fab918499859f8e80c58d99"><span class="__cf_email__" data-cfemail="086b67667c696b7c4872677a667c6d63266e7a">[email&#160;protected]</span></a></p></div>
-<h2>Articolo 2 — Oggetto</h2>
-<p>Due categorie: <strong>"Miglior Pizza"</strong> (abilità culinaria, IA oggettiva) e <strong>"Miglior Ambasciatore"</strong> (referral a un livello). Si può vincere in entrambe.</p>
-<h2>Articolo 3–4</h2>
-<p>3 settimane. 18+, residente Francia/Svizzera/SEE. <strong>Gratuito.</strong> 1 account/persona/dispositivo.</p>
-<h2>Articolo 5 — Modalità</h2>
-<p><strong>Bonus di benvenuto:</strong> ogni partecipante che invia la sua prima analisi foto durante il Concorso riceve automaticamente <strong>1 settimana di PizzAI Master gratuito</strong>.</p>
-<div class="cl cp">🍕 Miglior Pizza</div>
-<p><strong>3 analisi max</strong>, miglior punteggio. 5 criteri, <strong>0–100 punti</strong>. Definitivo.</p>
-<div class="cl ca">🤝 Miglior Ambasciatore</div>
-<p>Codice referral unico. <strong>Nessun limite.</strong> Verificato = dispositivo reale + account + email + 1 azione + 24h.</p>
-<h2>Articolo 6 — Premi</h2>
-<h3>Miglior Pizza</h3>
-<table><thead><tr><th>Pos.</th><th>Premio</th><th>Valore</th></tr></thead><tbody><tr><td>🥇 1°</td><td>Buono Amazon 200 € + 12 mesi Master</td><td>~272 €</td></tr><tr><td>🥈 2°</td><td>Buono Amazon 50 € + 6 mesi Master</td><td>~86 €</td></tr><tr><td>🥉 3°</td><td>3 mesi Master</td><td>~18 €</td></tr><tr><td>4°–10°</td><td>1 mese Master</td><td>5,99 €</td></tr></tbody></table>
-<h3>Miglior Ambasciatore</h3>
-<table><thead><tr><th>Pos.</th><th>Premio</th><th>Valore</th></tr></thead><tbody><tr><td>🥇 1°</td><td>Buono Amazon 100 € + 6 mesi Master</td><td>~136 €</td></tr><tr><td>🥈 2°</td><td>3 mesi Master</td><td>~18 €</td></tr><tr><td>🥉 3°</td><td>1 mese Master</td><td>5,99 €</td></tr></tbody></table>
-<div class="tr"><span>Totale stimato</span><span>~584 €</span></div>
-<h2>Articoli 7–15</h2>
-<p>Vincitori = primi classificati. Notifica 5 giorni. Accettazione 7 giorni. Buoni email 15 giorni. Antifrode completa. RGPD: ZornTek, 6 mesi. Diritto francese, Strasburgo. <a href="/cdn-cgi/l/email-protection#096a66677d686a7d4973667b677d6c62276f7b"><span class="__cf_email__" data-cfemail="492a26273d282a3d0933263b273d2c22672f3b">[email&#160;protected]</span></a></p>
-</div>
-
-<div data-l="de">
-<h2>Artikel 1 — Veranstalter</h2>
-<div class="gc"><p><strong>ZornTek</strong> — Emmanuel Baldo — Straßburg, Frankreich</p><p><a href="/cdn-cgi/l/email-protection#40232f2e34212334003a2f322e34252b6e2632"><span class="__cf_email__" data-cfemail="6f0c00011b0e0c1b2f15001d011b0a0441091d">[email&#160;protected]</span></a></p></div>
-<h2>Artikel 2 — Gegenstand</h2>
-<p>Zwei Kategorien: <strong>"Beste Pizza"</strong> (Geschicklichkeit, KI-Bewertung) und <strong>"Bester Botschafter"</strong> (einstufiges Empfehlungsprogramm). Man kann in beiden gewinnen.</p>
-<h2>Artikel 3–4</h2>
-<p>3 Wochen. 18+, wohnhaft Frankreich/Schweiz/EWR. <strong>Kostenlos.</strong> 1 Konto/Person/Gerät.</p>
-<h2>Artikel 5 — Modalitäten</h2>
-<p><strong>Willkommensbonus:</strong> Jeder Teilnehmer, der seine erste Fotoanalyse während des Wettbewerbs einreicht, erhält automatisch <strong>1 Woche PizzAI Master kostenlos</strong>.</p>
-<div class="cl cp">🍕 Beste Pizza</div>
-<p><strong>Max. 3 Analysen</strong>, beste Bewertung. 5 Kriterien, <strong>0–100 Punkte</strong>. Endgültig.</p>
-<div class="cl ca">🤝 Bester Botschafter</div>
-<p>Empfehlungscode. <strong>Keine Obergrenze.</strong> Verifiziert = echtes Gerät + Konto + E-Mail + 1 Aktion + 24h.</p>
-<h2>Artikel 6 — Preise</h2>
-<h3>Beste Pizza</h3>
-<table><thead><tr><th>Platz</th><th>Preis</th><th>Wert</th></tr></thead><tbody><tr><td>🥇 1.</td><td>Amazon-Gutschein 200 € + 12 Monate Master</td><td>~272 €</td></tr><tr><td>🥈 2.</td><td>Amazon-Gutschein 50 € + 6 Monate Master</td><td>~86 €</td></tr><tr><td>🥉 3.</td><td>3 Monate Master</td><td>~18 €</td></tr><tr><td>4.–10.</td><td>1 Monat Master</td><td>5,99 €</td></tr></tbody></table>
-<h3>Bester Botschafter</h3>
-<table><thead><tr><th>Platz</th><th>Preis</th><th>Wert</th></tr></thead><tbody><tr><td>🥇 1.</td><td>Amazon-Gutschein 100 € + 6 Monate Master</td><td>~136 €</td></tr><tr><td>🥈 2.</td><td>3 Monate Master</td><td>~18 €</td></tr><tr><td>🥉 3.</td><td>1 Monat Master</td><td>5,99 €</td></tr></tbody></table>
-<div class="tr"><span>Gesamtwert</span><span>~584 €</span></div>
-<h2>Artikel 7–15</h2>
-<p>Gewinner = Bestplatzierte. Benachrichtigung 5 Werktage. Annahme 7 Tage. Gutscheine per E-Mail 15 Tage. Betrugsbekämpfung. DSGVO: ZornTek, 6 Monate. Französisches Recht, Straßburg. <a href="/cdn-cgi/l/email-protection#caa9a5a4beaba9be8ab0a5b8a4beafa1e4acb8"><span class="__cf_email__" data-cfemail="2f4c40415b4e4c5b6f55405d415b4a4401495d">[email&#160;protected]</span></a></p>
-</div>
-
-<div data-l="es">
-<h2>Artículo 1 — Organizador</h2>
-<div class="gc"><p><strong>ZornTek</strong> — Emmanuel Baldo — Estrasburgo, Francia</p><p><a href="/cdn-cgi/l/email-protection#04676b6a70656770447e6b766a70616f2a6276"><span class="__cf_email__" data-cfemail="4724282933262433073d28352933222c692135">[email&#160;protected]</span></a></p></div>
-<h2>Artículo 2 — Objeto</h2>
-<p>Dos categorías: <strong>"Mejor Pizza"</strong> (habilidad culinaria, IA objetiva) y <strong>"Mejor Embajador"</strong> (referidos de un nivel). Se puede ganar en ambas.</p>
-<h2>Artículos 3–4</h2>
-<p>3 semanas. 18+, residente Francia/Suiza/EEE. <strong>Gratuito.</strong> 1 cuenta/persona/dispositivo.</p>
-<h2>Artículo 5 — Modalidades</h2>
-<p><strong>Bonus de bienvenida:</strong> todo participante que envíe su primer análisis fotográfico durante el Concurso recibe automáticamente <strong>1 semana de PizzAI Master gratis</strong>.</p>
-<div class="cl cp">🍕 Mejor Pizza</div>
-<p><strong>Máx. 3 análisis</strong>, mejor puntuación. 5 criterios, <strong>0–100 puntos</strong>. Definitiva.</p>
-<div class="cl ca">🤝 Mejor Embajador</div>
-<p>Código de referido único. <strong>Sin límite.</strong> Verificado = dispositivo real + cuenta + email + 1 acción + 24h.</p>
-<h2>Artículo 6 — Premios</h2>
-<h3>Mejor Pizza</h3>
-<table><thead><tr><th>Pos.</th><th>Premio</th><th>Valor</th></tr></thead><tbody><tr><td>🥇 1°</td><td>Tarjeta Amazon 200 € + 12 meses Master</td><td>~272 €</td></tr><tr><td>🥈 2°</td><td>Tarjeta Amazon 50 € + 6 meses Master</td><td>~86 €</td></tr><tr><td>🥉 3°</td><td>3 meses Master</td><td>~18 €</td></tr><tr><td>4°–10°</td><td>1 mes Master</td><td>5,99 €</td></tr></tbody></table>
-<h3>Mejor Embajador</h3>
-<table><thead><tr><th>Pos.</th><th>Premio</th><th>Valor</th></tr></thead><tbody><tr><td>🥇 1°</td><td>Tarjeta Amazon 100 € + 6 meses Master</td><td>~136 €</td></tr><tr><td>🥈 2°</td><td>3 meses Master</td><td>~18 €</td></tr><tr><td>🥉 3°</td><td>1 mes Master</td><td>5,99 €</td></tr></tbody></table>
-<div class="tr"><span>Valor total</span><span>~584 €</span></div>
-<h2>Artículos 7–15</h2>
-<p>Ganadores = mejores clasificados. Notificación 5 días. Aceptación 7 días. Tarjetas email 15 días. Antifraude completa. RGPD: ZornTek, 6 meses. Derecho francés, Estrasburgo. <a href="/cdn-cgi/l/email-protection#5f3c30312b3e3c2b1f25302d312b3a3471392d"><span class="__cf_email__" data-cfemail="52313d3c2633312612283d203c2637397c3420">[email&#160;protected]</span></a></p>
-</div>
-
-<div class="dv"></div>
-<div class="ft">
-<p class="ftb">Pizz<span>AI</span></p>
-<p>© 2026 ZornTek — Emmanuel Baldo</p>
-<p><a href="https://zorntek.fr/privacy.html" id="fp"></a> <a href="https://zorntek.fr/terms.html" id="fk"></a> <a href="https://instagram.com/pizzai_officiel">Instagram</a></p>
-</div>
-</div>
-<script data-cfasync
+</body>
+</html>
