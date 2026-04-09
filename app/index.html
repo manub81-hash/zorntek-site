@@ -65,16 +65,6 @@
             color: #fff;
             border: 1px solid rgba(255,255,255,0.15);
         }
-        .store-btn.ios.soon {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        .soon-badge {
-            font-size: 11px;
-            background: rgba(255,255,255,0.15);
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
         .spinner {
             width: 24px; height: 24px;
             border: 3px solid rgba(212,164,74,0.2);
@@ -92,15 +82,13 @@
             var isAndroid = /android/i.test(ua);
             var isIOS = /iphone|ipad|ipod/i.test(ua);
             var playUrl = 'https://play.google.com/store/apps/details?id=com.zorntek.pizzai';
-            // var appStoreUrl = 'https://apps.apple.com/app/pizzai/idXXXXXXXXXX'; // À remplir
+            var appStoreUrl = 'https://apps.apple.com/app/id6761267496';
 
             if (isAndroid) {
                 window.location.href = playUrl;
+            } else if (isIOS) {
+                window.location.href = appStoreUrl;
             }
-            // Décommenter quand iOS sera live :
-            // else if (isIOS) {
-            //     window.location.href = appStoreUrl;
-            // }
         })();
     </script>
 </head>
@@ -119,14 +107,13 @@
         <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" class="store-btn android">
             ▶ Google Play Store
         </a>
-        <div class="store-btn ios soon">
-            Apple App Store <span class="soon-badge">Bientôt</span>
-        </div>
+        <a href="https://apps.apple.com/app/id6761267496" class="store-btn ios">
+             App Store
+        </a>
     </div>
 </div>
 
 <script>
-    // Hide redirect message after 2s if still on this page
     setTimeout(function() {
         var msg = document.getElementById('redirect-msg');
         if (msg) msg.classList.add('hidden');
