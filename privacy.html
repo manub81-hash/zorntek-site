@@ -51,7 +51,9 @@
 <h3>2.4 Données de paiement</h3>
 <p>Les abonnements sont gérés par Google Play Billing ou Apple In-App Purchase via RevenueCat. ZornTek n'a <strong>jamais accès</strong> à vos coordonnées bancaires.</p>
 <h3>2.5 Données publicitaires</h3>
-<p>Plan gratuit : Google AdMob collecte un identifiant publicitaire. Désactivable dans les paramètres de votre appareil.</p>
+<p>Plan gratuit : Google AdMob collecte un identifiant publicitaire. Désactivable dans les paramètres de votre appareil. Votre consentement est recueilli au premier lancement via le module de gestion de consentement (CMP) Google User Messaging Platform, conformément au RGPD.</p>
+<h3>2.6 Données de stabilité (Crashlytics)</h3>
+<p>Firebase Crashlytics (Google) collecte des rapports anonymisés en cas de plantage : traces d'exécution, modèle d'appareil, version du système, version de l'application, et votre identifiant utilisateur Firebase (UID). Aucune donnée personnelle identifiable directement n'est incluse. Ces informations nous permettent d'identifier et corriger les bugs pour améliorer la stabilité.</p>
 
 <h2>3. Finalités du traitement</h2>
 <table>
@@ -59,8 +61,8 @@
 <tr><td>Authentification et gestion de compte</td><td>Exécution du contrat</td></tr>
 <tr><td>Fonctionnement de l'application (IA, recettes, limites)</td><td>Exécution du contrat</td></tr>
 <tr><td>Gestion des abonnements</td><td>Exécution du contrat</td></tr>
-<tr><td>Affichage de publicités (plan gratuit)</td><td>Intérêt légitime / Consentement</td></tr>
-<tr><td>Détection de bugs et amélioration</td><td>Intérêt légitime</td></tr>
+<tr><td>Affichage de publicités (plan gratuit)</td><td>Consentement</td></tr>
+<tr><td>Détection de plantages et amélioration de la stabilité</td><td>Intérêt légitime</td></tr>
 <tr><td>Concours et parrainages</td><td>Consentement</td></tr>
 </table>
 
@@ -68,6 +70,7 @@
 <table>
 <tr><th>Service</th><th>Données</th><th>Localisation</th></tr>
 <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>UE (europe-west1)</td></tr>
+<tr><td>Firebase Crashlytics (Google)</td><td>Rapports de plantage, UID, device</td><td>États-Unis*</td></tr>
 <tr><td>Anthropic (Claude)</td><td>Messages Chef IA, photos</td><td>États-Unis*</td></tr>
 <tr><td>RevenueCat</td><td>ID utilisateur, statut abonnement</td><td>États-Unis*</td></tr>
 <tr><td>Google AdMob</td><td>Identifiant publicitaire</td><td>International</td></tr>
@@ -82,6 +85,7 @@
 <tr><td>Recettes</td><td>Jusqu'à suppression par l'utilisateur</td></tr>
 <tr><td>Photos analysées</td><td>Non conservées par Anthropic</td></tr>
 <tr><td>Historique photo (Pro/Master)</td><td>Jusqu'à suppression du compte</td></tr>
+<tr><td>Rapports de plantage</td><td>90 jours maximum</td></tr>
 <tr><td>Données de paiement</td><td>Gérées par Google/Apple/RevenueCat</td></tr>
 </table>
 
@@ -94,6 +98,7 @@
 <li><strong>Portabilité</strong> — recevoir vos données dans un format structuré</li>
 <li><strong>Opposition</strong> — vous opposer au traitement</li>
 <li><strong>Limitation</strong> — demander la limitation du traitement</li>
+<li><strong>Retrait du consentement</strong> — modifier vos préférences publicitaires à tout moment dans les paramètres de l'application (plan gratuit uniquement, utilisateurs EEE/UK)</li>
 </ul>
 <p>Contact : <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Réclamation : <a href="https://www.cnil.fr">CNIL</a>.</p>
 
@@ -147,7 +152,9 @@
 <h3>2.4 Payment data</h3>
 <p>Subscriptions are managed by Google Play Billing or Apple In-App Purchase via RevenueCat. ZornTek <strong>never has access</strong> to your banking details.</p>
 <h3>2.5 Advertising data</h3>
-<p>Free plan: Google AdMob collects an advertising identifier. You can disable ad personalization in your device settings.</p>
+<p>Free plan: Google AdMob collects an advertising identifier. You can disable ad personalization in your device settings. Your consent is collected at first launch via the Google User Messaging Platform consent management module (CMP), in compliance with the GDPR.</p>
+<h3>2.6 Stability data (Crashlytics)</h3>
+<p>Firebase Crashlytics (Google) collects anonymized crash reports: stack traces, device model, operating system version, app version, and your Firebase user ID (UID). No directly identifiable personal data is included. This information allows us to identify and fix bugs to improve stability.</p>
 
 <h2>3. Purposes of processing</h2>
 <table>
@@ -155,8 +162,8 @@
 <tr><td>Authentication and account management</td><td>Contract performance</td></tr>
 <tr><td>App functionality (AI, recipes, limits)</td><td>Contract performance</td></tr>
 <tr><td>Subscription management</td><td>Contract performance</td></tr>
-<tr><td>Advertising (free plan)</td><td>Legitimate interest / Consent</td></tr>
-<tr><td>Bug detection and improvement</td><td>Legitimate interest</td></tr>
+<tr><td>Advertising (free plan)</td><td>Consent</td></tr>
+<tr><td>Crash detection and stability improvement</td><td>Legitimate interest</td></tr>
 <tr><td>Contests and referrals</td><td>Consent</td></tr>
 </table>
 
@@ -164,6 +171,7 @@
 <table>
 <tr><th>Service</th><th>Data</th><th>Location</th></tr>
 <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>EU (europe-west1)</td></tr>
+<tr><td>Firebase Crashlytics (Google)</td><td>Crash reports, UID, device</td><td>United States*</td></tr>
 <tr><td>Anthropic (Claude)</td><td>AI Chef messages, photos</td><td>United States*</td></tr>
 <tr><td>RevenueCat</td><td>User ID, subscription status</td><td>United States*</td></tr>
 <tr><td>Google AdMob</td><td>Advertising identifier</td><td>International</td></tr>
@@ -178,6 +186,7 @@
 <tr><td>Recipes</td><td>Until deleted by user</td></tr>
 <tr><td>Analyzed photos</td><td>Not retained by Anthropic</td></tr>
 <tr><td>Photo history (Pro/Master)</td><td>Until account deletion</td></tr>
+<tr><td>Crash reports</td><td>Up to 90 days</td></tr>
 <tr><td>Payment data</td><td>Managed by Google/Apple/RevenueCat</td></tr>
 </table>
 
@@ -190,6 +199,7 @@
 <li><strong>Portability</strong> — receive your data in a structured format</li>
 <li><strong>Object</strong> — object to processing</li>
 <li><strong>Restriction</strong> — request processing restriction</li>
+<li><strong>Withdraw consent</strong> — change your advertising preferences at any time in the app settings (free plan only, EEA/UK users)</li>
 </ul>
 <p>Contact: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Complaint: <a href="https://www.cnil.fr">CNIL</a>.</p>
 
@@ -235,7 +245,9 @@
 <h3>2.4 Pagamenti</h3>
 <p>Gli abbonamenti sono gestiti da Google Play o Apple tramite RevenueCat. ZornTek <strong>non ha mai accesso</strong> ai vostri dati bancari.</p>
 <h3>2.5 Pubblicità</h3>
-<p>Piano gratuito: Google AdMob raccoglie un ID pubblicitario. Disattivabile nelle impostazioni del dispositivo.</p>
+<p>Piano gratuito: Google AdMob raccoglie un ID pubblicitario. Disattivabile nelle impostazioni del dispositivo. Il consenso viene raccolto al primo avvio tramite il modulo di gestione del consenso (CMP) Google User Messaging Platform, in conformità al RGPD.</p>
+<h3>2.6 Dati di stabilità (Crashlytics)</h3>
+<p>Firebase Crashlytics (Google) raccoglie rapporti anonimi in caso di arresto anomalo: stack trace, modello del dispositivo, versione del sistema operativo, versione dell'app e il tuo ID utente Firebase (UID). Non vengono inclusi dati personali direttamente identificabili. Queste informazioni ci permettono di identificare e correggere i bug per migliorare la stabilità.</p>
 
 <h2>3. Finalità</h2>
 <table>
@@ -243,8 +255,8 @@
 <tr><td>Autenticazione e gestione account</td><td>Esecuzione del contratto</td></tr>
 <tr><td>Funzionamento dell'app (IA, ricette, limiti)</td><td>Esecuzione del contratto</td></tr>
 <tr><td>Gestione abbonamenti</td><td>Esecuzione del contratto</td></tr>
-<tr><td>Pubblicità (piano gratuito)</td><td>Interesse legittimo / Consenso</td></tr>
-<tr><td>Rilevamento bug e miglioramento</td><td>Interesse legittimo</td></tr>
+<tr><td>Pubblicità (piano gratuito)</td><td>Consenso</td></tr>
+<tr><td>Rilevamento arresti anomali e miglioramento stabilità</td><td>Interesse legittimo</td></tr>
 <tr><td>Concorsi e referral</td><td>Consenso</td></tr>
 </table>
 
@@ -252,6 +264,7 @@
 <table>
 <tr><th>Servizio</th><th>Dati</th><th>Sede</th></tr>
 <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>UE (europe-west1)</td></tr>
+<tr><td>Firebase Crashlytics (Google)</td><td>Report di arresto anomalo, UID, dispositivo</td><td>Stati Uniti*</td></tr>
 <tr><td>Anthropic (Claude)</td><td>Messaggi Chef IA, foto</td><td>Stati Uniti*</td></tr>
 <tr><td>RevenueCat</td><td>ID utente, stato abbonamento</td><td>Stati Uniti*</td></tr>
 <tr><td>Google AdMob</td><td>ID pubblicitario</td><td>Internazionale</td></tr>
@@ -266,11 +279,12 @@
 <tr><td>Ricette</td><td>Fino alla cancellazione</td></tr>
 <tr><td>Foto analizzate</td><td>Non conservate da Anthropic</td></tr>
 <tr><td>Storico foto (Pro/Master)</td><td>Fino alla cancellazione account</td></tr>
+<tr><td>Report di arresto anomalo</td><td>Fino a 90 giorni</td></tr>
 <tr><td>Dati di pagamento</td><td>Gestiti da Google/Apple/RevenueCat</td></tr>
 </table>
 
 <h2>6. Diritti</h2>
-<p>Ai sensi del RGPD: accesso, rettifica, cancellazione, portabilità, opposizione, limitazione. Contatto: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Reclamo: <a href="https://www.cnil.fr">CNIL</a>.</p>
+<p>Ai sensi del RGPD: accesso, rettifica, cancellazione, portabilità, opposizione, limitazione, revoca del consenso (modifica delle preferenze pubblicitarie nelle impostazioni dell'app, piano gratuito, utenti SEE/UK). Contatto: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Reclamo: <a href="https://www.cnil.fr">CNIL</a>.</p>
 
 <h2 id="suppression">7. Cancellazione account</h2>
 <div class="hl">
@@ -299,7 +313,9 @@
 <h3>2.4 Zahlungsdaten</h3>
 <p>Abonnements werden über Google Play Billing oder Apple In-App Purchase via RevenueCat verwaltet. ZornTek hat <strong>keinen Zugriff</strong> auf Ihre Bankdaten.</p>
 <h3>2.5 Werbedaten</h3>
-<p>Kostenloser Plan: Google AdMob erfasst eine Werbe-ID. Deaktivierbar in den Geräteeinstellungen.</p>
+<p>Kostenloser Plan: Google AdMob erfasst eine Werbe-ID. Deaktivierbar in den Geräteeinstellungen. Ihre Einwilligung wird beim ersten Start über das Einwilligungsmanagement-Modul (CMP) Google User Messaging Platform gemäß DSGVO eingeholt.</p>
+<h3>2.6 Stabilitätsdaten (Crashlytics)</h3>
+<p>Firebase Crashlytics (Google) erfasst anonymisierte Absturzberichte: Stack Traces, Gerätemodell, Betriebssystemversion, App-Version und Ihre Firebase-Benutzer-ID (UID). Es werden keine direkt identifizierbaren personenbezogenen Daten erfasst. Diese Informationen ermöglichen es uns, Fehler zu identifizieren und zu beheben, um die Stabilität zu verbessern.</p>
 
 <h2>3. Zwecke der Verarbeitung</h2>
 <table>
@@ -307,8 +323,8 @@
 <tr><td>Authentifizierung und Kontoverwaltung</td><td>Vertragserfüllung</td></tr>
 <tr><td>App-Funktionalität (KI, Rezepte, Limits)</td><td>Vertragserfüllung</td></tr>
 <tr><td>Abonnementverwaltung</td><td>Vertragserfüllung</td></tr>
-<tr><td>Werbung (kostenloser Plan)</td><td>Berechtigtes Interesse / Einwilligung</td></tr>
-<tr><td>Fehlererkennung und Verbesserung</td><td>Berechtigtes Interesse</td></tr>
+<tr><td>Werbung (kostenloser Plan)</td><td>Einwilligung</td></tr>
+<tr><td>Absturzerkennung und Stabilitätsverbesserung</td><td>Berechtigtes Interesse</td></tr>
 <tr><td>Wettbewerbe und Empfehlungen</td><td>Einwilligung</td></tr>
 </table>
 
@@ -316,6 +332,7 @@
 <table>
 <tr><th>Dienst</th><th>Daten</th><th>Standort</th></tr>
 <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>EU (europe-west1)</td></tr>
+<tr><td>Firebase Crashlytics (Google)</td><td>Absturzberichte, UID, Gerät</td><td>USA*</td></tr>
 <tr><td>Anthropic (Claude)</td><td>Chef-KI-Nachrichten, Fotos</td><td>USA*</td></tr>
 <tr><td>RevenueCat</td><td>Benutzer-ID, Abonnementstatus</td><td>USA*</td></tr>
 <tr><td>Google AdMob</td><td>Werbe-ID</td><td>International</td></tr>
@@ -330,11 +347,12 @@
 <tr><td>Rezepte</td><td>Bis zur Löschung durch den Nutzer</td></tr>
 <tr><td>Analysierte Fotos</td><td>Nicht von Anthropic gespeichert</td></tr>
 <tr><td>Foto-Verlauf (Pro/Master)</td><td>Bis zur Kontolöschung</td></tr>
+<tr><td>Absturzberichte</td><td>Bis zu 90 Tage</td></tr>
 <tr><td>Zahlungsdaten</td><td>Verwaltet von Google/Apple/RevenueCat</td></tr>
 </table>
 
 <h2>6. Ihre Rechte</h2>
-<p>Gemäß DSGVO: Auskunft, Berichtigung, Löschung, Datenübertragbarkeit, Widerspruch, Einschränkung. Kontakt: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Beschwerde: <a href="https://www.cnil.fr">CNIL</a>.</p>
+<p>Gemäß DSGVO: Auskunft, Berichtigung, Löschung, Datenübertragbarkeit, Widerspruch, Einschränkung, Widerruf der Einwilligung (Werbepräferenzen jederzeit in den App-Einstellungen ändern, kostenloser Plan, EWR/UK-Nutzer). Kontakt: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Beschwerde: <a href="https://www.cnil.fr">CNIL</a>.</p>
 
 <h2 id="suppression">7. Kontolöschung</h2>
 <div class="hl">
@@ -363,7 +381,9 @@
 <h3>2.4 Datos de pago</h3>
 <p>Las suscripciones son gestionadas por Google Play o Apple a través de RevenueCat. ZornTek <strong>nunca tiene acceso</strong> a sus datos bancarios.</p>
 <h3>2.5 Datos publicitarios</h3>
-<p>Plan gratuito: Google AdMob recopila un identificador publicitario. Desactivable en la configuración del dispositivo.</p>
+<p>Plan gratuito: Google AdMob recopila un identificador publicitario. Desactivable en la configuración del dispositivo. Su consentimiento se recoge en el primer inicio mediante el módulo de gestión del consentimiento (CMP) Google User Messaging Platform, conforme al RGPD.</p>
+<h3>2.6 Datos de estabilidad (Crashlytics)</h3>
+<p>Firebase Crashlytics (Google) recopila informes anónimos en caso de fallo: trazas de pila, modelo del dispositivo, versión del sistema operativo, versión de la aplicación y su ID de usuario de Firebase (UID). No se incluyen datos personales directamente identificables. Esta información nos permite identificar y corregir errores para mejorar la estabilidad.</p>
 
 <h2>3. Finalidades</h2>
 <table>
@@ -371,8 +391,8 @@
 <tr><td>Autenticación y gestión de cuenta</td><td>Ejecución del contrato</td></tr>
 <tr><td>Funcionamiento de la app (IA, recetas, límites)</td><td>Ejecución del contrato</td></tr>
 <tr><td>Gestión de suscripciones</td><td>Ejecución del contrato</td></tr>
-<tr><td>Publicidad (plan gratuito)</td><td>Interés legítimo / Consentimiento</td></tr>
-<tr><td>Detección de errores y mejora</td><td>Interés legítimo</td></tr>
+<tr><td>Publicidad (plan gratuito)</td><td>Consentimiento</td></tr>
+<tr><td>Detección de fallos y mejora de la estabilidad</td><td>Interés legítimo</td></tr>
 <tr><td>Concursos y referidos</td><td>Consentimiento</td></tr>
 </table>
 
@@ -380,6 +400,7 @@
 <table>
 <tr><th>Servicio</th><th>Datos</th><th>Ubicación</th></tr>
 <tr><td>Firebase (Google)</td><td>Auth, Firestore, Storage, Cloud Functions</td><td>UE (europe-west1)</td></tr>
+<tr><td>Firebase Crashlytics (Google)</td><td>Informes de fallos, UID, dispositivo</td><td>EE.UU.*</td></tr>
 <tr><td>Anthropic (Claude)</td><td>Mensajes Chef IA, fotos</td><td>EE.UU.*</td></tr>
 <tr><td>RevenueCat</td><td>ID usuario, estado suscripción</td><td>EE.UU.*</td></tr>
 <tr><td>Google AdMob</td><td>ID publicitario</td><td>Internacional</td></tr>
@@ -394,11 +415,12 @@
 <tr><td>Recetas</td><td>Hasta eliminación por el usuario</td></tr>
 <tr><td>Fotos analizadas</td><td>No conservadas por Anthropic</td></tr>
 <tr><td>Historial foto (Pro/Master)</td><td>Hasta eliminación de la cuenta</td></tr>
+<tr><td>Informes de fallos</td><td>Hasta 90 días</td></tr>
 <tr><td>Datos de pago</td><td>Gestionados por Google/Apple/RevenueCat</td></tr>
 </table>
 
 <h2>6. Derechos</h2>
-<p>Según el RGPD: acceso, rectificación, supresión, portabilidad, oposición, limitación. Contacto: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Reclamación: <a href="https://www.cnil.fr">CNIL</a>.</p>
+<p>Según el RGPD: acceso, rectificación, supresión, portabilidad, oposición, limitación, retirada del consentimiento (modificar preferencias publicitarias en los ajustes de la app, plan gratuito, usuarios EEE/UK). Contacto: <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>. Reclamación: <a href="https://www.cnil.fr">CNIL</a>.</p>
 
 <h2 id="suppression">7. Eliminación de cuenta</h2>
 <div class="hl">
@@ -418,7 +440,7 @@
 </div>
 </div>
 <script>
-const T={fr:{s:"Application PizzAI",u:"Dernière mise à jour : 30 mars 2026",b:"Retour",k:"CGU",fc:"Concours"},en:{s:"PizzAI Application",u:"Last updated: March 30, 2026",b:"Back",k:"Terms",fc:"Contest"},it:{s:"Applicazione PizzAI",u:"Ultimo aggiornamento: 30 marzo 2026",b:"Indietro",k:"Termini",fc:"Concorso"},de:{s:"PizzAI-Anwendung",u:"Letzte Aktualisierung: 30. März 2026",b:"Zurück",k:"AGB",fc:"Wettbewerb"},es:{s:"Aplicación PizzAI",u:"Última actualización: 30 de marzo de 2026",b:"Volver",k:"Términos",fc:"Concurso"}};
+const T={fr:{s:"Application PizzAI",u:"Dernière mise à jour : 19 avril 2026",b:"Retour",k:"CGU",fc:"Concours"},en:{s:"PizzAI Application",u:"Last updated: April 19, 2026",b:"Back",k:"Terms",fc:"Contest"},it:{s:"Applicazione PizzAI",u:"Ultimo aggiornamento: 19 aprile 2026",b:"Indietro",k:"Termini",fc:"Concorso"},de:{s:"PizzAI-Anwendung",u:"Letzte Aktualisierung: 19. April 2026",b:"Zurück",k:"AGB",fc:"Wettbewerb"},es:{s:"Aplicación PizzAI",u:"Última actualización: 19 de abril de 2026",b:"Volver",k:"Términos",fc:"Concurso"}};
 function L(l){document.querySelectorAll('[data-l]').forEach(e=>e.classList.remove('a'));const d=document.querySelector('[data-l="'+l+'"]');if(d)d.classList.add('a');document.querySelectorAll('.lb button').forEach(b=>{b.classList.toggle('a',b.getAttribute('onclick').includes("'"+l+"'"))});const t=T[l]||T.fr;document.getElementById('sub').textContent=t.s;document.getElementById('upd').textContent=t.u;document.getElementById('nb').textContent=t.b;document.getElementById('fk').textContent=t.k;document.getElementById('fc').textContent=t.fc;document.documentElement.lang=l;try{localStorage.setItem('pizzai_lang',l)}catch(e){}}
 (function(){let l='fr';try{l=localStorage.getItem('pizzai_lang')}catch(e){}if(!l){const n=(navigator.language||'').substring(0,2).toLowerCase();l=['fr','en','it','de','es'].includes(n)?n:'fr'}L(l)})();
 </script>
