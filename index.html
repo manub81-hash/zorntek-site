@@ -236,10 +236,28 @@
 
 <footer>
     <div class="ft-inner">
-        <div><div class="ft-brand">Pizz<i>AI</i></div><div class="ft-info">ZornTek — Emmanuel Baldo<br>Bossendorf, Alsace, France<br><a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a></div></div>
+        <div>
+            <div class="ft-brand">Pizz<i>AI</i></div>
+            <div class="ft-info">
+                ZornTek — Emmanuel Baldo<br>
+                SIREN&nbsp;: 509&nbsp;754&nbsp;875 R.C.S. Strasbourg<br>
+                11 Rue des Tilleuls, 67270 Bossendorf, France<br>
+                <a href="mailto:contact@zorntek.fr">contact@zorntek.fr</a>
+            </div>
+        </div>
         <div class="ft-cols">
-            <div class="ft-col"><h5 data-i18n="ft.app">Application</h5><a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a><a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener">App Store</a><a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a></div>
-            <div class="ft-col"><h5 data-i18n="ft.legal">Légal</h5><a href="https://zorntek.fr/privacy.html" data-i18n="ft.privacy">Confidentialité</a><a href="https://zorntek.fr/terms.html" data-i18n="ft.terms">CGU</a></div>
+            <div class="ft-col">
+                <h5 data-i18n="ft.app">Application</h5>
+                <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a>
+                <a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener">App Store</a>
+                <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
+            </div>
+            <div class="ft-col">
+                <h5 data-i18n="ft.legal">Légal</h5>
+                <a href="/mentions-legales.html">Mentions légales</a>
+                <a href="https://zorntek.fr/privacy.html" data-i18n="ft.privacy">Confidentialité</a>
+                <a href="https://zorntek.fr/terms.html" data-i18n="ft.terms">CGU</a>
+            </div>
         </div>
     </div>
     <div class="ft-bottom"><span>© 2026 ZornTek</span><span data-i18n="ft.powered">Propulsé par Claude · Anthropic</span></div>
@@ -386,29 +404,17 @@ function setLang(lang) {
     try { localStorage.setItem('pizzai_lang', lang); } catch(e) {}
 }
 
-// Init language
 document.querySelectorAll('.lang-btn').forEach(b => {
     b.addEventListener('click', () => setLang(b.dataset.lang));
 });
 const saved = (() => { try { return localStorage.getItem('pizzai_lang'); } catch(e) { return null; } })();
 if (saved && T[saved]) setLang(saved); else setLang('fr');
 
-// ═══ NAV ═══
 const nav=document.getElementById('nav');let ticking=false;window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>80);ticking=false});ticking=true}});
-
-// ═══ CURSOR GLOW ═══
 const glow=document.getElementById('cursorGlow');if(window.matchMedia('(pointer:fine)').matches){document.addEventListener('mousemove',e=>{glow.style.transform=`translate(${e.clientX-300}px,${e.clientY-300}px)`})}else{glow.style.display='none'}
-
-// ═══ SCROLL REVEAL ═══
 const rvEls=document.querySelectorAll('.rv');const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});rvEls.forEach(el=>rvObs.observe(el));
-
-// ═══ SCORE BARS ═══
 const phoneScore=document.getElementById('phoneScore');const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ph-bar').forEach(b=>{b.style.width=b.dataset.w})}})},{threshold:.4});barObs.observe(phoneScore);
-
-// ═══ COUNTERS ═══
 const counters=document.querySelectorAll('[data-count]');const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done='1';const target=+e.target.dataset.count;const dur=1200;const start=performance.now();const step=ts=>{const p=Math.min((ts-start)/dur,1);e.target.textContent=Math.round((1-Math.pow(1-p,3))*target);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}})},{threshold:.5});counters.forEach(c=>cObs.observe(c));
-
-// ═══ SMOOTH SCROLL ═══
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 </script>
 </body>
