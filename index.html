@@ -18,6 +18,8 @@
     <meta property="og:locale:alternate" content="it_IT">
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="nl_NL">
+    <meta property="og:locale:alternate" content="pt_BR">
     <meta property="og:site_name" content="ZornTek">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -43,10 +45,9 @@
         .hero-p{font-size:15px;color:var(--text);max-width:460px;margin:0 auto 48px;font-weight:300;line-height:1.8;opacity:0;animation:fadeUp .8s 1.4s forwards}
         .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.6s forwards;align-items:center}
         .store-badge{display:inline-flex;align-items:center;gap:12px;padding:12px 28px 12px 20px;background:#111;border:1px solid rgba(255,255,255,.2);border-radius:12px;text-decoration:none;transition:all .4s cubic-bezier(.16,1,.3,1);min-width:200px}.store-badge:hover{border-color:rgba(255,255,255,.4);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}.store-badge svg{flex-shrink:0}.store-badge-text{display:flex;flex-direction:column;line-height:1.2}.store-badge-small{font-size:10px;color:rgba(255,255,255,.6);font-weight:400}.store-badge-big{font-size:17px;color:#fff;font-weight:600;letter-spacing:-.2px}
-        .store-badge.disabled{opacity:.35;pointer-events:none;position:relative}.store-badge.disabled .store-soon{position:absolute;top:-8px;right:-8px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;background:var(--gold);color:var(--bg);padding:2px 8px;border-radius:100px}
         .cta-badges{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
         .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:100px;text-decoration:none;font-size:14px;font-weight:500;transition:all .5s cubic-bezier(.16,1,.3,1);position:relative}.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 24px 48px rgba(212,164,74,.3),0 0 0 1px rgba(212,164,74,.2)}.btn-ghost{border:1px solid rgba(255,255,255,.1);color:var(--text-light)}.btn-ghost:hover{border-color:rgba(212,164,74,.4);color:var(--gold);transform:translateY(-2px)}
-        .hero-langs{display:flex;justify-content:center;gap:12px;margin-top:56px;opacity:0;animation:fadeUp .8s 1.8s forwards}.lang-btn{background:none;border:none;cursor:pointer;padding:10px;border-radius:8px;transition:all .3s;opacity:.35;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.lang-btn:hover{opacity:.8;transform:scale(1.15)}.lang-btn.active{opacity:1;background:rgba(212,164,74,.1);box-shadow:0 0 0 1px rgba(212,164,74,.3)}.lang-btn svg{display:block;width:28px;height:18px;border-radius:2px;pointer-events:none}
+        .hero-langs{display:flex;justify-content:center;gap:12px;margin:56px auto 0;opacity:0;animation:fadeUp .8s 1.8s forwards;flex-wrap:wrap;max-width:440px}.lang-btn{background:none;border:none;cursor:pointer;padding:10px;border-radius:8px;transition:all .3s;opacity:.35;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.lang-btn:hover{opacity:.8;transform:scale(1.15)}.lang-btn.active{opacity:1;background:rgba(212,164,74,.1);box-shadow:0 0 0 1px rgba(212,164,74,.3)}.lang-btn svg{display:block;width:28px;height:18px;border-radius:2px;pointer-events:none}
         .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp .8s 2.2s forwards}.scroll-mouse{width:20px;height:32px;border:1.5px solid rgba(255,255,255,.15);border-radius:12px;position:relative;margin:0 auto 8px}.scroll-dot{width:3px;height:6px;background:var(--gold);border-radius:3px;position:absolute;top:6px;left:50%;transform:translateX(-50%);animation:scroll-dot 2s infinite}@keyframes scroll-dot{0%{opacity:1;top:6px}100%{opacity:0;top:20px}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
         .stats{border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:48px 24px}.stats-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;gap:40px;flex-wrap:wrap}.stat{text-align:center}.stat-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--white);line-height:1}.stat-num .accent{color:var(--gold)}.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:8px}
@@ -59,11 +60,13 @@
         .ph-score-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}.ph-score-label{font-size:12px;color:var(--text)}.ph-score-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold)}.ph-bar-wrap{flex:1;height:3px;background:rgba(255,255,255,.05);border-radius:3px;margin:0 12px;overflow:hidden}.ph-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;transition:width 1.5s cubic-bezier(.16,1,.3,1);width:0}.ph-total{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}.ph-big{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold)}.ph-unit{font-size:18px;color:var(--text)}.ph-level{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
         .ph-chat{display:flex;flex-direction:column;gap:12px;flex:1}.ph-bubble{padding:12px 16px;border-radius:16px;font-size:12px;line-height:1.6;max-width:90%}.ph-bubble.user{background:rgba(212,164,74,.12);color:var(--gold-light);align-self:flex-end;border-bottom-right-radius:4px}.ph-bubble.ai{background:rgba(255,255,255,.05);color:var(--text-light);align-self:flex-start;border-bottom-left-radius:4px}.ph-typing{display:flex;gap:4px;align-self:flex-start;padding:8px 16px}.ph-typing span{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:tb 1.4s infinite}.ph-typing span:nth-child(2){animation-delay:.2s}.ph-typing span:nth-child(3){animation-delay:.4s}@keyframes tb{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
         .plans{padding:140px 24px;background:var(--bg2)}.plans-inner{max-width:1000px;margin:0 auto}.plans-header{text-align:center;margin-bottom:64px}.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.plan{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:24px;padding:40px 32px;position:relative;transition:all .4s}.plan:hover{border-color:rgba(212,164,74,.15)}.plan.pop{border-color:rgba(212,164,74,.25);background:linear-gradient(180deg,rgba(212,164,74,.04) 0%,rgba(255,255,255,.02) 100%)}.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:4px 16px;border-radius:100px}.plan-name{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--white);margin-bottom:4px}.plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold);margin-bottom:4px}.plan-price .per{font-size:16px;color:var(--text)}.plan-price-free{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--text);margin-bottom:4px}.plan-trial{font-size:12px;color:var(--gold);margin-bottom:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px}.plan-features{list-style:none;margin-top:24px}.plan-features li{font-size:13px;color:var(--text);padding:7px 0;display:flex;align-items:center;gap:10px;font-weight:300}.plan-features li::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
+        .plan-sub{font-size:12px;color:var(--text-light);font-weight:300;letter-spacing:.2px;min-height:18px;margin-bottom:6px}
         .cta-section{padding:160px 24px;text-align:center;position:relative}.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,164,74,.06) 0%,transparent 60%);pointer-events:none}.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:300;color:var(--white);margin-bottom:16px;position:relative}.cta-title em{font-style:italic;color:var(--gold)}.cta-p{font-size:15px;color:var(--text);font-weight:300;max-width:420px;margin:0 auto 40px}
         footer{padding:56px 24px;border-top:1px solid rgba(255,255,255,.04)}.ft-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px}.ft-brand{font-family:'Cormorant Garamond',serif;font-size:22px;color:rgba(255,255,255,.2);margin-bottom:10px}.ft-brand i{color:rgba(212,164,74,.3);font-style:italic}.ft-info{font-size:12px;color:rgba(255,255,255,.12);line-height:1.9}.ft-info a{color:rgba(212,164,74,.35);text-decoration:none}.ft-info a:hover{color:var(--gold)}.ft-cols{display:flex;gap:48px}.ft-col h5{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px;font-weight:500}.ft-col a{display:block;font-size:13px;color:rgba(255,255,255,.25);text-decoration:none;padding:3px 0;transition:color .3s;font-weight:300}.ft-col a:hover{color:var(--gold)}.ft-bottom{max-width:1100px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.03);display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.08)}
         .rv{opacity:0;transform:translateY(50px);transition:all 1s cubic-bezier(.16,1,.3,1)}.rv.vis{opacity:1;transform:translateY(0)}.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
         @media(max-width:900px){.f-header{grid-template-columns:1fr;gap:24px}.f-item{grid-template-columns:1fr;gap:40px}.f-item:nth-child(even){direction:ltr}.plans-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}.ft-inner{flex-direction:column}.ft-cols{flex-direction:column;gap:24px}.ft-bottom{flex-direction:column;gap:4px}.stat-num{font-size:36px}}
-        @media(max-width:600px){nav{padding:16px 20px}nav.scrolled{padding:12px 20px}.nav-right a:not(.nav-dl){display:none}.features{padding:80px 16px}.plans{padding:80px 16px}.cta-section{padding:100px 16px}.f-phone{width:220px}.hero-langs{gap:12px}}
+        @media(max-width:600px){nav{padding:16px 20px}nav.scrolled{padding:12px 20px}.nav-right a:not(.nav-dl){display:none}.features{padding:80px 16px}.plans{padding:80px 16px}.cta-section{padding:100px 16px}.f-phone{width:220px}.hero-langs{gap:8px;max-width:320px}}
+        @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
     </style>
 </head>
 <body>
@@ -77,7 +80,7 @@
         <a href="#features" data-i18n="nav.features">Fonctionnalités</a>
         <a href="#plans" data-i18n="nav.plans">Plans</a>
         <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="nav-dl" data-i18n="nav.download">Télécharger</a>
+        <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" id="navDownload" target="_blank" rel="noopener" class="nav-dl" data-i18n="nav.download">Télécharger</a>
     </div>
 </nav>
 
@@ -91,20 +94,22 @@
         <p class="hero-p" data-i18n="hero.desc">Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef&nbsp;IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.</p>
         <div class="hero-btns">
             <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="store-badge">
-                <svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
+                <svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
                 <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge.gp.small">Disponible sur</span><span class="store-badge-big">Google Play</span></div>
             </a>
             <a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener" class="store-badge">
-                <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
+                <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
                 <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge.as.small">Télécharger sur l'</span><span class="store-badge-big">App Store</span></div>
             </a>
         </div>
         <div class="hero-langs">
-            <button class="lang-btn active" data-lang="fr"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ED2939"/></svg></button>
-            <button class="lang-btn" data-lang="en"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#012169"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" stroke-width="2.5"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#C8102E" stroke-width="1.2"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="4"/><path d="M12,0 V16 M0,8 H24" stroke="#C8102E" stroke-width="2.4"/></svg></button>
-            <button class="lang-btn" data-lang="it"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#009246"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#CE2B37"/></svg></button>
-            <button class="lang-btn" data-lang="de"><svg viewBox="0 0 24 16"><rect width="24" height="10" fill="#000"/><rect y="10" width="24" height="3" fill="#DD0000"/><rect y="13" width="24" height="3" fill="#FFCE00"/></svg></button>
-            <button class="lang-btn" data-lang="es"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></svg></button>
+            <button class="lang-btn active" data-lang="fr" aria-label="Français"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ED2939"/></svg></button>
+            <button class="lang-btn" data-lang="en" aria-label="English"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#012169"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#fff" stroke-width="2.5"/><path d="M0,0 L24,16 M24,0 L0,16" stroke="#C8102E" stroke-width="1.2"/><path d="M12,0 V16 M0,8 H24" stroke="#fff" stroke-width="4"/><path d="M12,0 V16 M0,8 H24" stroke="#C8102E" stroke-width="2.4"/></svg></button>
+            <button class="lang-btn" data-lang="it" aria-label="Italiano"><svg viewBox="0 0 24 16"><rect width="8" height="16" fill="#009246"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#CE2B37"/></svg></button>
+            <button class="lang-btn" data-lang="de" aria-label="Deutsch"><svg viewBox="0 0 24 16"><rect width="24" height="10" fill="#000"/><rect y="10" width="24" height="3" fill="#DD0000"/><rect y="13" width="24" height="3" fill="#FFCE00"/></svg></button>
+            <button class="lang-btn" data-lang="es" aria-label="Español"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></svg></button>
+            <button class="lang-btn" data-lang="nl" aria-label="Nederlands"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#21468B"/><rect width="24" height="10.66" fill="#fff"/><rect width="24" height="5.33" fill="#AE1C28"/></svg></button>
+            <button class="lang-btn" data-lang="pt" aria-label="Português (Brasil)"><svg viewBox="0 0 24 16"><rect width="24" height="16" fill="#009C3B"/><path d="M12 1.8 22.2 8 12 14.2 1.8 8Z" fill="#FFDF00"/><circle cx="12" cy="8" r="3.1" fill="#002776"/></svg></button>
         </div>
     </div>
     <div class="scroll-hint"><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
@@ -112,7 +117,7 @@
 
 <div class="stats rv">
     <div class="stats-inner">
-        <div class="stat"><div class="stat-num"><span class="accent" data-count="5">0</span></div><div class="stat-label" data-i18n="stats.langs">Langues</div></div>
+        <div class="stat"><div class="stat-num"><span class="accent" data-count="7">0</span></div><div class="stat-label" data-i18n="stats.langs">Langues</div></div>
         <div class="stat"><div class="stat-num"><span class="accent" data-count="22">0</span></div><div class="stat-label" data-i18n="stats.yeast">Points courbe levure</div></div>
         <div class="stat"><div class="stat-num"><span class="accent" data-count="5">0</span></div><div class="stat-label" data-i18n="stats.criteria">Critères d'analyse</div></div>
         <div class="stat"><div class="stat-num"><span class="accent" data-count="12">0</span></div><div class="stat-label" data-i18n="stats.flours">Farines référencées</div></div>
@@ -177,7 +182,7 @@
                 <div class="f-phone"><div class="f-phone-screen" style="justify-content:center;gap:16px;">
                     <div class="ph-title" data-i18n="ph.calc">Calculateur</div>
                     <div style="text-align:center;">
-                        <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text);margin-bottom:8px;">Napoletana · 4 pâtons · 250g</div>
+                        <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text);margin-bottom:8px;"><span data-i18n="ph.style">Napolitaine</span> · 4 <span data-i18n="ph.balls">pâtons</span> · 250g</div>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;">
                             <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);">612<span style="font-size:14px;color:var(--text);">g</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.flour">Farine</div></div>
                             <div style="background:rgba(255,255,255,.03);border-radius:12px;padding:14px 8px;text-align:center;"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);">398<span style="font-size:14px;color:var(--text);">ml</span></div><div style="font-size:10px;color:var(--text);text-transform:uppercase;letter-spacing:1px;" data-i18n="ph.water">Eau</div></div>
@@ -212,23 +217,42 @@
     <div class="plans-inner">
         <div class="plans-header rv"><div class="f-label" data-i18n="plans.label">Plans</div><h2 class="f-title" data-i18n-html="plans.title">Choisissez <em>votre plan</em></h2></div>
         <div class="plans-grid">
-            <div class="plan rv rv-d1"><div class="plan-name">Free</div><div class="plan-price-free">0€</div><div class="plan-trial">&nbsp;</div><ul class="plan-features"><li data-i18n="p.f1">2 messages Chef IA / jour</li><li data-i18n="p.f2">1 analyse photo / jour</li><li data-i18n="p.f3">3 recettes</li><li data-i18n="p.f4">Publicités</li></ul></div>
-            <div class="plan pop rv rv-d2"><div class="plan-badge" data-i18n="p.popular">Populaire</div><div class="plan-name">Pro</div><div class="plan-price">2,99€ <span class="per" data-i18n="p.month">/mois</span></div><div class="plan-trial" data-i18n="p.trial">Essai gratuit 3 jours</div><ul class="plan-features"><li data-i18n="p.p1">20 messages Chef IA / jour</li><li data-i18n="p.p2">3 analyses photo / jour</li><li data-i18n="p.p3">Recettes illimitées</li><li data-i18n="p.p4">Historique photos</li><li data-i18n="p.p5">Zéro publicité</li></ul></div>
-            <div class="plan rv rv-d3"><div class="plan-name">Master</div><div class="plan-price">69,99€ <span class="per" data-i18n="p.month2">à vie</span></div><div class="plan-trial">&nbsp;</div><ul class="plan-features"><li data-i18n="p.m1">60 messages Chef IA / jour</li><li data-i18n="p.m2">10 analyses photo / jour</li><li data-i18n="p.m3">IA avancée (Sonnet)</li><li data-i18n="p.m4">Recettes illimitées</li><li data-i18n="p.m5">Historique photos</li><li data-i18n="p.m6">Zéro publicité</li></ul></div>
+            <div class="plan rv rv-d1">
+                <div class="plan-name">Free</div>
+                <div class="plan-price-free">0€</div>
+                <div class="plan-sub">&nbsp;</div>
+                <div class="plan-trial">&nbsp;</div>
+                <ul class="plan-features"><li data-i18n="p.f1">2 messages Chef IA / jour</li><li data-i18n="p.f2">1 analyse photo / jour</li><li data-i18n="p.f3">3 recettes</li><li data-i18n="p.f4">Publicités</li></ul>
+            </div>
+            <div class="plan pop rv rv-d2">
+                <div class="plan-badge" data-i18n="p.popular">Populaire</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-price">2,99€ <span class="per" data-i18n="p.month">/mois</span></div>
+                <div class="plan-sub" data-i18n="p.year">ou 19,99€/an — 44% d'économie</div>
+                <div class="plan-trial" data-i18n="p.trial">Essai gratuit 3 jours</div>
+                <ul class="plan-features"><li data-i18n="p.p1">20 messages Chef IA / jour</li><li data-i18n="p.p2">3 analyses photo / jour</li><li data-i18n="p.p3">Recettes illimitées</li><li data-i18n="p.p4">Historique photos</li><li data-i18n="p.p5">Zéro publicité</li></ul>
+            </div>
+            <div class="plan rv rv-d3">
+                <div class="plan-name">Master</div>
+                <div class="plan-price">69,99€ <span class="per" data-i18n="p.month2">à vie</span></div>
+                <div class="plan-sub" data-i18n="p.once">Paiement unique</div>
+                <div class="plan-trial">&nbsp;</div>
+                <ul class="plan-features"><li data-i18n="p.m1">60 messages Chef IA / jour</li><li data-i18n="p.m2">10 analyses photo / jour</li><li data-i18n="p.m3">IA avancée (Sonnet)</li><li data-i18n="p.m4">Recettes illimitées</li><li data-i18n="p.m5">Historique photos</li><li data-i18n="p.m6">Zéro publicité</li></ul>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="cta-section rv">
+<section class="cta-section rv" id="download">
     <h2 class="cta-title" data-i18n-html="cta.title">Prêt à faire la <em>pizza parfaite</em> ?</h2>
     <p class="cta-p" data-i18n="cta.desc">Rejoignez des passionnés qui perfectionnent leur technique à chaque fournée.</p>
     <div class="cta-badges">
         <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener" class="store-badge">
-            <svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
+            <svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M1.57 1.1a1.5 1.5 0 00-.57 1.2v21.4c0 .46.21.9.57 1.2L13.5 13 1.57 1.1z" fill="#4285F4"/><path d="M17.5 17l-4-4 4-4 4.7 2.7c.53.3.53.83 0 1.14L17.5 17z" fill="#FBBC04"/><path d="M1.57 24.9c.24.2.55.27.85.15L17.5 17l-4-4-11.93 11.9z" fill="#EA4335"/><path d="M1.57 1.1L13.5 13l4-4L2.42.95c-.3-.12-.6-.05-.85.15z" fill="#34A853"/></svg>
             <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge2.gp.small">Disponible sur</span><span class="store-badge-big">Google Play</span></div>
         </a>
         <a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener" class="store-badge">
-            <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.07 13.64c-.03-2.87 2.34-4.25 2.45-4.32-1.33-1.95-3.41-2.22-4.15-2.25-1.77-.18-3.45 1.04-4.34 1.04-.9 0-2.28-1.01-3.75-.99-1.93.03-3.71 1.12-4.71 2.85-2.01 3.49-.51 8.66 1.44 11.49.96 1.39 2.1 2.95 3.6 2.89 1.45-.06 1.99-.93 3.74-.93 1.74 0 2.24.93 3.76.9 1.56-.02 2.55-1.41 3.49-2.81 1.1-1.61 1.55-3.17 1.58-3.25-.04-.01-3.03-1.16-3.06-4.62z" fill="#fff"/><path d="M15.18 5.18c.8-.97 1.34-2.3 1.19-3.64-1.15.05-2.55.77-3.37 1.73-.74.85-1.38 2.22-1.21 3.53 1.28.1 2.59-.65 3.39-1.62z" fill="#fff"/></svg>
             <div class="store-badge-text"><span class="store-badge-small" data-i18n="badge2.as.small">Télécharger sur l'</span><span class="store-badge-big">App Store</span></div>
         </a>
     </div>
@@ -249,12 +273,12 @@
             <div class="ft-col">
                 <h5 data-i18n="ft.app">Application</h5>
                 <a href="https://play.google.com/store/apps/details?id=com.zorntek.pizzai" target="_blank" rel="noopener">Google Play</a>
-                <a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener">App Store</a>
+                <a href="https://apps.apple.com/app/id6761267496" target="_blank" rel="noopener" data-i18n="ft.ios">App Store</a>
                 <a href="https://instagram.com/pizzai_officiel" target="_blank" rel="noopener">Instagram</a>
             </div>
             <div class="ft-col">
                 <h5 data-i18n="ft.legal">Légal</h5>
-                <a href="/mentions-legales.html">Mentions légales</a>
+                <a href="/mentions-legales.html" data-i18n="ft.mentions">Mentions légales</a>
                 <a href="https://zorntek.fr/privacy.html" data-i18n="ft.privacy">Confidentialité</a>
                 <a href="https://zorntek.fr/terms.html" data-i18n="ft.terms">CGU</a>
             </div>
@@ -270,7 +294,7 @@ fr: {
     "nav.features":"Fonctionnalités","nav.plans":"Plans","nav.download":"Télécharger",
     "hero.over":"L'intelligence artificielle au service de la pizza","hero.tagline":"Ton pizzaiolo intelligent",
     "hero.desc":"Calcule ta pâte avec précision scientifique, perfectionne ta technique avec le Chef\u00a0IA et analyse tes créations en photo. La pizza parfaite, à chaque fournée.",
-    "badge.gp.small":"Disponible sur","badge.as.small":"Télécharger sur l'","badge.soon":"Bientôt","badge2.gp.small":"Disponible sur","badge2.as.small":"Télécharger sur l'","badge2.soon":"Bientôt",
+    "badge.gp.small":"Disponible sur","badge.as.small":"Télécharger sur l'","badge2.gp.small":"Disponible sur","badge2.as.small":"Télécharger sur l'",
     "stats.langs":"Langues","stats.yeast":"Points courbe levure","stats.criteria":"Critères d'analyse","stats.flours":"Farines référencées",
     "feat.label":"Fonctionnalités","feat.title":"Tout pour la<br><em>pizza parfaite</em>",
     "feat.intro":"Quatre outils propulsés par l'intelligence artificielle, réunis dans une seule application. De la farine au four, chaque étape est couverte.",
@@ -280,21 +304,21 @@ fr: {
     "f4.name":"Carnet & Guide des farines","f4.desc":"Sauvegardez vos recettes et vos meilleurs paramètres. Consultez le guide de 12 farines détaillées avec force W, protéines et usages recommandés. 18 termes techniques dans le glossaire.","f4.t1":"12 farines","f4.t2":"Glossaire","f4.t3":"Favoris",
     "ph.photo":"Analyse Photo","ph.s1":"🔥 Cuisson","ph.s2":"🫧 Corniche","ph.s3":"⭕ Forme","ph.s4":"🧀 Garniture","ph.s5":"🎨 Aspect",
     "ph.chef":"Chef IA","ph.q1":"Comment réussir une pâte bien alvéolée ?","ph.a1":"Pour une mie alvéolée, vise 70-75% d'hydratation avec une farine W280+. Le secret : un long pointage de 24h au frigo 🧊 et des rabats toutes les 30 min pendant la 1ère heure.","ph.q2":"Quelle farine tu recommandes ?",
-    "ph.calc":"Calculateur","ph.flour":"Farine","ph.water":"Eau","ph.salt":"Sel","ph.yeast":"Levure",
+    "ph.calc":"Calculateur","ph.style":"Napolitaine","ph.balls":"pâtons","ph.flour":"Farine","ph.water":"Eau","ph.salt":"Sel","ph.yeast":"Levure",
     "ph.guide":"Guide farines","ph.protein":"protéines","ph.protein2":"protéines","ph.protein3":"protéines",
     "plans.label":"Plans","plans.title":"Choisissez <em>votre plan</em>",
-    "p.popular":"Populaire","p.month":"/mois","p.month2":"à vie","p.trial":"Essai gratuit 3 jours",
+    "p.popular":"Populaire","p.month":"/mois","p.month2":"à vie","p.once":"Paiement unique","p.trial":"Essai gratuit 3 jours","p.year":"ou 19,99€/an — 44% d'économie",
     "p.f1":"2 messages Chef IA / jour","p.f2":"1 analyse photo / jour","p.f3":"3 recettes","p.f4":"Publicités",
     "p.p1":"20 messages Chef IA / jour","p.p2":"3 analyses photo / jour","p.p3":"Recettes illimitées","p.p4":"Historique photos","p.p5":"Zéro publicité",
     "p.m1":"60 messages Chef IA / jour","p.m2":"10 analyses photo / jour","p.m3":"IA avancée (Sonnet)","p.m4":"Recettes illimitées","p.m5":"Historique photos","p.m6":"Zéro publicité",
     "cta.title":"Prêt à faire la <em>pizza parfaite</em> ?","cta.desc":"Rejoignez des passionnés qui perfectionnent leur technique à chaque fournée.",
-    "ft.app":"Application","ft.ios":"App Store","ft.legal":"Légal","ft.privacy":"Confidentialité","ft.terms":"CGU","ft.powered":"Propulsé par Claude · Anthropic"
+    "ft.app":"Application","ft.ios":"App Store","ft.legal":"Légal","ft.mentions":"Mentions légales","ft.privacy":"Confidentialité","ft.terms":"CGU","ft.powered":"Propulsé par Claude · Anthropic"
 },
 en: {
     "nav.features":"Features","nav.plans":"Plans","nav.download":"Download",
     "hero.over":"Artificial intelligence at the service of pizza","hero.tagline":"Your smart pizza assistant",
     "hero.desc":"Calculate your dough with scientific precision, perfect your technique with the AI\u00a0Chef and analyze your creations by photo. The perfect pizza, every bake.",
-    "badge.gp.small":"GET IT ON","badge.as.small":"Download on the","badge.soon":"Soon","badge2.gp.small":"GET IT ON","badge2.as.small":"Download on the","badge2.soon":"Soon",
+    "badge.gp.small":"GET IT ON","badge.as.small":"Download on the","badge2.gp.small":"GET IT ON","badge2.as.small":"Download on the",
     "stats.langs":"Languages","stats.yeast":"Yeast curve points","stats.criteria":"Analysis criteria","stats.flours":"Referenced flours",
     "feat.label":"Features","feat.title":"Everything for the<br><em>perfect pizza</em>",
     "feat.intro":"Four tools powered by artificial intelligence, united in a single app. From flour to oven, every step is covered.",
@@ -304,21 +328,21 @@ en: {
     "f4.name":"Notebook & Flour guide","f4.desc":"Save your recipes and best parameters. Browse the guide of 12 detailed flours with W strength, protein content and recommended uses. 18 technical terms in the glossary.","f4.t1":"12 flours","f4.t2":"Glossary","f4.t3":"Favorites",
     "ph.photo":"Photo Analysis","ph.s1":"🔥 Baking","ph.s2":"🫧 Crust","ph.s3":"⭕ Shape","ph.s4":"🧀 Toppings","ph.s5":"🎨 Appearance",
     "ph.chef":"AI Chef","ph.q1":"How to get a well-aerated dough?","ph.a1":"For an airy crumb, aim for 70-75% hydration with a W280+ flour. The secret: a long 24h cold proof 🧊 and stretch & folds every 30 min during the first hour.","ph.q2":"Which flour do you recommend?",
-    "ph.calc":"Calculator","ph.flour":"Flour","ph.water":"Water","ph.salt":"Salt","ph.yeast":"Yeast",
+    "ph.calc":"Calculator","ph.style":"Neapolitan","ph.balls":"dough balls","ph.flour":"Flour","ph.water":"Water","ph.salt":"Salt","ph.yeast":"Yeast",
     "ph.guide":"Flour guide","ph.protein":"protein","ph.protein2":"protein","ph.protein3":"protein",
     "plans.label":"Plans","plans.title":"Choose <em>your plan</em>",
-    "p.popular":"Popular","p.month":"/month","p.month2":"lifetime","p.trial":"Free 3-day trial",
+    "p.popular":"Popular","p.month":"/month","p.month2":"lifetime","p.once":"One-time payment","p.trial":"Free 3-day trial","p.year":"or 19.99€/year — save 44%",
     "p.f1":"2 AI Chef messages / day","p.f2":"1 photo analysis / day","p.f3":"3 recipes","p.f4":"Ads",
     "p.p1":"20 AI Chef messages / day","p.p2":"3 photo analyses / day","p.p3":"Unlimited recipes","p.p4":"Photo history","p.p5":"Zero ads",
     "p.m1":"60 AI Chef messages / day","p.m2":"10 photo analyses / day","p.m3":"Advanced AI (Sonnet)","p.m4":"Unlimited recipes","p.m5":"Photo history","p.m6":"Zero ads",
     "cta.title":"Ready to make the <em>perfect pizza</em>?","cta.desc":"Join enthusiasts who perfect their technique with every bake.",
-    "ft.app":"Application","ft.ios":"App Store","ft.legal":"Legal","ft.privacy":"Privacy","ft.terms":"Terms","ft.powered":"Powered by Claude · Anthropic"
+    "ft.app":"Application","ft.ios":"App Store","ft.legal":"Legal","ft.mentions":"Legal notice","ft.privacy":"Privacy","ft.terms":"Terms","ft.powered":"Powered by Claude · Anthropic"
 },
 it: {
     "nav.features":"Funzionalità","nav.plans":"Piani","nav.download":"Scarica",
     "hero.over":"L'intelligenza artificiale al servizio della pizza","hero.tagline":"Il tuo pizzaiolo intelligente",
     "hero.desc":"Calcola il tuo impasto con precisione scientifica, perfeziona la tecnica con lo Chef\u00a0IA e analizza le tue creazioni in foto. La pizza perfetta, a ogni infornata.",
-    "badge.gp.small":"Disponibile su","badge.as.small":"Scarica su","badge.soon":"Presto","badge2.gp.small":"Disponibile su","badge2.as.small":"Scarica su","badge2.soon":"Presto",
+    "badge.gp.small":"Disponibile su","badge.as.small":"Scarica su","badge2.gp.small":"Disponibile su","badge2.as.small":"Scarica su",
     "stats.langs":"Lingue","stats.yeast":"Punti curva lievito","stats.criteria":"Criteri di analisi","stats.flours":"Farine referenziate",
     "feat.label":"Funzionalità","feat.title":"Tutto per la<br><em>pizza perfetta</em>",
     "feat.intro":"Quattro strumenti alimentati dall'intelligenza artificiale, riuniti in una sola app. Dalla farina al forno, ogni fase è coperta.",
@@ -328,21 +352,21 @@ it: {
     "f4.name":"Quaderno & Guida farine","f4.desc":"Salva le tue ricette e i tuoi migliori parametri. Consulta la guida di 12 farine dettagliate con forza W, proteine e usi consigliati. 18 termini tecnici nel glossario.","f4.t1":"12 farine","f4.t2":"Glossario","f4.t3":"Preferiti",
     "ph.photo":"Analisi Foto","ph.s1":"🔥 Cottura","ph.s2":"🫧 Cornicione","ph.s3":"⭕ Forma","ph.s4":"🧀 Condimento","ph.s5":"🎨 Aspetto",
     "ph.chef":"Chef IA","ph.q1":"Come ottenere un impasto ben alveolato?","ph.a1":"Per una mollica alveolata, punta al 70-75% di idratazione con una farina W280+. Il segreto: una lunga puntata di 24h in frigo 🧊 e pieghe ogni 30 min durante la prima ora.","ph.q2":"Quale farina consigli?",
-    "ph.calc":"Calcolatore","ph.flour":"Farina","ph.water":"Acqua","ph.salt":"Sale","ph.yeast":"Lievito",
+    "ph.calc":"Calcolatore","ph.style":"Napoletana","ph.balls":"panetti","ph.flour":"Farina","ph.water":"Acqua","ph.salt":"Sale","ph.yeast":"Lievito",
     "ph.guide":"Guida farine","ph.protein":"proteine","ph.protein2":"proteine","ph.protein3":"proteine",
     "plans.label":"Piani","plans.title":"Scegli il <em>tuo piano</em>",
-    "p.popular":"Popolare","p.month":"/mese","p.month2":"a vita","p.trial":"Prova gratuita 3 giorni",
+    "p.popular":"Popolare","p.month":"/mese","p.month2":"a vita","p.once":"Pagamento unico","p.trial":"Prova gratuita 3 giorni","p.year":"o 19,99€/anno — risparmi il 44%",
     "p.f1":"2 messaggi Chef IA / giorno","p.f2":"1 analisi foto / giorno","p.f3":"3 ricette","p.f4":"Pubblicità",
     "p.p1":"20 messaggi Chef IA / giorno","p.p2":"3 analisi foto / giorno","p.p3":"Ricette illimitate","p.p4":"Storico foto","p.p5":"Zero pubblicità",
     "p.m1":"60 messaggi Chef IA / giorno","p.m2":"10 analisi foto / giorno","p.m3":"IA avanzata (Sonnet)","p.m4":"Ricette illimitate","p.m5":"Storico foto","p.m6":"Zero pubblicità",
     "cta.title":"Pronto a fare la <em>pizza perfetta</em>?","cta.desc":"Unisciti agli appassionati che perfezionano la loro tecnica a ogni infornata.",
-    "ft.app":"Applicazione","ft.ios":"App Store","ft.legal":"Legale","ft.privacy":"Privacy","ft.terms":"Termini","ft.powered":"Alimentato da Claude · Anthropic"
+    "ft.app":"Applicazione","ft.ios":"App Store","ft.legal":"Legale","ft.mentions":"Note legali","ft.privacy":"Privacy","ft.terms":"Termini","ft.powered":"Alimentato da Claude · Anthropic"
 },
 de: {
     "nav.features":"Funktionen","nav.plans":"Pläne","nav.download":"Herunterladen",
     "hero.over":"Künstliche Intelligenz im Dienste der Pizza","hero.tagline":"Dein smarter Pizza-Assistent",
     "hero.desc":"Berechne deinen Teig mit wissenschaftlicher Präzision, perfektioniere deine Technik mit dem KI\u00a0Chef und analysiere deine Kreationen per Foto. Die perfekte Pizza, bei jedem Backen.",
-    "badge.gp.small":"JETZT BEI","badge.as.small":"Laden im","badge.soon":"Bald","badge2.gp.small":"JETZT BEI","badge2.as.small":"Laden im","badge2.soon":"Bald",
+    "badge.gp.small":"JETZT BEI","badge.as.small":"Laden im","badge2.gp.small":"JETZT BEI","badge2.as.small":"Laden im",
     "stats.langs":"Sprachen","stats.yeast":"Hefekurve-Punkte","stats.criteria":"Analysekriterien","stats.flours":"Referenzierte Mehle",
     "feat.label":"Funktionen","feat.title":"Alles für die<br><em>perfekte Pizza</em>",
     "feat.intro":"Vier Werkzeuge angetrieben von der künstlichen Intelligenz, vereint in einer einzigen App. Vom Mehl bis zum Ofen, jeder Schritt ist abgedeckt.",
@@ -352,21 +376,21 @@ de: {
     "f4.name":"Notizbuch & Mehlführer","f4.desc":"Speichere deine Rezepte und besten Parameter. Durchstöbere den Leitfaden mit 12 detaillierten Mehlen mit W-Stärke, Proteingehalt und empfohlenen Verwendungen. 18 Fachbegriffe im Glossar.","f4.t1":"12 Mehle","f4.t2":"Glossar","f4.t3":"Favoriten",
     "ph.photo":"Fotoanalyse","ph.s1":"🔥 Backen","ph.s2":"🫧 Rand","ph.s3":"⭕ Form","ph.s4":"🧀 Belag","ph.s5":"🎨 Aussehen",
     "ph.chef":"KI Chef","ph.q1":"Wie bekomme ich einen schön luftigen Teig?","ph.a1":"Für eine luftige Krume ziele auf 70-75% Hydration mit einem W280+ Mehl. Das Geheimnis: eine lange 24h Stockgare im Kühlschrank 🧊 und Dehnen & Falten alle 30 Min in der ersten Stunde.","ph.q2":"Welches Mehl empfiehlst du?",
-    "ph.calc":"Rechner","ph.flour":"Mehl","ph.water":"Wasser","ph.salt":"Salz","ph.yeast":"Hefe",
+    "ph.calc":"Rechner","ph.style":"Neapolitanisch","ph.balls":"Teiglinge","ph.flour":"Mehl","ph.water":"Wasser","ph.salt":"Salz","ph.yeast":"Hefe",
     "ph.guide":"Mehlführer","ph.protein":"Protein","ph.protein2":"Protein","ph.protein3":"Protein",
     "plans.label":"Pläne","plans.title":"Wähle <em>deinen Plan</em>",
-    "p.popular":"Beliebt","p.month":"/Monat","p.month2":"lebenslang","p.trial":"3 Tage kostenlos testen",
+    "p.popular":"Beliebt","p.month":"/Monat","p.month2":"lebenslang","p.once":"Einmalzahlung","p.trial":"3 Tage kostenlos testen","p.year":"oder 19,99€/Jahr — 44% sparen",
     "p.f1":"2 KI Chef Nachrichten / Tag","p.f2":"1 Fotoanalyse / Tag","p.f3":"3 Rezepte","p.f4":"Werbung",
     "p.p1":"20 KI Chef Nachrichten / Tag","p.p2":"3 Fotoanalysen / Tag","p.p3":"Unbegrenzte Rezepte","p.p4":"Foto-Verlauf","p.p5":"Keine Werbung",
     "p.m1":"60 KI Chef Nachrichten / Tag","p.m2":"10 Fotoanalysen / Tag","p.m3":"Fortgeschrittene KI (Sonnet)","p.m4":"Unbegrenzte Rezepte","p.m5":"Foto-Verlauf","p.m6":"Keine Werbung",
     "cta.title":"Bereit für die <em>perfekte Pizza</em>?","cta.desc":"Schließe dich Enthusiasten an, die ihre Technik bei jedem Backen perfektionieren.",
-    "ft.app":"Anwendung","ft.ios":"App Store","ft.legal":"Rechtliches","ft.privacy":"Datenschutz","ft.terms":"AGB","ft.powered":"Betrieben von Claude · Anthropic"
+    "ft.app":"Anwendung","ft.ios":"App Store","ft.legal":"Rechtliches","ft.mentions":"Impressum","ft.privacy":"Datenschutz","ft.terms":"AGB","ft.powered":"Betrieben von Claude · Anthropic"
 },
 es: {
     "nav.features":"Funcionalidades","nav.plans":"Planes","nav.download":"Descargar",
     "hero.over":"La inteligencia artificial al servicio de la pizza","hero.tagline":"Tu pizzero inteligente",
     "hero.desc":"Calcula tu masa con precisión científica, perfecciona tu técnica con el Chef\u00a0IA y analiza tus creaciones en foto. La pizza perfecta, en cada horneada.",
-    "badge.gp.small":"Disponible en","badge.as.small":"Descargar en la","badge.soon":"Pronto","badge2.gp.small":"Disponible en","badge2.as.small":"Descargar en la","badge2.soon":"Pronto",
+    "badge.gp.small":"Disponible en","badge.as.small":"Descargar en la","badge2.gp.small":"Disponible en","badge2.as.small":"Descargar en la",
     "stats.langs":"Idiomas","stats.yeast":"Puntos curva levadura","stats.criteria":"Criterios de análisis","stats.flours":"Harinas referenciadas",
     "feat.label":"Funcionalidades","feat.title":"Todo para la<br><em>pizza perfecta</em>",
     "feat.intro":"Cuatro herramientas impulsadas por la inteligencia artificial, reunidas en una sola aplicación. De la harina al horno, cada paso está cubierto.",
@@ -376,21 +400,69 @@ es: {
     "f4.name":"Cuaderno & Guía de harinas","f4.desc":"Guarda tus recetas y tus mejores parámetros. Consulta la guía de 12 harinas detalladas con fuerza W, proteínas y usos recomendados. 18 términos técnicos en el glosario.","f4.t1":"12 harinas","f4.t2":"Glosario","f4.t3":"Favoritos",
     "ph.photo":"Análisis Foto","ph.s1":"🔥 Cocción","ph.s2":"🫧 Borde","ph.s3":"⭕ Forma","ph.s4":"🧀 Cobertura","ph.s5":"🎨 Aspecto",
     "ph.chef":"Chef IA","ph.q1":"¿Cómo lograr una masa bien alveolada?","ph.a1":"Para una miga alveolada, apunta al 70-75% de hidratación con una harina W280+. El secreto: una fermentación larga de 24h en el frigo 🧊 y pliegues cada 30 min durante la primera hora.","ph.q2":"¿Qué harina recomiendas?",
-    "ph.calc":"Calculadora","ph.flour":"Harina","ph.water":"Agua","ph.salt":"Sal","ph.yeast":"Levadura",
+    "ph.calc":"Calculadora","ph.style":"Napolitana","ph.balls":"bolas de masa","ph.flour":"Harina","ph.water":"Agua","ph.salt":"Sal","ph.yeast":"Levadura",
     "ph.guide":"Guía harinas","ph.protein":"proteínas","ph.protein2":"proteínas","ph.protein3":"proteínas",
     "plans.label":"Planes","plans.title":"Elige <em>tu plan</em>",
-    "p.popular":"Popular","p.month":"/mes","p.month2":"de por vida","p.trial":"Prueba gratis 3 días",
+    "p.popular":"Popular","p.month":"/mes","p.month2":"de por vida","p.once":"Pago único","p.trial":"Prueba gratis 3 días","p.year":"o 19,99€/año — ahorra un 44%",
     "p.f1":"2 mensajes Chef IA / día","p.f2":"1 análisis foto / día","p.f3":"3 recetas","p.f4":"Publicidad",
     "p.p1":"20 mensajes Chef IA / día","p.p2":"3 análisis foto / día","p.p3":"Recetas ilimitadas","p.p4":"Historial fotos","p.p5":"Sin publicidad",
     "p.m1":"60 mensajes Chef IA / día","p.m2":"10 análisis foto / día","p.m3":"IA avanzada (Sonnet)","p.m4":"Recetas ilimitadas","p.m5":"Historial fotos","p.m6":"Sin publicidad",
     "cta.title":"¿Listo para la <em>pizza perfecta</em>?","cta.desc":"Únete a apasionados que perfeccionan su técnica en cada horneada.",
-    "ft.app":"Aplicación","ft.ios":"App Store","ft.legal":"Legal","ft.privacy":"Privacidad","ft.terms":"Términos","ft.powered":"Impulsado por Claude · Anthropic"
+    "ft.app":"Aplicación","ft.ios":"App Store","ft.legal":"Legal","ft.mentions":"Aviso legal","ft.privacy":"Privacidad","ft.terms":"Términos","ft.powered":"Impulsado por Claude · Anthropic"
+},
+nl: {
+    "nav.features":"Functies","nav.plans":"Abonnementen","nav.download":"Downloaden",
+    "hero.over":"Kunstmatige intelligentie in dienst van de pizza","hero.tagline":"Jouw slimme pizzabakker",
+    "hero.desc":"Bereken je deeg met wetenschappelijke precisie, perfectioneer je techniek met de AI\u00a0Chef en analyseer je creaties op foto. De perfecte pizza, bij elke bak.",
+    "badge.gp.small":"ONTDEK HET OP","badge.as.small":"Download in de","badge2.gp.small":"ONTDEK HET OP","badge2.as.small":"Download in de",
+    "stats.langs":"Talen","stats.yeast":"Punten gistcurve","stats.criteria":"Analysecriteria","stats.flours":"Meelsoorten",
+    "feat.label":"Functies","feat.title":"Alles voor de<br><em>perfecte pizza</em>",
+    "feat.intro":"Vier tools aangedreven door kunstmatige intelligentie, verenigd in één app. Van meel tot oven, elke stap is gedekt.",
+    "f1.name":"AI-fotoanalyse","f1.desc":"Fotografeer je pizza en ontvang een gedetailleerde score op 5 criteria. De AI beoordeelt de bakking, de korstrand, de vorm, het beleg en het algehele uiterlijk, en geeft je persoonlijk advies om te verbeteren.","f1.t1":"AI Vision","f1.t2":"Score /5","f1.t3":"Tips",
+    "f2.name":"AI-chef","f2.desc":"Een ervaren pizzaiolo, 24/7 beschikbaar. Stel je vragen over deeg, meel, bakken, beleg of probleemoplossing. Bewaar recepten direct in je notitieboek.","f2.t2":"Conversatie","f2.t3":"Recepten",
+    "f3.name":"Wetenschappelijke calculator","f3.desc":"Gistcurve met 22 punten voor een perfecte dosering. Vooraf ingestelde profielen (Eenvoudig thuis, Napolitaans, Romana, Teglia), stap voor stap begeleid protocol met ingebouwde timers.","f3.t1":"22 gistpunten","f3.t2":"Begeleid protocol",
+    "f4.name":"Notitieboek & Meelgids","f4.desc":"Bewaar je recepten en je beste instellingen. Raadpleeg de gids met 12 gedetailleerde meelsoorten, met W-sterkte, eiwitgehalte en aanbevolen gebruik. 18 vaktermen in de woordenlijst.","f4.t1":"12 meelsoorten","f4.t2":"Woordenlijst","f4.t3":"Favorieten",
+    "ph.photo":"Fotoanalyse","ph.s1":"🔥 Bakking","ph.s2":"🫧 Korstrand","ph.s3":"⭕ Vorm","ph.s4":"🧀 Beleg","ph.s5":"🎨 Uiterlijk",
+    "ph.chef":"AI-chef","ph.q1":"Hoe krijg ik een luchtig deeg?","ph.a1":"Voor een luchtige kruim streef je naar 70-75% hydratatie met een W280+ meel. Het geheim: een lange rijs van 24 uur in de koelkast 🧊 en vouwen om de 30 minuten tijdens het eerste uur.","ph.q2":"Welk meel raad je aan?",
+    "ph.calc":"Calculator","ph.style":"Napolitaans","ph.balls":"deegbollen","ph.flour":"Meel","ph.water":"Water","ph.salt":"Zout","ph.yeast":"Gist",
+    "ph.guide":"Meelgids","ph.protein":"eiwitten","ph.protein2":"eiwitten","ph.protein3":"eiwitten",
+    "plans.label":"Abonnementen","plans.title":"Kies <em>jouw abonnement</em>",
+    "p.popular":"Populair","p.month":"/maand","p.month2":"levenslang","p.once":"Eenmalige betaling","p.trial":"3 dagen gratis proberen","p.year":"of 19,99€/jaar — 44% voordeel",
+    "p.f1":"2 AI-chefberichten / dag","p.f2":"1 fotoanalyse / dag","p.f3":"3 recepten","p.f4":"Advertenties",
+    "p.p1":"20 AI-chefberichten / dag","p.p2":"3 fotoanalyses / dag","p.p3":"Onbeperkt recepten","p.p4":"Fotogeschiedenis","p.p5":"Geen advertenties",
+    "p.m1":"60 AI-chefberichten / dag","p.m2":"10 fotoanalyses / dag","p.m3":"Geavanceerde AI (Sonnet)","p.m4":"Onbeperkt recepten","p.m5":"Fotogeschiedenis","p.m6":"Geen advertenties",
+    "cta.title":"Klaar voor de <em>perfecte pizza</em>?","cta.desc":"Sluit je aan bij liefhebbers die hun techniek bij elke bak verfijnen.",
+    "ft.app":"Applicatie","ft.ios":"App Store","ft.legal":"Juridisch","ft.mentions":"Wettelijke vermeldingen","ft.privacy":"Privacy","ft.terms":"Voorwaarden","ft.powered":"Aangedreven door Claude · Anthropic"
+},
+pt: {
+    "nav.features":"Funcionalidades","nav.plans":"Planos","nav.download":"Baixar",
+    "hero.over":"A inteligência artificial a serviço da pizza","hero.tagline":"Seu pizzaiolo inteligente",
+    "hero.desc":"Calcule sua massa com precisão científica, aperfeiçoe sua técnica com o Chef\u00a0IA e analise suas criações por foto. A pizza perfeita, em cada fornada.",
+    "badge.gp.small":"Disponível no","badge.as.small":"Baixar na","badge2.gp.small":"Disponível no","badge2.as.small":"Baixar na",
+    "stats.langs":"Idiomas","stats.yeast":"Pontos da curva de fermento","stats.criteria":"Critérios de análise","stats.flours":"Farinhas catalogadas",
+    "feat.label":"Funcionalidades","feat.title":"Tudo para a<br><em>pizza perfeita</em>",
+    "feat.intro":"Quatro ferramentas movidas por inteligência artificial, reunidas em um único aplicativo. Da farinha ao forno, cada etapa é coberta.",
+    "f1.name":"Análise de Foto IA","f1.desc":"Fotografe sua pizza e receba uma nota detalhada em 5 critérios. A IA avalia o cozimento, a borda, o formato, a cobertura e o aspecto geral, e dá dicas personalizadas para você evoluir.","f1.t1":"Visão IA","f1.t2":"Nota /5","f1.t3":"Dicas",
+    "f2.name":"Chef IA","f2.desc":"Um pizzaiolo experiente disponível 24/7. Tire suas dúvidas sobre massa, farinhas, cozimento, coberturas ou solução de problemas. Salve as receitas direto no seu caderno.","f2.t2":"Conversacional","f2.t3":"Receitas",
+    "f3.name":"Calculadora científica","f3.desc":"Curva de fermento com 22 pontos para uma dosagem perfeita. Perfis predefinidos (Caseira fácil, Napolitana, Romana, Teglia), protocolo guiado passo a passo com timers integrados.","f3.t1":"22 pontos de fermento","f3.t2":"Protocolo guiado",
+    "f4.name":"Caderno & Guia de farinhas","f4.desc":"Salve suas receitas e seus melhores parâmetros. Consulte o guia com 12 farinhas detalhadas, com força W, teor de proteínas e usos recomendados. 18 termos técnicos no glossário.","f4.t1":"12 farinhas","f4.t2":"Glossário","f4.t3":"Favoritos",
+    "ph.photo":"Análise de Foto","ph.s1":"🔥 Cozimento","ph.s2":"🫧 Borda","ph.s3":"⭕ Formato","ph.s4":"🧀 Cobertura","ph.s5":"🎨 Aspecto",
+    "ph.chef":"Chef IA","ph.q1":"Como conseguir uma massa bem alveolada?","ph.a1":"Para um miolo alveolado, mire em 70-75% de hidratação com uma farinha W280+. O segredo: uma longa fermentação de 24h na geladeira 🧊 e dobras a cada 30 min durante a primeira hora.","ph.q2":"Qual farinha você recomenda?",
+    "ph.calc":"Calculadora","ph.style":"Napolitana","ph.balls":"bolas de massa","ph.flour":"Farinha","ph.water":"Água","ph.salt":"Sal","ph.yeast":"Fermento",
+    "ph.guide":"Guia de farinhas","ph.protein":"proteínas","ph.protein2":"proteínas","ph.protein3":"proteínas",
+    "plans.label":"Planos","plans.title":"Escolha <em>seu plano</em>",
+    "p.popular":"Popular","p.month":"/mês","p.month2":"vitalício","p.once":"Pagamento único","p.trial":"Teste grátis de 3 dias","p.year":"ou 19,99€/ano — economize 44%",
+    "p.f1":"2 mensagens Chef IA / dia","p.f2":"1 análise de foto / dia","p.f3":"3 receitas","p.f4":"Anúncios",
+    "p.p1":"20 mensagens Chef IA / dia","p.p2":"3 análises de foto / dia","p.p3":"Receitas ilimitadas","p.p4":"Histórico de fotos","p.p5":"Zero anúncios",
+    "p.m1":"60 mensagens Chef IA / dia","p.m2":"10 análises de foto / dia","p.m3":"IA avançada (Sonnet)","p.m4":"Receitas ilimitadas","p.m5":"Histórico de fotos","p.m6":"Zero anúncios",
+    "cta.title":"Pronto para fazer a <em>pizza perfeita</em>?","cta.desc":"Junte-se aos apaixonados que aperfeiçoam a técnica a cada fornada.",
+    "ft.app":"Aplicativo","ft.ios":"App Store","ft.legal":"Jurídico","ft.mentions":"Aviso legal","ft.privacy":"Privacidade","ft.terms":"Termos","ft.powered":"Desenvolvido com Claude · Anthropic"
 }
 };
 
 function setLang(lang) {
-    if (!T[lang]) return;
     const dict = T[lang];
+    if (!dict) return;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.getAttribute('data-i18n');
         if (dict[k]) el.textContent = dict[k];
@@ -401,21 +473,124 @@ function setLang(lang) {
     });
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    try { localStorage.setItem('pizzai_lang', lang); } catch(e) {}
+    try { localStorage.setItem('pizzai_lang', lang); } catch (e) {}
 }
 
 document.querySelectorAll('.lang-btn').forEach(b => {
     b.addEventListener('click', () => setLang(b.dataset.lang));
 });
-const saved = (() => { try { return localStorage.getItem('pizzai_lang'); } catch(e) { return null; } })();
-if (saved && T[saved]) setLang(saved); else setLang('fr');
 
-const nav=document.getElementById('nav');let ticking=false;window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>80);ticking=false});ticking=true}});
-const glow=document.getElementById('cursorGlow');if(window.matchMedia('(pointer:fine)').matches){document.addEventListener('mousemove',e=>{glow.style.transform=`translate(${e.clientX-300}px,${e.clientY-300}px)`})}else{glow.style.display='none'}
-const rvEls=document.querySelectorAll('.rv');const rvObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});rvEls.forEach(el=>rvObs.observe(el));
-const phoneScore=document.getElementById('phoneScore');const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.ph-bar').forEach(b=>{b.style.width=b.dataset.w})}})},{threshold:.4});barObs.observe(phoneScore);
-const counters=document.querySelectorAll('[data-count]');const cObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done='1';const target=+e.target.dataset.count;const dur=1200;const start=performance.now();const step=ts=>{const p=Math.min((ts-start)/dur,1);e.target.textContent=Math.round((1-Math.pow(1-p,3))*target);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}})},{threshold:.5});counters.forEach(c=>cObs.observe(c));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+(function initLang() {
+    let saved = null;
+    try { saved = localStorage.getItem('pizzai_lang'); } catch (e) {}
+    if (saved && T[saved]) { setLang(saved); return; }
+
+    const navLangs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language];
+    for (const l of navLangs) {
+        const code = (l || '').slice(0, 2).toLowerCase();
+        if (T[code]) { setLang(code); return; }
+    }
+    setLang('fr');
+})();
+
+// ═══ NAV ═══
+const nav = document.getElementById('nav');
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => { nav.classList.toggle('scrolled', window.scrollY > 80); ticking = false; });
+        ticking = true;
+    }
+});
+
+// ═══ STORE ROUTING ═══
+const STORE_URLS = {
+    ios: 'https://apps.apple.com/app/id6761267496',
+    android: 'https://play.google.com/store/apps/details?id=com.zorntek.pizzai'
+};
+const UA = navigator.userAgent || '';
+const IS_IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const IS_ANDROID = /Android/.test(UA);
+
+(function routeDownloadCta() {
+    const btn = document.getElementById('navDownload');
+    if (!btn) return;
+    if (IS_IOS) {
+        btn.href = STORE_URLS.ios;
+    } else if (IS_ANDROID) {
+        btn.href = STORE_URLS.android;
+    } else {
+        btn.href = '#download';
+        btn.removeAttribute('target');
+        btn.removeAttribute('rel');
+    }
+})();
+
+// ═══ CURSOR GLOW ═══
+const glow = document.getElementById('cursorGlow');
+if (window.matchMedia('(pointer:fine)').matches) {
+    document.addEventListener('mousemove', e => {
+        glow.style.transform = `translate(${e.clientX - 300}px,${e.clientY - 300}px)`;
+    });
+} else {
+    glow.style.display = 'none';
+}
+
+// ═══ SCROLL REVEAL ═══
+const rvObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: .12, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+
+// ═══ SCORE BARS ═══
+const phoneScore = document.getElementById('phoneScore');
+if (phoneScore) {
+    const barObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.querySelectorAll('.ph-bar').forEach(b => { b.style.width = b.dataset.w; });
+            }
+        });
+    }, { threshold: .4 });
+    barObs.observe(phoneScore);
+}
+
+// ═══ COUNTERS ═══
+const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting && !e.target.dataset.done) {
+            e.target.dataset.done = '1';
+            const target = +e.target.dataset.count;
+            const dur = 1200;
+            const start = performance.now();
+            const step = ts => {
+                const p = Math.min((ts - start) / dur, 1);
+                e.target.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+    });
+}, { threshold: .5 });
+document.querySelectorAll('[data-count]').forEach(c => cObs.observe(c));
+
+// ═══ SMOOTH SCROLL ═══
+document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (href === '#') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 </script>
 </body>
 </html>
