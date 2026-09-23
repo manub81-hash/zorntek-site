@@ -7,10 +7,10 @@
 google.com, pub-5807847572766906, DIRECT, f08c47fec0942fa0
 
 # === META AUDIENCE NETWORK ===
-# Business ID du portefeuille Zorntek (business.facebook.com > Parametres > Informations)
+# Business ID du portefeuille Zorntek
 facebook.com, 1543005010520703, RESELLER, c3e20eee3f780d68
-# App ID PizzAI (prefixe des placements 2756712108044215_...)
-facebook.com, 2756712108044215, RESELLER, c3e20eee3f780d68
+# App ID PizzAI (app creee le 23/09/2026)
+facebook.com, 963709320116224, RESELLER, c3e20eee3f780d68
 
 # === RESELLER (partenaires programmatiques Unity Ads) ===
 adagio.io, 1522, RESELLER
