@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Recette PizzAI</title>
+<meta name="description" content="Une recette de pâte à pizza partagée depuis PizzAI. Ouvre-la dans l'app pour la personnaliser et la recalculer." />
+<!-- Aperçu de lien générique (le contenu est dans le fragment #, non lisible côté serveur ;
+     un aperçu par recette nécessiterait un rendu serveur = lot 3+). -->
+<meta property="og:title" content="Recette PizzAI 🍕" />
+<meta property="og:description" content="Une recette de pâte à pizza partagée depuis PizzAI." />
+<meta property="og:type" content="website" />
+<style>
+  :root {
+    --bg: #1a1410;
+    --surface: #241c16;
+    --surface2: #2e241c;
+    --border: #3a2d22;
+    --accent: #e85d24;
+    --accent2: #f0a35e;
+    --text: #f5e6d3;
+    --muted: #a89480;
+    --green: #2ecc71;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  body { min-height: 100dvh; display: flex; flex-direction: column; align-items: center;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); }
+  .wrap { width: 100%; max-width: 440px; }
+  .brand { display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 800; font-size: 20px; letter-spacing: 0.3px; margin-bottom: 18px; }
+  .brand .logo { font-size: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+  .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2);
+    border: 1px solid var(--border); color: var(--accent2); font-weight: 800; font-size: 12px;
+    letter-spacing: 1px; padding: 6px 12px; border-radius: 999px; }
+  .title { font-size: 20px; font-weight: 800; margin: 14px 0 2px; line-height: 1.25; }
+  .context { color: var(--muted); font-size: 13px; margin-bottom: 2px; }
+  .yield { color: var(--text); font-size: 14px; font-weight: 600; margin: 10px 0 2px; opacity: 0.95; }
+  .ingredients { margin: 16px 0 6px; border-top: 1px solid var(--border); }
+  .row { display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 2px; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .row .k { color: var(--text); display: flex; align-items: center; gap: 9px; }
+  .row .v { font-weight: 800; }
+  .row.total .k, .row.total .v { color: var(--accent2); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 2px; }
+  .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--muted);
+    font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 10px; }
+  .chip b { color: var(--text); }
+  .note { color: var(--muted); font-size: 13px; margin: 14px 0 0; line-height: 1.5; }
+  .cta { display: block; width: 100%; text-align: center; text-decoration: none;
+    background: var(--accent); color: #fff; font-weight: 800; font-size: 16px;
+    padding: 15px; border-radius: 16px; margin-top: 20px; border: none; cursor: pointer; }
+  .cta:active { opacity: 0.9; }
+  .stores { display: flex; gap: 10px; margin-top: 12px; }
+  .store { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); font-size: 12.5px; font-weight: 700; padding: 12px 8px; border-radius: 14px; }
+  .store .ic { font-size: 17px; }
+  .store small { display: block; color: var(--muted); font-weight: 600; font-size: 10px; }
+  .store .lines { text-align: left; line-height: 1.15; }
+  .hint { color: var(--muted); font-size: 12.5px; text-align: center; margin-top: 14px; line-height: 1.5; }
+  .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 22px; }
+  .footer a { color: var(--muted); }
+  .errwrap { text-align: center; }
+  .errwrap .emoji { font-size: 44px; }
+  .errwrap h1 { font-size: 20px; margin: 12px 0 6px; }
+  .errwrap p { color: var(--muted); font-size: 14px; margin: 0 0 4px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><span class="logo">🍕</span><span>PizzAI</span></div>
+  <div id="app"></div>
+  <div class="footer" id="footer"></div>
+</div>
+
+<script>
+/* ============================================================
+ *  Page /r — rendu d'une recette partagée (LOT 4).
+ *  Décodeur base64url + JSON VOLONTAIREMENT MIROIR de lib/recipeLink.ts
+ *  (même charset '-_', sans padding ; même enveloppe {v,p,s}). À garder
+ *  synchronisé en cas de bump de version. Aucune dépendance, aucun build :
+ *  ce fichier est déposé tel quel sur zorntek.fr/r.
+ * ============================================================ */
+(function () {
+  'use strict';
+
+  var VERSION = 1;
+  var IOS_URL = 'https://apps.apple.com/app/id6761267496';
+  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.zorntek.pizzai';
+  var SITE_URL = 'https://zorntek.fr';
+
+  // ---------- i18n (chrome de la page ; pt = pt-BR) ----------
+  var I18N = {
+    fr: { shared:'Recette partagée', balls:'pâtons', flour:'Farine', water:'Eau', salt:'Sel',
+      yeast:'Levure', oil:'Huile', total:'Total', hydration:'hydratation', saltPct:'sel',
+      open:'Ouvrir dans PizzAI', exact:"Ouvre l'app pour les quantités exactes.",
+      hint:"Tu n'as pas l'app ? Installe PizzAI pour ouvrir et personnaliser cette recette.",
+      errTitle:'Recette illisible', errMsg:'Ce lien est invalide ou périmé. Installe PizzAI pour créer la tienne.',
+      footer:'Calculé avec PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Télécharger sur' },
+    en: { shared:'Shared recipe', balls:'dough balls', flour:'Flour', water:'Water', salt:'Salt',
+      yeast:'Yeast', oil:'Oil', total:'Total', hydration:'hydration', saltPct:'salt',
+      open:'Open in PizzAI', exact:'Open the app for exact quantities.',
+      hint:"Don't have the app? Install PizzAI to open and customize this recipe.",
+      errTitle:'Recipe unreadable', errMsg:'This link is invalid or expired. Install PizzAI to create your own.',
+      footer:'Calculated with PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Download on' },
+    it: { shared:'Ricetta condivisa', balls:'panetti', flour:'Farina', water:'Acqua', salt:'Sale',
+      yeast:'Lievito', oil:'Olio', total:'Totale', hydration:'idratazione', saltPct:'sale',
+      open:'Apri in PizzAI', exact:"Apri l'app per le quantità esatte.",
+      hint:"Non hai l'app? Installa PizzAI per aprire e personalizzare questa ricetta.",
+      errTitle:'Ricetta illeggibile', errMsg:'Link non valido o scaduto. Installa PizzAI per creare la tua.',
+      footer:'Calcolato con PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Scarica su' },
+    de: { shared:'Geteiltes Rezept', balls:'Teiglinge', flour:'Mehl', water:'Wasser', salt:'Salz',
+      yeast:'Hefe', oil:'Öl', total:'Gesamt', hydration:'Hydration', saltPct:'Salz',
+      open:'In PizzAI öffnen', exact:'Öffne die App für genaue Mengen.',
+      hint:'Keine App? Installiere PizzAI, um dieses Rezept zu öffnen und anzupassen.',
+      errTitle:'Rezept unlesbar', errMsg:'Link ungültig oder abgelaufen. Installiere PizzAI für dein eigenes.',
+      footer:'Berechnet mit PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Laden im' },
+    es: { shared:'Receta compartida', balls:'bolas', flour:'Harina', water:'Agua', salt:'Sal',
+      yeast:'Levadura', oil:'Aceite', total:'Total', hydration:'hidratación', saltPct:'sal',
+      open:'Abrir en PizzAI', exact:'Abre la app para las cantidades exactas.',
+      hint:'¿No tienes la app? Instala PizzAI para abrir y personalizar esta receta.',
+      errTitle:'Receta ilegible', errMsg:'Enlace no válido o caducado. Instala PizzAI para crear la tuya.',
+      footer:'Calculado con PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Descargar en' },
+    nl: { shared:'Gedeeld recept', balls:'deegballen', flour:'Bloem', water:'Water', salt:'Zout',
+      yeast:'Gist', oil:'Olie', total:'Totaal', hydration:'hydratatie', saltPct:'zout',
+      open:'Openen in PizzAI', exact:'Open de app voor exacte hoeveelheden.',
+      hint:'Geen app? Installeer PizzAI om dit recept te openen en aan te passen.',
+      errTitle:'Recept onleesbaar', errMsg:'Ongeldige of verlopen link. Installeer PizzAI om je eigen te maken.',
+      footer:'Berekend met PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Download in' },
+    pt: { shared:'Receita compartilhada', balls:'bolas', flour:'Farinha', water:'Água', salt:'Sal',
+      yeast:'Fermento', oil:'Óleo', total:'Total', hydration:'hidratação', saltPct:'sal',
+      open:'Abrir no PizzAI', exact:'Abra o app para as quantidades exatas.',
+      hint:'Não tem o app? Instale o PizzAI para abrir e personalizar esta receita.',
+      errTitle:'Receita ilegível', errMsg:'Link inválido ou expirado. Instale o PizzAI para criar a sua.',
+      footer:'Calculado com o PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Baixar na' },
+  };
+  function pickLang() {
+    var l = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    return I18N[l] ? l : 'en';
+  }
+  var T = I18N[pickLang()];
+  document.documentElement.lang = pickLang();
+
+  // ---------- base64url -> octets -> UTF-8 -> JSON (miroir recipeLink.ts) ----------
+  var B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+  var LOOKUP = {}; for (var i = 0; i < B64.length; i++) LOOKUP[B64[i]] = i;
+  function b64urlToBytes(str) {
+    if (!/^[A-Za-z0-9\-_]*$/.test(str)) return null;
+    var out = [];
+    for (var i = 0; i < str.length; i += 4) {
+      var c0 = LOOKUP[str[i]], c1 = LOOKUP[str[i + 1]];
+      if (c0 === undefined || c1 === undefined) return null;
+      out.push((c0 << 2) | (c1 >> 4));
+      var c2 = str[i + 2] !== undefined ? LOOKUP[str[i + 2]] : undefined;
+      if (c2 !== undefined) {
+        out.push(((c1 & 15) << 4) | (c2 >> 2));
+        var c3 = str[i + 3] !== undefined ? LOOKUP[str[i + 3]] : undefined;
+        if (c3 !== undefined) out.push(((c2 & 3) << 6) | c3);
+      }
+    }
+    return new Uint8Array(out);
+  }
+  function decodePayload(payload) {
+    if (!payload || payload.length > 4000) return null;
+    var bytes = b64urlToBytes(payload);
+    if (!bytes || !bytes.length) return null;
+    var json;
+    try { json = new TextDecoder().decode(bytes); } catch (e) { return null; }
+    var obj; try { obj = JSON.parse(json); } catch (e) { return null; }
+    if (!obj || typeof obj !== 'object' || obj.v !== VERSION) return null;
+    return obj; // { v, p, s? }
+  }
+
+  // ---------- helpers d'affichage ----------
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+  function g(n) { // grammes : entier sinon 1 décimale
+    var v = Math.round(n * 10) / 10;
+    return (Number.isInteger(v) ? v : v.toFixed(1)) + ' g';
+  }
+  function storesHtml() {
+    return '<div class="stores">'
+      + '<a class="store" href="' + IOS_URL + '"><span class="ic"></span>'
+        + '<span class="lines"><small>' + esc(T.dl) + '</small>' + esc(T.appstore) + '</span></a>'
+      + '<a class="store" href="' + PLAY_URL + '"><span class="ic">▶</span>'
+        + '<span class="lines"><small>' + esc(T.dl) + '</small>' + esc(T.play) + '</span></a>'
+      + '</div>';
+  }
+
+  function renderRecipe(obj, payload) {
+    var p = obj.p || {};
+    var s = obj.s || null;
+    var html = '<div class="card">';
+
+    // Badge style
+    if (s && s.styleLabel) {
+      html += '<span class="badge">' + (s.styleIcon ? esc(s.styleIcon) + ' ' : '') + esc(s.styleLabel) + '</span>';
+    }
+    // Titre + contexte
+    html += '<div class="title">' + esc((s && s.context) ? s.context : T.shared) + '</div>';
+
+    // Rendement : N pâtons × P g
+    var balls = (s && s.balls) || p.balls;
+    var weight = (s && s.weight) || p.weight;
+    if (balls && weight) {
+      html += '<div class="yield">' + balls + ' ' + esc(T.balls) + ' × ' + weight + ' g</div>';
+    }
+
+    // Ingrédients (uniquement si le résumé porte les grammes)
+    if (s && (s.flour || s.water || s.salt)) {
+      html += '<div class="ingredients">';
+      if (s.flour) html += row('🌾', T.flour, g(s.flour));
+      if (s.water) html += row('💧', T.water, g(s.water));
+      if (s.salt) html += row('🧂', T.salt, g(s.salt));
+      if (s.yeast) html += row('🫧', T.yeast, g(s.yeast));
+      if (s.oil) html += row('🫗', T.oil, g(s.oil));
+      if (s.total) html += rowTotal('🍕', T.total, g(s.total));
+      html += '</div>';
+    } else {
+      html += '<p class="note">' + esc(T.exact) + '</p>';
+    }
+
+    // Chips (hydration / sel / protocole / four)
+    var chips = [];
+    var hyd = (s && s.hydration) || p.hydration;
+    if (hyd) chips.push('<span class="chip"><b>' + hyd + '%</b> ' + esc(T.hydration) + '</span>');
+    if (s && s.saltPct) chips.push('<span class="chip"><b>' + s.saltPct + '%</b> ' + esc(T.saltPct) + '</span>');
+    if (s && s.protocol) chips.push('<span class="chip">⏱ <b>' + esc(s.protocol) + '</b></span>');
+    if (s && s.oven) chips.push('<span class="chip">🔥 <b>' + esc(s.oven) + '</b></span>');
+    if (chips.length) html += '<div class="chips">' + chips.join('') + '</div>';
+
+    // CTA : ouvrir dans l'app (réutilise le même payload ; l'app ignore le résumé)
+    html += '<a class="cta" href="pizzai://recipe?r=' + encodeURIComponent(payload) + '">' + esc(T.open) + '</a>';
+    html += storesHtml();
+    html += '<p class="hint">' + esc(T.hint) + '</p>';
+    html += '</div>';
+    return html;
+  }
+  function row(icon, k, v) {
+    return '<div class="row"><span class="k">' + icon + ' ' + esc(k) + '</span><span class="v">' + esc(v) + '</span></div>';
+  }
+  function rowTotal(icon, k, v) {
+    return '<div class="row total"><span class="k">' + icon + ' ' + esc(k) + '</span><span class="v">' + esc(v) + '</span></div>';
+  }
+
+  function renderError() {
+    return '<div class="card errwrap"><div class="emoji">🍕</div>'
+      + '<h1>' + esc(T.errTitle) + '</h1><p>' + esc(T.errMsg) + '</p>'
+      + storesHtml() + '</div>';
+  }
+
+  // ---------- montage ----------
+  var payload = (location.hash || '').replace(/^#/, '').trim();
+  var obj = payload ? decodePayload(payload) : null;
+  document.getElementById('app').innerHTML = obj ? renderRecipe(obj, payload) : renderError();
+  document.getElementById('footer').innerHTML = '<a href="' + SITE_URL + '">' + esc(T.footer) + '</a>';
+})();
+</script>
+</body>
+</html>
