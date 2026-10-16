@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["B5LP25R99S.com.zorntek.pizzai"],
+        "components": [
+          { "/": "/r", "comment": "Lien de recette PizzAI (exact)" },
+          { "/": "/r/*", "comment": "Lien de recette PizzAI (sous-chemins)" }
+        ]
+      }
+    ]
+  }
+}
