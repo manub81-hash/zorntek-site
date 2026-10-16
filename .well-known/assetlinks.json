@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.zorntek.pizzai",
+      "sha256_cert_fingerprints": [
+        "DE:18:2A:03:C8:EC:16:DD:82:88:BF:62:10:B8:FA:53:54:86:E9:47:17:63:2C:C8:A7:01:B3:04:AC:58:45:B3"
+      ]
+    }
+  }
+]
