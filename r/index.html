@@ -77,9 +77,11 @@
   <div class="footer" id="footer"></div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
 /* ============================================================
- *  Page /r — rendu d'une recette partagée (LOT 4).
+ *  Page /r — rendu d'une recette partagée (LOT 4 + liens courts).
  *  Décodeur base64url + JSON VOLONTAIREMENT MIROIR de lib/recipeLink.ts
  *  (même charset '-_', sans padding ; même enveloppe {v,p,s}). À garder
  *  synchronisé en cas de bump de version. Aucune dépendance, aucun build :
@@ -92,6 +94,18 @@
   var IOS_URL = 'https://apps.apple.com/app/id6761267496';
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.zorntek.pizzai';
   var SITE_URL = 'https://zorntek.fr';
+
+  // Firebase (projet pizzai-app) — config PUBLIQUE, protégée par les règles
+  // Firestore (sharedRecipes : get par id autorisé, list refusé, write serveur).
+  var fbDb = getFirestore(initializeApp({
+    apiKey: 'AIzaSyArErShI8bWOzseXJhRyDkongffJHbnA-8',
+    authDomain: 'pizzai-app.firebaseapp.com',
+    projectId: 'pizzai-app',
+    storageBucket: 'pizzai-app.firebasestorage.app',
+    messagingSenderId: '249964275155',
+    appId: '1:249964275155:web:2dff9e580a0e1585fffb26',
+  }));
+  function isShortId(s) { return /^[A-Za-z0-9]{4,16}$/.test(s); }
 
   // ---------- i18n (chrome de la page ; pt = pt-BR) ----------
   var I18N = {
@@ -191,7 +205,7 @@
       + '</div>';
   }
 
-  function renderRecipe(obj, payload) {
+  function renderRecipe(obj, payload, shortId) {
     var p = obj.p || {};
     var s = obj.s || null;
     var html = '<div class="card">';
@@ -233,8 +247,11 @@
     if (s && s.oven) chips.push('<span class="chip">🔥 <b>' + esc(s.oven) + '</b></span>');
     if (chips.length) html += '<div class="chips">' + chips.join('') + '</div>';
 
-    // CTA : ouvrir dans l'app (réutilise le même payload ; l'app ignore le résumé)
-    html += '<a class="cta" href="pizzai://recipe?r=' + encodeURIComponent(payload) + '">' + esc(T.open) + '</a>';
+    // CTA : ouvrir dans l'app. Lien court → pizzai://recipe#<id> ; sinon payload autoportant.
+    var openHref = shortId
+      ? ('pizzai://recipe#' + encodeURIComponent(shortId))
+      : ('pizzai://recipe?r=' + encodeURIComponent(payload));
+    html += '<a class="cta" href="' + openHref + '">' + esc(T.open) + '</a>';
     html += storesHtml();
     html += '<p class="hint">' + esc(T.hint) + '</p>';
     html += '</div>';
@@ -254,10 +271,28 @@
   }
 
   // ---------- montage ----------
-  var payload = (location.hash || '').replace(/^#/, '').trim();
-  var obj = payload ? decodePayload(payload) : null;
-  document.getElementById('app').innerHTML = obj ? renderRecipe(obj, payload) : renderError();
+  var frag = (location.hash || '').replace(/^#/, '').trim();
   document.getElementById('footer').innerHTML = '<a href="' + SITE_URL + '">' + esc(T.footer) + '</a>';
+
+  (async function () {
+    var obj = null;      // { v, p, s } attendu par renderRecipe
+    var shortId = null;  // id court (bouton « Ouvrir dans l'app »)
+    if (frag && isShortId(frag)) {
+      // Lien COURT : la recette est lue dans Firestore (lecture publique par id).
+      try {
+        var snap = await getDoc(doc(fbDb, 'sharedRecipes', frag));
+        if (snap.exists()) {
+          var d = snap.data();
+          obj = { v: VERSION, p: d.params || {}, s: d.summary || null };
+          shortId = frag;
+        }
+      } catch (e) { /* obj reste null → écran « illisible » */ }
+    } else if (frag) {
+      // Lien LONG autoportant : décodage local (repli hors-ligne / invité).
+      obj = decodePayload(frag);
+    }
+    document.getElementById('app').innerHTML = obj ? renderRecipe(obj, frag, shortId) : renderError();
+  })();
 })();
 </script>
 </body>
