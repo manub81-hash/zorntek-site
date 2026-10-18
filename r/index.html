@@ -247,10 +247,12 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10
     if (s && s.oven) chips.push('<span class="chip">🔥 <b>' + esc(s.oven) + '</b></span>');
     if (chips.length) html += '<div class="chips">' + chips.join('') + '</div>';
 
-    // CTA : ouvrir dans l'app. Lien court → pizzai://recipe#<id> ; sinon payload autoportant.
-    var openHref = shortId
-      ? ('pizzai://recipe#' + encodeURIComponent(shortId))
-      : ('pizzai://recipe?r=' + encodeURIComponent(payload));
+    // CTA : ouvrir dans l'app. On utilise le lien UNIVERSEL https, JAMAIS pizzai://.
+    // Raison : une ANCIENNE version de l'app (sans gestion du deep link) s'ouvre sur
+    // pizzai:// et FIGE au démarrage. Le lien universel, lui, n'est revendiqué que par
+    // la version récente (elle s'ouvre sur la recette) ; une vieille app / pas d'app
+    // reste simplement dans le navigateur, sans figeage.
+    var openHref = 'https://zorntek.fr/r/#' + encodeURIComponent(shortId || payload);
     html += '<a class="cta" href="' + openHref + '">' + esc(T.open) + '</a>';
     html += storesHtml();
     html += '<p class="hint">' + esc(T.hint) + '</p>';
