@@ -112,43 +112,43 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10
     fr: { shared:'Recette partagée', balls:'pâtons', flour:'Farine', water:'Eau', salt:'Sel',
       yeast:'Levure', oil:'Huile', total:'Total', hydration:'hydratation', saltPct:'sel',
       open:'Ouvrir dans PizzAI', exact:"Ouvre l'app pour les quantités exactes.",
-      hint:"Tu n'as pas l'app ? Installe PizzAI pour ouvrir et personnaliser cette recette.",
+      hint:"Pour ouvrir dans l'app, installe ou mets à jour PizzAI.",
       errTitle:'Recette illisible', errMsg:'Ce lien est invalide ou périmé. Installe PizzAI pour créer la tienne.',
       footer:'Calculé avec PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Télécharger sur' },
     en: { shared:'Shared recipe', balls:'dough balls', flour:'Flour', water:'Water', salt:'Salt',
       yeast:'Yeast', oil:'Oil', total:'Total', hydration:'hydration', saltPct:'salt',
       open:'Open in PizzAI', exact:'Open the app for exact quantities.',
-      hint:"Don't have the app? Install PizzAI to open and customize this recipe.",
+      hint:"To open in the app, install or update PizzAI.",
       errTitle:'Recipe unreadable', errMsg:'This link is invalid or expired. Install PizzAI to create your own.',
       footer:'Calculated with PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Download on' },
     it: { shared:'Ricetta condivisa', balls:'panetti', flour:'Farina', water:'Acqua', salt:'Sale',
       yeast:'Lievito', oil:'Olio', total:'Totale', hydration:'idratazione', saltPct:'sale',
       open:'Apri in PizzAI', exact:"Apri l'app per le quantità esatte.",
-      hint:"Non hai l'app? Installa PizzAI per aprire e personalizzare questa ricetta.",
+      hint:"Per aprire nell'app, installa o aggiorna PizzAI.",
       errTitle:'Ricetta illeggibile', errMsg:'Link non valido o scaduto. Installa PizzAI per creare la tua.',
       footer:'Calcolato con PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Scarica su' },
     de: { shared:'Geteiltes Rezept', balls:'Teiglinge', flour:'Mehl', water:'Wasser', salt:'Salz',
       yeast:'Hefe', oil:'Öl', total:'Gesamt', hydration:'Hydration', saltPct:'Salz',
       open:'In PizzAI öffnen', exact:'Öffne die App für genaue Mengen.',
-      hint:'Keine App? Installiere PizzAI, um dieses Rezept zu öffnen und anzupassen.',
+      hint:'Zum Öffnen in der App: PizzAI installieren oder aktualisieren.',
       errTitle:'Rezept unlesbar', errMsg:'Link ungültig oder abgelaufen. Installiere PizzAI für dein eigenes.',
       footer:'Berechnet mit PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Laden im' },
     es: { shared:'Receta compartida', balls:'bolas', flour:'Harina', water:'Agua', salt:'Sal',
       yeast:'Levadura', oil:'Aceite', total:'Total', hydration:'hidratación', saltPct:'sal',
       open:'Abrir en PizzAI', exact:'Abre la app para las cantidades exactas.',
-      hint:'¿No tienes la app? Instala PizzAI para abrir y personalizar esta receta.',
+      hint:'Para abrir en la app, instala o actualiza PizzAI.',
       errTitle:'Receta ilegible', errMsg:'Enlace no válido o caducado. Instala PizzAI para crear la tuya.',
       footer:'Calculado con PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Descargar en' },
     nl: { shared:'Gedeeld recept', balls:'deegballen', flour:'Bloem', water:'Water', salt:'Zout',
       yeast:'Gist', oil:'Olie', total:'Totaal', hydration:'hydratatie', saltPct:'zout',
       open:'Openen in PizzAI', exact:'Open de app voor exacte hoeveelheden.',
-      hint:'Geen app? Installeer PizzAI om dit recept te openen en aan te passen.',
+      hint:'Openen in de app? Installeer of werk PizzAI bij.',
       errTitle:'Recept onleesbaar', errMsg:'Ongeldige of verlopen link. Installeer PizzAI om je eigen te maken.',
       footer:'Berekend met PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Download in' },
     pt: { shared:'Receita compartilhada', balls:'bolas', flour:'Farinha', water:'Água', salt:'Sal',
       yeast:'Fermento', oil:'Óleo', total:'Total', hydration:'hidratação', saltPct:'sal',
       open:'Abrir no PizzAI', exact:'Abra o app para as quantidades exatas.',
-      hint:'Não tem o app? Instale o PizzAI para abrir e personalizar esta receita.',
+      hint:'Para abrir no app, instale ou atualize o PizzAI.',
       errTitle:'Receita ilegível', errMsg:'Link inválido ou expirado. Instale o PizzAI para criar a sua.',
       footer:'Calculado com o PizzAI 🤖', appstore:'App Store', play:'Google Play', dl:'Baixar na' },
   };
@@ -247,13 +247,13 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10
     if (s && s.oven) chips.push('<span class="chip">🔥 <b>' + esc(s.oven) + '</b></span>');
     if (chips.length) html += '<div class="chips">' + chips.join('') + '</div>';
 
-    // CTA : ouvrir dans l'app. On utilise le lien UNIVERSEL https, JAMAIS pizzai://.
-    // Raison : une ANCIENNE version de l'app (sans gestion du deep link) s'ouvre sur
-    // pizzai:// et FIGE au démarrage. Le lien universel, lui, n'est revendiqué que par
-    // la version récente (elle s'ouvre sur la recette) ; une vieille app / pas d'app
-    // reste simplement dans le navigateur, sans figeage.
-    var openHref = 'https://zorntek.fr/r/#' + encodeURIComponent(shortId || payload);
-    html += '<a class="cta" href="' + openHref + '">' + esc(T.open) + '</a>';
+    // CTA : mène au STORE (installer / METTRE À JOUR PizzAI). JAMAIS pizzai:// (qui
+    // fige une ancienne app) ni le lien universel même-page (qui ne ferait rien de
+    // visible → bouton « cassé »). La vraie ouverture in-app se fait au niveau de l'OS
+    // via le lien universel du PARTAGE, avant d'arriver sur cette page ; qui atterrit
+    // ici a besoin d'installer ou de mettre à jour l'app.
+    var storeHref = /iphone|ipad|ipod/i.test(navigator.userAgent || '') ? IOS_URL : PLAY_URL;
+    html += '<a class="cta" href="' + storeHref + '">' + esc(T.open) + '</a>';
     html += storesHtml();
     html += '<p class="hint">' + esc(T.hint) + '</p>';
     html += '</div>';
