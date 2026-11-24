@@ -81,7 +81,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
 import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
 /* ============================================================
- *  Page /r — rendu d'une recette partagée (LOT 4 + liens courts).
+ *  Page /r - rendu d'une recette partagée (LOT 4 + liens courts).
  *  Décodeur base64url + JSON VOLONTAIREMENT MIROIR de lib/recipeLink.ts
  *  (même charset '-_', sans padding ; même enveloppe {v,p,s}). À garder
  *  synchronisé en cas de bump de version. Aucune dépendance, aucun build :
@@ -95,7 +95,7 @@ import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.zorntek.pizzai';
   var SITE_URL = 'https://zorntek.fr';
 
-  // Firebase (projet pizzai-app) — config PUBLIQUE, protégée par les règles
+  // Firebase (projet pizzai-app) - config PUBLIQUE, protégée par les règles
   // Firestore (sharedRecipes : get par id autorisé, list refusé, write serveur).
   var fbDb = getFirestore(initializeApp({
     apiKey: 'AIzaSyArErShI8bWOzseXJhRyDkongffJHbnA-8',
